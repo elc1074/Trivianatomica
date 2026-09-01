@@ -18,22 +18,13 @@
     var(--color-primary);
 }
 
-.ctaKicker {
-  color: #d8bbb0;
-  font-size: 0.72rem;
-  font-weight: 750;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
 .ctaContent h2 {
-  margin: 14px 0 12px;
+  margin: 0 0 12px;
   color: #ffffff;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2rem, 3vw, 2.75rem);
-  font-weight: 600;
-  letter-spacing: -0.035em;
-  line-height: 1.13;
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
 }
 
 .ctaContent p {

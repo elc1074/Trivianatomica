@@ -4,7 +4,7 @@ function Header() {
   return (
     <header className={styles.siteHeader}>
       <div className={`container ${styles.headerContent}`}>
-        <a className={styles.brand} href="#inicio" aria-label="Trivia Anatômica — início">
+        <a className={styles.brand} href="#inicio" aria-label="Trivia Anatômica, início">
           <span className={styles.brandMark} aria-hidden="true">
             TA
           </span>

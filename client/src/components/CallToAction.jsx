@@ -1,3 +1,4 @@
+import Icon from './Icon.jsx'
 import styles from './CallToAction.module.css'
 
 function CallToAction() {
@@ -6,14 +7,13 @@ function CallToAction() {
       <div className="container">
         <div className={styles.ctaContent}>
           <div>
-            <span className={styles.ctaKicker}>Aprenda praticando</span>
             <h2 id="cta-title">Pronto para praticar?</h2>
             <p>Revise estruturas anatômicas no seu ritmo.</p>
           </div>
 
           <a className="button button-light" href="#como-funciona">
             Ver atividades
-            <span aria-hidden="true">→</span>
+            <Icon name="arrow_forward" size={20} color="currentColor" />
           </a>
         </div>
       </div>

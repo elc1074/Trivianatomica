@@ -10,6 +10,7 @@
   --color-text-muted: #77837f;
   --color-border: #dce5e2;
 
+  --radius-control: 10px;
   --radius-card: 16px;
   --shadow-card: 0 8px 24px rgba(15, 81, 74, 0.12);
 
@@ -62,17 +63,6 @@ select {
   margin-inline: auto;
 }
 
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  color: var(--color-primary);
-  font-size: 0.76rem;
-  font-weight: 750;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
 .button {
   display: inline-flex;
   min-height: 52px;
@@ -80,7 +70,8 @@ select {
   justify-content: center;
   gap: 14px;
   border: 0;
-  border-radius: 9px;
+  cursor: pointer;
+  border-radius: var(--radius-control);
   padding: 0 22px;
   font-size: 0.93rem;
   font-weight: 720;

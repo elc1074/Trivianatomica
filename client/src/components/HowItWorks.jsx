@@ -1,20 +1,21 @@
+import Icon from './Icon.jsx'
 import styles from './HowItWorks.module.css'
 
 const steps = [
   {
-    number: '01',
+    icon: 'visibility',
     title: 'Observe',
     description:
       'Visualize a peça anatômica e identifique a estrutura indicada.',
   },
   {
-    number: '02',
+    icon: 'edit',
     title: 'Responda',
     description:
       'Digite o nome da estrutura antes de visualizar as alternativas.',
   },
   {
-    number: '03',
+    icon: 'school',
     title: 'Aprenda',
     description:
       'Receba feedback imediato e acompanhe seu desempenho na atividade.',
@@ -30,15 +31,20 @@ function HowItWorks() {
     >
       <div className="container">
         <div className={styles.sectionHeading}>
-          <span className="eyebrow">Método de estudo</span>
           <h2 id="how-title">Como funciona</h2>
           <p>Uma sequência simples para transformar observação em aprendizado.</p>
         </div>
 
         <ol className={styles.stepsList}>
-          {steps.map((step) => (
-            <li className={styles.stepCard} key={step.number}>
-              <span className={styles.stepNumber}>{step.number}</span>
+          {steps.map((step, index) => (
+            <li className={styles.stepCard} key={step.title}>
+              {index > 0 && <div className={styles.lineLeft} />}
+              {index < steps.length - 1 && <div className={styles.lineRight} />}
+
+              <div className={styles.stepIcon}>
+                <Icon name={step.icon} size={26} color="currentColor" />
+              </div>
+
               <h3>{step.title}</h3>
               <p>{step.description}</p>
             </li>

@@ -23,6 +23,7 @@ Cole este documento no início de qualquer sessão com IA (Claude Code, Cursor, 
 - **Faixa colorida de 3-4px na borda esquerda do card** é apontada como o tell mais confiável desse tipo de levantamento. Não usar.
 - **Glassmorphism, blobs 3D flutuantes, ilustrações "plásticas" excessivamente suaves.** Nenhum deles tem lugar aqui.
 - **Badge acima do título ("novo!", "beta") só por hábito.** Só usar se tiver função real.
+- **Nunca usar emoji como ícone de interface.** Ícones vêm de Google Material Symbols (`Icon.jsx`, fonte já carregada em `index.html`), nunca caractere emoji solto no JSX.
 - **Ícone enorme centralizado acima do heading** como elemento decorativo solto — evitar.
 - **O mesmo fade-in em todo elemento da tela, hover que não muda nada visualmente.** Toda transição/hover deve ter função (destacar algo selecionável, indicar estado).
 - **"Tasteful default" de fundo creme + fonte serifada + acento verde-sálvia** virou o clichê genérico seguinte, não uma alternativa real. Usar as decisões já tomadas no design system do projeto, não o clichê do momento.
