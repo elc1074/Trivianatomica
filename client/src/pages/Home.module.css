@@ -1,0 +1,91 @@
+.heroSection {
+  position: relative;
+  padding: 92px 0 104px;
+  background:
+    radial-gradient(circle at 90% 10%, rgba(69, 137, 126, 0.08), transparent 34%),
+    var(--color-background);
+}
+
+.heroSection::before {
+  position: absolute;
+  top: 0;
+  left: max(24px, calc((100% - var(--container-width)) / 2));
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(transparent, rgba(15, 81, 74, 0.12), transparent);
+  content: '';
+}
+
+.heroContent {
+  display: flex;
+  justify-content: center;
+}
+
+.heroCopy {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 880px);
+  min-width: 0;
+  text-align: center;
+}
+
+.eyebrowDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 5px rgba(215, 168, 91, 0.14);
+}
+
+.heroCopy h1 {
+  max-width: 880px;
+  margin: 22px 0 24px;
+  color: var(--color-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3rem, 5vw, 4.6rem);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  line-height: 1.04;
+}
+
+.heroDescription {
+  max-width: 650px;
+  margin: 0 auto 36px;
+  color: var(--color-text);
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+@media (max-width: 900px) {
+  .heroSection {
+    padding: 72px 0 88px;
+  }
+
+  .heroCopy {
+    max-width: 720px;
+  }
+
+  .heroCopy h1 {
+    font-size: clamp(2.8rem, 8vw, 4.25rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .heroSection {
+    padding: 58px 0 72px;
+  }
+
+  .heroSection::before {
+    left: 18px;
+  }
+
+  .heroCopy h1 {
+    margin-top: 18px;
+    font-size: clamp(2.45rem, 12vw, 3.35rem);
+  }
+
+  .heroDescription {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+}

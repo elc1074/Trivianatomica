@@ -1,0 +1,120 @@
+.howItWorks {
+  border-block: 1px solid var(--color-border);
+  padding: 104px 0 112px;
+  background: var(--color-surface);
+}
+
+.sectionHeading {
+  max-width: 580px;
+  margin-bottom: 54px;
+}
+
+.sectionHeading h2 {
+  margin: 14px 0 12px;
+  color: var(--color-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 3vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.13;
+}
+
+.sectionHeading p {
+  margin: 0;
+  color: var(--color-text);
+  line-height: 1.7;
+}
+
+.stepsList {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stepCard {
+  min-height: 232px;
+  border-left: 1px solid var(--color-border);
+  padding: 2px clamp(28px, 3.5vw, 48px);
+}
+
+.stepCard:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.stepCard:last-child {
+  padding-right: 0;
+}
+
+.stepNumber {
+  display: inline-grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 50%;
+  color: var(--color-primary);
+  background: var(--color-primary-soft);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.stepCard h3 {
+  margin: 26px 0 12px;
+  color: var(--color-ink);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.stepCard p {
+  max-width: 290px;
+  margin: 0;
+  color: var(--color-text);
+  font-size: 0.93rem;
+  line-height: 1.68;
+}
+
+@media (max-width: 900px) {
+  .howItWorks {
+    padding: 76px 0 80px;
+  }
+
+  .sectionHeading {
+    margin-bottom: 38px;
+  }
+
+  .stepsList {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .stepCard,
+  .stepCard:first-child,
+  .stepCard:last-child {
+    display: grid;
+    min-height: auto;
+    grid-template-columns: 48px 1fr;
+    column-gap: 22px;
+    border-top: 1px solid var(--color-border);
+    border-left: 0;
+    padding: 28px 0;
+  }
+
+  .stepCard:last-child {
+    padding-bottom: 0;
+  }
+
+  .stepCard h3 {
+    align-self: end;
+    margin: 0 0 6px;
+  }
+
+  .stepCard p {
+    grid-column: 2;
+    max-width: 520px;
+  }
+}
