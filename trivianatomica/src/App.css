@@ -89,16 +89,16 @@
 }
 
 .hero-content {
-  display: grid;
-  grid-template-columns: minmax(0, 1.02fr) minmax(420px, 0.98fr);
-  align-items: center;
-  gap: clamp(56px, 8vw, 112px);
+  display: flex;
+  justify-content: center;
 }
 
 .hero-copy {
   position: relative;
   z-index: 1;
+  width: min(100%, 880px);
   min-width: 0;
+  text-align: center;
 }
 
 .eyebrow {
@@ -121,7 +121,7 @@
 }
 
 .hero-copy h1 {
-  max-width: 690px;
+  max-width: 880px;
   margin: 22px 0 24px;
   color: var(--color-ink);
   font-family: Georgia, "Times New Roman", serif;
@@ -132,8 +132,8 @@
 }
 
 .hero-description {
-  max-width: 590px;
-  margin: 0 0 36px;
+  max-width: 650px;
+  margin: 0 auto 36px;
   color: var(--color-text);
   font-size: 1.08rem;
   line-height: 1.75;
@@ -145,6 +145,7 @@
   align-items: center;
   justify-content: center;
   gap: 14px;
+  border: 0;
   border-radius: 9px;
   padding: 0 22px;
   font-size: 0.93rem;
@@ -181,154 +182,6 @@
 .button-primary:hover {
   background: var(--color-primary-dark);
   transform: translateY(-1px);
-}
-
-.practice-preview {
-  position: relative;
-  z-index: 1;
-  min-width: 0;
-  max-width: 100%;
-  border: 1px solid rgba(15, 81, 74, 0.14);
-  border-radius: 22px;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 24px 64px rgba(24, 54, 49, 0.11);
-}
-
-.practice-preview::before {
-  position: absolute;
-  z-index: -1;
-  right: -25px;
-  bottom: -25px;
-  width: 120px;
-  height: 120px;
-  border: 1px solid rgba(15, 81, 74, 0.12);
-  border-radius: 28px;
-  content: '';
-}
-
-.preview-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 4px 2px 18px;
-}
-
-.preview-header div {
-  display: grid;
-  gap: 4px;
-}
-
-.preview-label {
-  color: var(--color-muted);
-  font-size: 0.69rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.preview-header strong {
-  color: var(--color-ink);
-  font-size: 0.96rem;
-}
-
-.preview-progress {
-  border-radius: 999px;
-  padding: 6px 10px;
-  color: var(--color-primary);
-  background: var(--color-primary-soft);
-  font-size: 0.72rem;
-  font-weight: 750;
-}
-
-.preview-media {
-  position: relative;
-  display: grid;
-  min-height: 276px;
-  place-items: center;
-  overflow: hidden;
-  border-radius: 14px;
-  background:
-    linear-gradient(rgba(15, 81, 74, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(15, 81, 74, 0.035) 1px, transparent 1px),
-    #eff4f2;
-  background-size: 28px 28px;
-}
-
-.media-tag {
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  border: 1px solid rgba(15, 81, 74, 0.12);
-  border-radius: 6px;
-  padding: 5px 8px;
-  color: var(--color-text);
-  background: rgba(255, 255, 255, 0.74);
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.image-placeholder {
-  display: grid;
-  place-items: center;
-  gap: 10px;
-  color: #78908a;
-  font-size: 0.78rem;
-  font-weight: 650;
-}
-
-.image-placeholder svg {
-  width: 52px;
-  fill: none;
-  stroke: #8aa19b;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.7;
-}
-
-.structure-indicator {
-  position: absolute;
-  right: 18%;
-  bottom: 28%;
-  display: flex;
-  align-items: center;
-}
-
-.structure-indicator span {
-  width: 10px;
-  height: 10px;
-  border: 2px solid #ffffff;
-  border-radius: 50%;
-  background: var(--color-accent);
-  box-shadow: 0 0 0 5px rgba(215, 168, 91, 0.22);
-}
-
-.structure-indicator i {
-  width: 52px;
-  height: 1px;
-  background: var(--color-accent);
-}
-
-.preview-question {
-  display: grid;
-  gap: 10px;
-  padding: 18px 2px 2px;
-  color: var(--color-ink);
-  font-size: 0.82rem;
-  font-weight: 700;
-}
-
-.answer-placeholder {
-  border: 1px solid var(--color-line);
-  border-radius: 8px;
-  padding: 11px 12px;
-  color: #8a9692;
-  background: #fbfcfc;
-  font-size: 0.77rem;
-  font-weight: 450;
 }
 
 .how-it-works {
@@ -484,21 +337,12 @@
     padding: 72px 0 88px;
   }
 
-  .hero-content {
-    grid-template-columns: 1fr;
-    gap: 64px;
-  }
-
   .hero-copy {
     max-width: 720px;
   }
 
   .hero-copy h1 {
     font-size: clamp(2.8rem, 8vw, 4.25rem);
-  }
-
-  .practice-preview {
-    width: min(100%, 620px);
   }
 
   .steps-list {
@@ -571,23 +415,6 @@
 
   .button-primary {
     width: 100%;
-  }
-
-  .practice-preview {
-    border-radius: 18px;
-    padding: 14px;
-  }
-
-  .practice-preview::before {
-    display: none;
-  }
-
-  .preview-header {
-    padding-inline: 2px;
-  }
-
-  .preview-media {
-    min-height: 224px;
   }
 
   .how-it-works {

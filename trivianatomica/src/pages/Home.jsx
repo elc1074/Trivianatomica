@@ -1,7 +1,6 @@
 import CallToAction from '../components/CallToAction.jsx'
 import Footer from '../components/Footer.jsx'
 import Header from '../components/Header.jsx'
-import HeroPreview from '../components/HeroPreview.jsx'
 import HowItWorks from '../components/HowItWorks.jsx'
 
 function Home() {
@@ -28,13 +27,11 @@ function Home() {
                 Pratique a identificação de estruturas anatômicas e prepare-se
                 para suas avaliações práticas.
               </p>
-              <a className="button button-primary" href="#como-funciona">
+              <button className="button button-primary" type="button">
                 Começar a estudar
                 <span aria-hidden="true">→</span>
-              </a>
+              </button>
             </div>
-
-            <HeroPreview />
           </div>
         </section>
 
