@@ -1,0 +1,102 @@
+.heroSection {
+  position: relative;
+  padding: 64px 0 96px;
+  background: var(--color-background);
+}
+
+.heroStage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 380px;
+}
+
+.heroTitle {
+  position: relative;
+  z-index: 1;
+  max-width: 880px;
+  margin: 0 auto;
+  color: var(--color-ink);
+  text-align: center;
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.heroDogImage {
+  position: absolute;
+  z-index: 2;
+  bottom: -100%;
+  left: 20%;
+  display: block;
+  height: 180%;
+  width: auto;
+  max-width: none;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.heroDivider {
+  position: absolute;
+  z-index: 3;
+  bottom: -100%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-border);
+  pointer-events: none;
+}
+
+.heroCopy {
+  position: relative;
+  z-index: 1;
+  margin: 8px auto 0;
+  max-width: 560px;
+  text-align: center;
+}
+
+.heroDescription {
+  margin: 0 0 32px;
+  color: var(--color-text);
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+@media (max-width: 900px) {
+  .heroStage {
+    min-height: 320px;
+  }
+
+  .heroTitle {
+    font-size: clamp(2.2rem, 8vw, 3.2rem);
+  }
+
+  .heroDogImage {
+    height: 90%;
+  }
+
+  .heroDivider {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .heroSection {
+    padding: 48px 0 64px;
+  }
+
+  .heroStage {
+    min-height: 260px;
+  }
+
+  .heroDogImage {
+    display: none;
+  }
+
+  .heroDescription {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+}

@@ -1,0 +1,11 @@
+.shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  overflow: hidden;
+  background: var(--color-background);
+}
+
+.main {
+  flex: 1;
+}

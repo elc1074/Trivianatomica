@@ -1,0 +1,24 @@
+.siteFooter {
+  border-top: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+
+.footerContent {
+  display: flex;
+  min-height: 86px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  color: var(--color-text-muted);
+  font-size: 0.76rem;
+}
+
+@media (max-width: 640px) {
+  .footerContent {
+    min-height: 96px;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 6px;
+  }
+}

@@ -1,0 +1,46 @@
+.ctaSection {
+  padding: 80px 0;
+  background: var(--color-background);
+}
+
+.ctaContent {
+  display: flex;
+  min-height: 240px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  padding: 48px clamp(32px, 6vw, 72px);
+  color: rgba(255, 255, 255, 0.76);
+  background:
+    radial-gradient(circle at 88% 10%, rgba(255, 255, 255, 0.12), transparent 28%),
+    var(--color-primary);
+}
+
+.ctaContent h2 {
+  margin: 0 0 12px;
+  color: #ffffff;
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
+}
+
+.ctaContent p {
+  margin: 0;
+  line-height: 1.65;
+}
+
+@media (max-width: 640px) {
+  .ctaSection {
+    padding: 52px 0;
+  }
+
+  .ctaContent {
+    min-height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 38px 28px;
+  }
+}
