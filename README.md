@@ -17,13 +17,6 @@ cp .env.example .env
 npm run dev
 ```
 
-```
-cd server
-npm install
-cp .env.example .env
-npm run dev
-```
-
 Server sobe em `http://localhost:3001`, rota `GET /health` confirma que está no ar.
 
 Ver [IA.md](IA.md) para as regras de código e commit do projeto, e a estrutura do backend.
