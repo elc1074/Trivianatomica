@@ -1,28 +1,11 @@
+import { useLanguage } from '../i18n/useLanguage.js'
 import Icon from './Icon.jsx'
 import styles from './HowItWorks.module.css'
 
-const steps = [
-  {
-    icon: 'visibility',
-    title: 'Observe',
-    description:
-      'Visualize a peça anatômica e identifique a estrutura indicada.',
-  },
-  {
-    icon: 'edit',
-    title: 'Responda',
-    description:
-      'Digite o nome da estrutura antes de visualizar as alternativas.',
-  },
-  {
-    icon: 'school',
-    title: 'Aprenda',
-    description:
-      'Receba feedback imediato e acompanhe seu desempenho na atividade.',
-  },
-]
-
 function HowItWorks() {
+  const { t } = useLanguage()
+  const steps = t.home.howItWorks.steps
+
   return (
     <section
       className={styles.howItWorks}
@@ -31,8 +14,7 @@ function HowItWorks() {
     >
       <div className="container">
         <div className={styles.sectionHeading}>
-          <h2 id="how-title">Como funciona</h2>
-          <p>Uma sequência simples para transformar observação em aprendizado.</p>
+          <h2 id="how-title">{t.home.howItWorks.heading}</h2>
         </div>
 
         <ol className={styles.stepsList}>
@@ -42,7 +24,7 @@ function HowItWorks() {
               {index < steps.length - 1 && <div className={styles.lineRight} />}
 
               <div className={styles.stepIcon}>
-                <Icon name={step.icon} size={26} color="currentColor" />
+                <Icon name={step.icon} size={30} color="currentColor" />
               </div>
 
               <h3>{step.title}</h3>
