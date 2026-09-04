@@ -1,0 +1,100 @@
+.root {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+.trigger {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-control);
+  padding: 12px 14px;
+  cursor: pointer;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  text-align: left;
+}
+
+.trigger:focus-visible {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.trigger:disabled {
+  cursor: default;
+}
+
+.triggerCorrect {
+  border-color: var(--color-success);
+  background: var(--color-success-soft);
+}
+
+.triggerWrong {
+  border-color: var(--color-error);
+  background: var(--color-error-soft);
+}
+
+.placeholder {
+  color: var(--color-text-muted);
+}
+
+.value {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.chevron {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  color: var(--color-text-muted);
+  transition: transform 140ms ease;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.options {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  margin: 0;
+  border-radius: var(--radius-control);
+  padding: 8px;
+  list-style: none;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.option {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 12px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.option:hover {
+  background: var(--color-primary-soft);
+}
+
+.optionSelected {
+  background: var(--color-primary-soft);
+  font-weight: 700;
+}

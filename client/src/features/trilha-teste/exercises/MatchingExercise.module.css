@@ -1,0 +1,42 @@
+.card {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.pairList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0 0 28px;
+  padding: 0;
+  list-style: none;
+}
+
+.pairRow {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.term {
+  flex: 0 0 40%;
+  color: var(--color-ink);
+  font-weight: 700;
+}
+
+.card :global(.button-primary) {
+  width: 100%;
+  justify-content: center;
+}
+
+@media (max-width: 560px) {
+  .pairRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .term {
+    flex: none;
+  }
+}

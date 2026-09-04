@@ -1,0 +1,26 @@
+.feedback {
+  display: flex;
+  max-width: 420px;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 32px auto 0;
+  border-radius: var(--radius-card);
+  padding: 28px;
+  text-align: center;
+}
+
+.feedback p {
+  margin: 0;
+  font-weight: 700;
+}
+
+.feedbackCorrect {
+  background: var(--color-success-soft);
+  color: var(--color-success);
+}
+
+.feedbackWrong {
+  background: var(--color-error-soft);
+  color: var(--color-error);
+}
