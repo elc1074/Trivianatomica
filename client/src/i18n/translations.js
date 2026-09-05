@@ -23,57 +23,49 @@ export const translations = {
     home: {
       hero: {
         title: 'Estudia Anatomía Veterinaria de forma interactiva',
-        description:
-          'Una ruta de repaso para identificar estructuras anatómicas, pensada para la recta final antes de la prueba práctica.',
-        cta: 'Empezar a estudiar',
+        description: 'Practica la identificación de estructuras anatómicas y repasa para tu prueba práctica.',
+        cta: 'Empezar a estudiar'
       },
       valuePropsLabel: 'Por qué estudiar con Trivia Anatómica',
       valueProps: [
         {
-          title: 'Basado en la nomenclatura oficial de la asignatura',
-          description:
-            'Los diagramas siguen la Nomina Anatomica Veterinaria y el material de la asignatura de Anatomía de Animales de Compañía, validado con el equipo de Medicina Veterinaria de la Universidad Santo Tomás (Chile).',
+          title: 'La nomenclatura de tu asignatura',
+          description: 'Estudia con la Nomina Anatomica Veterinaria y el material de Anatomía de Animales de Compañía de la UST.'
         },
         {
           title: 'Responde antes de ver las alternativas',
-          description:
-            'Escribe el nombre de la estructura antes de que aparezca cualquier opción en la pantalla. Acertar aquí vale el doble de puntos. Esa recuperación activa fija más que reconocer la respuesta correcta en una lista de opciones ya listas.',
+          description: 'En las preguntas de identificación, escribe el nombre de la estructura. Acertar sin alternativas vale el doble.'
         },
         {
-          title: 'Repasa exactamente lo que te equivocas',
-          description:
-            'Toda estructura equivocada entra en tu Central de Repaso, una cola que prioriza lo que más necesitas estudiar.',
-        },
+          title: 'Descubre qué necesitas repasar',
+          description: 'Al terminar la unidad, consulta tus aciertos y las estructuras que necesitas volver a estudiar.'
+        }
       ],
       howItWorks: {
         heading: 'Cómo funciona',
         steps: [
           {
-            icon: 'category',
-            title: 'Elige un sistema',
-            description:
-              'Cada unidad de la ruta cubre un sistema anatómico: Osteología, Artrología, y más a medida que avanzas.',
+            icon: 'menu_book',
+            title: 'Elige una unidad',
+            description: 'Selecciona el contenido que quieres practicar.'
           },
           {
             icon: 'edit',
-            title: 'Responde de memoria',
-            description:
-              'Escribe el nombre de la estructura indicada antes de ver cualquier alternativa. Acertar a la primera vale el doble de puntos.',
+            title: 'Pon a prueba tu memoria',
+            description: 'Resuelve preguntas de identificación, verdadero o falso, completar y asociación.'
           },
           {
             icon: 'task_alt',
             title: 'Mira el resultado al instante',
-            description:
-              '¿Te equivocaste o pasaste? Te mostramos 4 alternativas. Toda estructura equivocada entra en tu cola de repaso.',
-          },
-        ],
+            description: 'Recibe la respuesta después de cada pregunta y consulta tu puntuación al terminar.'
+          }
+        ]
       },
       finalCta: {
-        headline: 'Aprende anatomía veterinaria con Trivia Anatómica',
-        description:
-          'Sigue cuánto de la ruta ya cubriste y cuánto falta hasta la fecha de tu prueba. Sin racha diaria obligatoria, solo progreso real.',
-        cta: 'Comienza ahora',
-      },
+        headline: '¿Listo para practicar?',
+        description: 'Elige una unidad y repasa a tu ritmo, una pregunta a la vez.',
+        cta: 'Comienza ahora'
+      }
     },
     trilha: {
       panel: {
@@ -82,6 +74,7 @@ export const translations = {
         questionsCount: (count) => `${count} preguntas`,
       },
       lesson: {
+        encouragement: '¡Ya completaste la mitad! Sigue a tu ritmo.',
         progress: (index, total) => `Pregunta ${index} de ${total}`,
         points: (points) => `${points} puntos`,
         formats: {
@@ -136,7 +129,7 @@ export const translations = {
       units: [
         {
           id: 'osteologia-membro-pelvico',
-          title: 'Osteología — Miembro Pélvico',
+          title: 'Osteología del miembro pélvico',
           exercises: [
             { format: 'seta', id: 'coxal', name: 'Coxal', distractors: ['Fémur', 'Escápula', 'Húmero'] },
             { format: 'seta', id: 'femur', name: 'Fémur', distractors: ['Tibia', 'Húmero', 'Radio'] },
@@ -203,13 +196,47 @@ export const translations = {
         },
       ],
     },
+    homeTest: {
+      preview: 'Una nueva forma de empezar',
+      original: 'Ver inicio original',
+      tag: 'ANATOMÍA VETERINARIA · COIL UFSM + UST',
+      title: 'En tu próxima prueba,',
+      accent: 'reconoce a la primera.',
+      description:
+        'Practica la identificación de estructuras, pon a prueba tu memoria y descubre qué necesitas repasar. Una pregunta a la vez.',
+      start: 'Empezar a practicar',
+      try: 'Probar una pregunta',
+      note: 'A tu ritmo. Sin presión de rachas diarias.',
+      bubble: '¿Aprendemos juntos?',
+      demoTag: 'UNA MUESTRA DE LA RUTA',
+      demoTitle: 'Observa. Recuerda. Aprende.',
+      demoDescription:
+        'Así comienza la práctica: observa la estructura marcada y elige una respuesta.',
+      question: '¿Qué hueso está marcado?',
+      options: ['Fémur', 'Tibia', 'Húmero'],
+      correct: '¡Eso! Es el fémur, el hueso del muslo.',
+      wrong: 'Es el fémur, el hueso del muslo. Observa otra vez el punto marcado.',
+      again: 'Intentar de nuevo',
+      example: 'Pregunta de ejemplo · no cambia tu puntuación',
+      stepsTitle: 'Tu próximo paso es sencillo.',
+      steps: [
+        ['Elige una unidad', 'Empieza por el sistema anatómico que quieres repasar.'],
+        ['Pon en juego tu memoria', 'Practica identificación, asociación y otros formatos.'],
+        [
+          'Mira lo que aprendiste',
+          'Consulta tus aciertos y las estructuras para repasar en el resumen.',
+        ],
+      ],
+      end: '¿Transformamos dudas en descubrimientos?',
+      endNote: 'Elige tu primera unidad y empieza con una pregunta.',
+    },
   },
   pt: {
     meta: {
       htmlLang: 'pt-BR',
       title: 'Trivia Anatômica',
       description:
-        'Pratique a identificação de estruturas de Anatomia Veterinária de forma interativa.',
+        'Revise anatomia veterinária com perguntas sobre estruturas anatômicas.',
     },
     chrome: {
       brand: 'Trivia Anatômica',
@@ -220,121 +247,114 @@ export const translations = {
     },
     home: {
       hero: {
-        title: 'Estude Anatomia Veterinária de forma interativa',
-        description:
-          'Uma trilha de revisão pra identificação de estruturas anatômicas, pensada pra reta final antes da prova prática.',
-        cta: 'Começar a estudar',
+        title: 'Pratique anatomia veterinária',
+        description: 'Treine o reconhecimento das estruturas anatômicas para a prova prática.',
+        cta: 'Começar a estudar'
       },
       valuePropsLabel: 'Por que estudar com o Trivia Anatômica',
       valueProps: [
         {
-          title: 'Baseado na nomenclatura oficial da disciplina',
-          description:
-            'Os diagramas seguem a Nomina Anatomica Veterinaria e o material da disciplina de Anatomia de Animales de Compañía, validado com a equipe de Medicina Veterinária da Universidad Santo Tomás (Chile).',
+          title: 'Os termos que você estuda em aula',
+          description: 'As atividades usam a Nomina Anatomica Veterinaria e o material de Anatomia de Animais de Companhia da UST.'
         },
         {
           title: 'Responda antes de ver as alternativas',
-          description:
-            'Digite o nome da estrutura antes de qualquer opção aparecer na tela. Acertar aqui vale pontuação em dobro. Essa lembrança ativa fixa mais do que reconhecer a resposta certa numa lista de opções prontas.',
+          description: 'Tente lembrar o nome da estrutura sem consultar as opções. Se acertar, você ganha o dobro dos pontos.'
         },
         {
-          title: 'Revise exatamente o que você erra',
-          description:
-            'Toda estrutura errada entra na sua Central de Revisão, uma fila que prioriza o que você mais precisa estudar.',
-        },
+          title: 'Saiba o que revisar',
+          description: 'No fim da unidade, veja o que acertou e quais estruturas precisa revisar.'
+        }
       ],
       howItWorks: {
         heading: 'Como funciona',
         steps: [
           {
-            icon: 'category',
-            title: 'Escolha um sistema',
-            description:
-              'Cada unidade da trilha cobre um sistema anatômico: Osteologia, Artrologia, e mais conforme você avança.',
+            icon: 'menu_book',
+            title: 'Escolha uma unidade',
+            description: 'Escolha o conteúdo que quer revisar.'
           },
           {
             icon: 'edit',
-            title: 'Responda de cabeça',
-            description:
-              'Digite o nome da estrutura indicada antes de ver qualquer alternativa. Acertar de primeira vale o dobro dos pontos.',
+            title: 'Responda às questões',
+            description: 'Identifique estruturas, complete frases e relacione os termos às descrições. Há também questões de verdadeiro ou falso.'
           },
           {
             icon: 'task_alt',
             title: 'Veja o resultado na hora',
-            description:
-              'Errou ou pulou? A gente revela 4 alternativas. Toda estrutura errada entra na sua fila de revisão.',
-          },
-        ],
+            description: 'Confira a resposta de cada questão e veja sua pontuação no fim da unidade.'
+          }
+        ]
       },
       finalCta: {
-        headline: 'Aprenda anatomia veterinária com o Trivia Anatômica',
-        description:
-          'Acompanhe quanto da trilha você já cobriu e quanto falta até a data da sua prova. Sem sequência diária obrigatória, só progresso real.',
-        cta: 'Comece agora',
-      },
+        headline: 'Vamos praticar?',
+        description: 'Escolha o conteúdo e comece a revisão.',
+        cta: 'Comece agora'
+      }
     },
     trilha: {
       panel: {
-        title: 'Painel de sistemas',
-        subtitle: 'Escolha uma unidade pra começar a trilha.',
+        title: 'Unidades de estudo',
+        subtitle: 'Escolha uma unidade para começar.',
         questionsCount: (count) => `${count} perguntas`,
       },
       lesson: {
+        encouragement: 'Você chegou à metade da unidade!',
         progress: (index, total) => `Pergunta ${index} de ${total}`,
         points: (points) => `${points} pontos`,
         formats: {
           seta: 'Identificação por seta',
           'verdadeiro-falso': 'Verdadeiro ou falso',
           completar: 'Completar lacuna',
-          associacao: 'Associação termo-função',
+          associacao: 'Associar termos e descrições',
         },
       },
       exercises: {
         seta: {
           diagramLabel:
-            'Diagrama de referência do membro pélvico, com um marcador indicando a estrutura perguntada',
+            'Diagrama do membro pélvico com a estrutura da questão marcada em vermelho',
           diagramCredit: 'Ellenberger, Baum e Dittrich (1911), domínio público',
           inputLabel: 'Digite o nome da estrutura',
           skip: 'Pular',
           answer: 'Responder',
           chooseCorrect: 'Escolha a alternativa certa',
           correctFeedback: (points) => `Certo! +${points} pontos`,
-          wrongFeedback: (name) => `A resposta certa era ${name}.`,
+          wrongFeedback: (name) => `A resposta é ${name}.`,
         },
         verdadeiroFalso: {
           false: 'Falso',
           true: 'Verdadeiro',
           correctFeedback: (points) => `Certo! +${points} pontos`,
-          wrongFeedback: (answer) => `Errado. A afirmação é ${answer ? 'verdadeira' : 'falsa'}.`,
+          wrongFeedback: (answer) => `A afirmação é ${answer ? 'verdadeira' : 'falsa'}.`,
         },
         completar: {
           answer: 'Responder',
           correctFeedback: (points) => `Certo! +${points} pontos`,
-          wrongFeedback: (answer) => `A resposta certa era "${answer}".`,
+          wrongFeedback: (answer) => `A resposta é "${answer}".`,
         },
         associacao: {
-          placeholder: 'Selecione a descrição',
+          placeholder: 'Escolha a descrição',
           check: 'Conferir associações',
           continueLabel: 'Continuar',
           resultLabel: (correct, total) => `Associação (${correct}/${total} pares)`,
         },
       },
       summary: {
-        title: 'Lição concluída!',
+        title: 'Unidade concluída!',
         scoreSuffix: 'pontos',
         formatStats: (correct, total, earned, max) =>
           `${correct}/${total} certas · ${earned}/${max} pts`,
-        reviewTitle: 'Pra revisar:',
-        perfect: 'Nenhum erro. Mandou bem!',
-        retry: 'Refazer a lição',
-        backToPanel: 'Voltar ao painel',
+        reviewTitle: 'O que revisar:',
+        perfect: 'Você acertou todas!',
+        retry: 'Refazer a unidade',
+        backToPanel: 'Voltar às unidades',
       },
     },
     quiz: {
       units: [
         {
           id: 'osteologia-membro-pelvico',
-          title: 'Osteologia — Membro Pélvico',
+          title: 'Osteologia do membro pélvico',
           exercises: [
             { format: 'seta', id: 'coxal', name: 'Coxal', distractors: ['Fêmur', 'Escápula', 'Úmero'] },
             { format: 'seta', id: 'femur', name: 'Fêmur', distractors: ['Tíbia', 'Úmero', 'Rádio'] },
@@ -400,6 +420,36 @@ export const translations = {
           ],
         },
       ],
+    },
+    homeTest: {
+      preview: 'Página de teste',
+      original: 'Ver home original',
+      tag: 'ANATOMIA VETERINÁRIA · COIL UFSM + UST',
+      title: 'Para a prova prática,',
+      accent: 'treine anatomia.',
+      description:
+        'Pratique o reconhecimento das estruturas anatômicas e veja o que precisa revisar.',
+      start: 'Começar a praticar',
+      try: 'Experimentar uma questão',
+      note: 'Você escolhe quando estudar.',
+      bubble: 'Vamos estudar?',
+      demoTag: 'EXPERIMENTE',
+      demoTitle: 'Reconhece este osso?',
+      demoDescription: 'Observe o ponto vermelho no diagrama e escolha o nome do osso.',
+      question: 'Qual osso está marcado?',
+      options: ['Fêmur', 'Tíbia', 'Úmero'],
+      correct: 'Isso! É o fêmur, o osso da coxa.',
+      wrong: 'É o fêmur, o osso da coxa. Observe novamente o ponto marcado.',
+      again: 'Tentar de novo',
+      example: 'Questão de exemplo · não altera sua pontuação',
+      stepsTitle: 'Como funciona',
+      steps: [
+        ['Escolha uma unidade', 'Comece pelo sistema anatômico que quer revisar.'],
+        ['Responda às questões', 'Pratique com identificação, associação e outros formatos.'],
+        ['Veja o que aprendeu', 'Confira seus acertos e as estruturas para revisar no resumo.'],
+      ],
+      end: 'Vamos começar?',
+      endNote: 'Escolha uma unidade para revisar.',
     },
   },
 }

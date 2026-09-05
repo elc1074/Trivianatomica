@@ -2,6 +2,7 @@
   --color-background: #f8faf9;
   --color-surface: #ffffff;
   --color-primary: #f0b94a;
+  --color-primary-light: #f6c65f;
   --color-primary-dark: #a6672a;
   --color-primary-press: #7a4a1d;
   --color-primary-soft: #fdf3de;
@@ -123,7 +124,10 @@ select {
 }
 
 .button-primary:hover {
-  background: var(--color-primary-dark);
+  color: var(--color-ink);
+  background: var(--color-primary-light);
+  box-shadow: 0 5px 0 var(--color-primary-press);
+  transform: translateY(-1px);
 }
 
 .button-primary:active {

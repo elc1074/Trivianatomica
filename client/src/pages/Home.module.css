@@ -62,3 +62,31 @@
     max-width: 240px;
   }
 }
+
+.heroImage {
+  object-fit: contain;
+  max-height: 440px;
+  transform-origin: 50% 94%;
+  animation: mascotGreeting 9s ease-in-out infinite;
+}
+
+@keyframes mascotGreeting {
+  0%, 30%, 60%, 100% { transform: translateY(0) rotate(0) scale(1); }
+  15%, 45% { transform: translateY(-2px) rotate(0) scale(1.008); }
+  68% { transform: translateY(-3px) rotate(-2deg) scale(1); }
+  74% { transform: translateY(-2px) rotate(1.5deg) scale(1); }
+  80% { transform: translateY(-2px) rotate(-1deg) scale(1); }
+  86% { transform: translateY(0) rotate(0) scale(1); }
+}
+
+@media (max-width: 900px) {
+  .heroImage { max-height: 360px; }
+}
+
+@media (max-width: 640px) {
+  .heroImage { max-height: 280px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroImage { animation: none; }
+}

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import heroIllustration from '../assets/illustrations/computer-guy.svg'
+import heroIllustration from '../assets/illustrations/mascot-welcome.png'
 import FinalCta from '../components/FinalCta.jsx'
 import HowItWorks from '../components/HowItWorks.jsx'
 import Icon from '../components/Icon.jsx'

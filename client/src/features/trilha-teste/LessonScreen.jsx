@@ -1,5 +1,7 @@
+import LessonProgress from './LessonProgress.jsx'
 import { useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import mascotEncourage from '../../assets/illustrations/mascot-encourage.png'
 import PageLayout from '../../components/PageLayout.jsx'
 import { useLanguage } from '../../i18n/useLanguage.js'
 import { getMaxPoints, getUnitById } from './data.js'
@@ -71,6 +73,15 @@ function LessonScreen() {
             </p>
             <p className={styles.scoreBadge}>{t.trilha.lesson.points(sessionScore)}</p>
           </div>
+
+          <LessonProgress completed={results.length} total={unit.exercises.length} />
+
+          {unit.exercises.length >= 4 && exerciseIndex === Math.ceil(unit.exercises.length / 2) && (
+            <aside className={styles.encouragement}>
+              <img src={mascotEncourage} alt="" width="72" height="88" />
+              <p>{t.trilha.lesson.encouragement}</p>
+            </aside>
+          )}
 
           <p className={styles.formatLabel}>{t.trilha.lesson.formats[exercise.format]}</p>
 

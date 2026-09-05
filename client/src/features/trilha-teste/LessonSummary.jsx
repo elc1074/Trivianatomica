@@ -1,3 +1,5 @@
+import LessonProgress from './LessonProgress.jsx'
+import mascotCelebrate from '../../assets/illustrations/mascot-celebrate.png'
 import Icon from '../../components/Icon.jsx'
 import { useLanguage } from '../../i18n/useLanguage.js'
 import { getMaxPoints } from './data.js'
@@ -32,8 +34,11 @@ function LessonSummary({ unit, results, onRetry, onBackToPanel }) {
     <section className={styles.summary}>
       <div className="container">
         <div className={styles.card}>
+          <img className={styles.mascot} src={mascotCelebrate} alt="" width="140" height="210" />
           <h1 className={styles.title}>{t.trilha.summary.title}</h1>
           <p className={styles.unitName}>{unit.title}</p>
+
+          <LessonProgress completed={results.length} total={unit.exercises.length} />
 
           <div className={styles.score}>
             {totalScore}{' '}

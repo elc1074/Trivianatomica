@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import mascotWelcome from '../../assets/illustrations/mascot-welcome.png'
 import Icon from '../../components/Icon.jsx'
 import PageLayout from '../../components/PageLayout.jsx'
 import { useLanguage } from '../../i18n/useLanguage.js'
@@ -14,8 +15,13 @@ function SystemsPanel() {
     <PageLayout>
       <section className={styles.panel}>
         <div className="container">
-          <h1 className={styles.title}>{t.trilha.panel.title}</h1>
-          <p className={styles.subtitle}>{t.trilha.panel.subtitle}</p>
+          <div className={styles.intro}>
+            <img className={styles.mascot} src={mascotWelcome} alt="" width="160" height="184" />
+            <div>
+              <h1 className={styles.title}>{t.trilha.panel.title}</h1>
+              <p className={styles.subtitle}>{t.trilha.panel.subtitle}</p>
+            </div>
+          </div>
 
           <ul className={styles.unitList}>
             {units.map((unit) => (
