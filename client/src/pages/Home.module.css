@@ -1,84 +1,55 @@
 .heroSection {
-  position: relative;
-  padding: 64px 0 96px;
+  padding: 72px 0 96px;
   background: var(--color-background);
 }
 
-.heroStage {
-  position: relative;
+.heroContent {
   display: flex;
   align-items: center;
-  justify-content: center;
-  min-height: 380px;
+  gap: clamp(32px, 6vw, 80px);
 }
 
-.heroTitle {
-  position: relative;
-  z-index: 1;
-  max-width: 880px;
-  margin: 0 auto;
-  color: var(--color-ink);
-  text-align: center;
-  font-size: clamp(2.6rem, 6vw, 4.4rem);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
-}
-
-.heroDogImage {
-  position: absolute;
-  z-index: 2;
-  bottom: -100%;
-  left: 20%;
-  display: block;
-  height: 180%;
-  width: auto;
-  max-width: none;
-  transform: translateX(-50%);
-  pointer-events: none;
-}
-
-.heroDivider {
-  position: absolute;
-  z-index: 3;
-  bottom: -100%;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: var(--color-border);
-  pointer-events: none;
+.heroImage {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 440px;
+  height: auto;
 }
 
 .heroCopy {
-  position: relative;
-  z-index: 1;
-  margin: 8px auto 0;
-  max-width: 560px;
-  text-align: center;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.heroTitle {
+  margin: 0 0 20px;
+  color: var(--color-ink);
+  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
 }
 
 .heroDescription {
   margin: 0 0 32px;
+  max-width: 480px;
   color: var(--color-text);
   font-size: 1.05rem;
   line-height: 1.7;
 }
 
 @media (max-width: 900px) {
-  .heroStage {
-    min-height: 320px;
+  .heroContent {
+    flex-direction: column;
+    text-align: center;
   }
 
-  .heroTitle {
-    font-size: clamp(2.2rem, 8vw, 3.2rem);
+  .heroImage {
+    max-width: 320px;
   }
 
-  .heroDogImage {
-    height: 90%;
-  }
-
-  .heroDivider {
-    display: none;
+  .heroDescription {
+    margin-inline: auto;
   }
 }
 
@@ -87,16 +58,35 @@
     padding: 48px 0 64px;
   }
 
-  .heroStage {
-    min-height: 260px;
+  .heroImage {
+    max-width: 240px;
   }
+}
 
-  .heroDogImage {
-    display: none;
-  }
+.heroImage {
+  object-fit: contain;
+  max-height: 440px;
+  transform-origin: 50% 94%;
+  animation: mascotGreeting 9s ease-in-out infinite;
+}
 
-  .heroDescription {
-    font-size: 1rem;
-    line-height: 1.65;
-  }
+@keyframes mascotGreeting {
+  0%, 30%, 60%, 100% { transform: translateY(0) rotate(0) scale(1); }
+  15%, 45% { transform: translateY(-2px) rotate(0) scale(1.008); }
+  68% { transform: translateY(-3px) rotate(-2deg) scale(1); }
+  74% { transform: translateY(-2px) rotate(1.5deg) scale(1); }
+  80% { transform: translateY(-2px) rotate(-1deg) scale(1); }
+  86% { transform: translateY(0) rotate(0) scale(1); }
+}
+
+@media (max-width: 900px) {
+  .heroImage { max-height: 360px; }
+}
+
+@media (max-width: 640px) {
+  .heroImage { max-height: 280px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroImage { animation: none; }
 }

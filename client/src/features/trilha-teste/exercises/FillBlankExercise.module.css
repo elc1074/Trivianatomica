@@ -1,0 +1,29 @@
+.form {
+  max-width: 460px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.sentence {
+  margin: 0 0 24px;
+  color: var(--color-ink);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.input {
+  width: 100%;
+  margin-bottom: 20px;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-control);
+  padding: 14px 18px;
+  font-size: 1.05rem;
+  color: var(--color-ink);
+  background: var(--color-surface);
+}
+
+.input:focus-visible {
+  outline: none;
+  border-color: var(--color-primary);
+}

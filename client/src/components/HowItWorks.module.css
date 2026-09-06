@@ -1,5 +1,4 @@
 .howItWorks {
-  margin-top: 64px;
   padding: 104px 0 112px;
   background: var(--color-surface);
 }
@@ -12,7 +11,7 @@
 
 .sectionHeading h2 {
   margin: 14px 0 12px;
-  color: var(--color-primary);
+  color: var(--color-primary-dark);
   font-size: clamp(1.9rem, 2.6vw, 2.4rem);
   font-weight: 700;
   letter-spacing: -0.02em;
@@ -47,10 +46,16 @@
 .lineLeft,
 .lineRight {
   position: absolute;
-  top: 28px;
+  top: 32px;
   width: 50%;
-  height: 1px;
-  background: var(--color-border);
+  height: 3px;
+  background: repeating-linear-gradient(
+    to right,
+    var(--color-border) 0,
+    var(--color-border) 6px,
+    transparent 6px,
+    transparent 14px
+  );
 }
 
 .lineLeft {
@@ -65,20 +70,21 @@
   position: relative;
   z-index: 1;
   display: grid;
-  width: 56px;
-  height: 56px;
+  width: 64px;
+  height: 64px;
   place-items: center;
   border-radius: 50%;
-  border: 1px solid var(--color-primary);
-  background: var(--color-surface);
-  color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-ink);
 }
 
 .stepCard h3 {
+  max-width: 280px;
   margin: 0;
   color: var(--color-ink);
   font-size: 1.1rem;
-  font-weight: 650;
+  font-weight: 700;
+  line-height: 1.35;
 }
 
 .stepCard p {
@@ -114,6 +120,7 @@
     display: none;
   }
 
+  .stepCard h3,
   .stepCard p {
     max-width: none;
   }

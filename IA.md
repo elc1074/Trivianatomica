@@ -19,7 +19,7 @@ Cole este documento no início de qualquer sessão com IA (Claude Code, Cursor, 
 ## Regras de interface (evitar os "tells" documentados de UI gerada por IA)
 
 - **Modo escuro como padrão automático** é o tell mais comum de todos. Este projeto é light mode por decisão de design system, não por padrão de ferramenta.
-- **Gradiente roxo/índigo em qualquer elemento** — o roxo vem do padrão `bg-indigo-500` do Tailwind, saturado nos dados de treino dos modelos. A paleta daqui é o verde-petróleo (`--color-primary`) e o dourado (`--color-accent`), sem gradiente roxo em lugar nenhum.
+- **Gradiente roxo/índigo em qualquer elemento** — o roxo vem do padrão `bg-indigo-500` do Tailwind, saturado nos dados de treino dos modelos. A paleta daqui é o dourado/âmbar (`--color-primary`), com azul como secundário (`--color-secondary`) e verde/vermelho só como cor semântica de acerto/erro (`--color-success`/`--color-error`), sem gradiente roxo em lugar nenhum.
 - **Faixa colorida de 3-4px na borda esquerda do card** é apontada como o tell mais confiável desse tipo de levantamento. Não usar.
 - **Glassmorphism, blobs 3D flutuantes, ilustrações "plásticas" excessivamente suaves.** Nenhum deles tem lugar aqui.
 - **Badge acima do título ("novo!", "beta") só por hábito.** Só usar se tiver função real.
@@ -64,6 +64,14 @@ Variar comprimento de frase deliberadamente, misturar frase curta com frase mais
 
 README e qualquer documentação de setup devem cobrir TODAS as variáveis de ambiente usadas pelo projeto, com descrição e indicação de obrigatória ou não — documentação parcial é pior do que parecer incompleta.
 
+## Internacionalização (i18n)
+
+O site é bilíngue (espanhol do Chile como padrão, português como alternativa), por causa da parceria COIL entre a UFSM e a Universidad Santo Tomás. Toda string visível ao usuário, incluindo o conteúdo das perguntas da trilha, vive em `client/src/i18n/translations.js`, nunca hardcoded num componente.
+
+- Usar o hook `useLanguage()` (`client/src/i18n/useLanguage.js`) pra pegar `{ language, setLanguage, t }`; `t` é o dicionário inteiro do idioma atual, acessado por chave (`t.chrome.brand`, `t.trilha.summary.retry`, etc.), não uma função `t('chave')`.
+- Toda chave nova precisa existir nos dois idiomas (`es` e `pt`), com a mesma estrutura. O arquivo já roda um validador em modo dev (`import.meta.env.DEV`) que compara as duas árvores e solta `console.warn` pra qualquer chave que exista num idioma e falte no outro — checar o console depois de adicionar texto novo.
+- Isso inclui atributos que não aparecem na tela mas são lidos por leitor de tela (`aria-label`, `alt`), e também `document.title`/`meta[name="description"]`/`html[lang]`, que são atualizados em tempo de execução pelo `LanguageProvider`, não fixos no `index.html`.
+
 ## Estrutura do backend
 
 ```
@@ -92,6 +100,7 @@ Convenções ao adicionar uma rota nova:
 - [ ] Nenhum ícone genérico centralizado sem função
 - [ ] Toda animação/hover tem propósito funcional
 - [ ] Estrutura de pastas e nomenclatura seguem o padrão já definido no projeto
+- [ ] Todo texto novo visível ao usuário (inclusive `aria-label`/`alt`) veio de `client/src/i18n/translations.js`, existe em `es` e `pt`, e não gerou warning de tradução faltando no console
 - [ ] Nenhum travessão em qualquer texto ou documentação
 - [ ] Nenhuma das construções/palavras da lista de vícios de texto apareceu no README, commits ou textos de UI
 - [ ] Funcionalidade foi implementada em partes pequenas, testadas antes de seguir adiante

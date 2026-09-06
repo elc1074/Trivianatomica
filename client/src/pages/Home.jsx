@@ -1,12 +1,17 @@
-import heroImage from '../assets/hero_image.png'
-import CallToAction from '../components/CallToAction.jsx'
+import { Link } from 'react-router-dom'
+import heroIllustration from '../assets/illustrations/mascot-welcome.png'
+import FinalCta from '../components/FinalCta.jsx'
 import HowItWorks from '../components/HowItWorks.jsx'
 import Icon from '../components/Icon.jsx'
 import PageLayout from '../components/PageLayout.jsx'
 import Reveal from '../components/Reveal.jsx'
+import ValueProps from '../components/ValueProps.jsx'
+import { useLanguage } from '../i18n/useLanguage.js'
 import styles from './Home.module.css'
 
 function Home() {
+  const { t } = useLanguage()
+
   return (
     <PageLayout>
       <section
@@ -14,34 +19,29 @@ function Home() {
         id="inicio"
         aria-labelledby="hero-title"
       >
-        <div className="container">
-          <div className={styles.heroStage}>
-            <h1 id="hero-title" className={styles.heroTitle}>
-              Estude Anatomia Veterinária de forma interativa
-            </h1>
-            <img src={heroImage} alt="" className={styles.heroDogImage} />
-            <div className={styles.heroDivider} />
-          </div>
+        <div className={`container ${styles.heroContent}`}>
+          <img src={heroIllustration} alt="" className={styles.heroImage} />
 
           <div className={styles.heroCopy}>
-            <p className={styles.heroDescription}>
-              Pratique a identificação de estruturas anatômicas e prepare-se
-              para suas avaliações práticas.
-            </p>
-            <button className="button button-primary" type="button">
-              Começar a estudar
+            <h1 id="hero-title" className={styles.heroTitle}>
+              {t.home.hero.title}
+            </h1>
+            <p className={styles.heroDescription}>{t.home.hero.description}</p>
+            <Link className="button button-primary" to="/trilha">
+              {t.home.hero.cta}
               <Icon name="arrow_forward" size={20} color="currentColor" />
-            </button>
+            </Link>
           </div>
         </div>
       </section>
 
+      <ValueProps />
+
       <Reveal>
         <HowItWorks />
       </Reveal>
-      <Reveal>
-        <CallToAction />
-      </Reveal>
+
+      <FinalCta />
     </PageLayout>
   )
 }

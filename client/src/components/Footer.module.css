@@ -1,6 +1,5 @@
 .siteFooter {
-  border-top: 1px solid var(--color-border);
-  background: var(--color-surface);
+  background: var(--color-primary);
 }
 
 .footerContent {
@@ -9,8 +8,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  color: var(--color-text-muted);
+  color: var(--color-ink);
   font-size: 0.76rem;
+  font-weight: 600;
 }
 
 @media (max-width: 640px) {

@@ -1,0 +1,85 @@
+.encouragement {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 24px 0;
+}
+
+.encouragement img {
+  width: 72px;
+  height: 92px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.encouragement p {
+  position: relative;
+  width: fit-content;
+  max-width: 480px;
+  min-width: 0;
+  margin: 0;
+  padding: 16px 20px;
+  border: 1px solid var(--color-text-muted);
+  border-radius: 20px;
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.encouragement p::before {
+  content: '';
+  position: absolute;
+  left: -7px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  background: var(--color-surface);
+  border-left: 1px solid var(--color-text-muted);
+  border-bottom: 1px solid var(--color-text-muted);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+@media (max-width: 480px) {
+  .encouragement { gap: 14px; }
+  .encouragement img { width: 60px; height: 80px; }
+  .encouragement p { padding: 12px 14px; font-size: 0.9rem; }
+}
+
+.lesson {
+  padding: 48px 0 96px;
+}
+
+.statusBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 8px;
+}
+
+.progress {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.scoreBadge {
+  margin: 0;
+  color: var(--color-primary-dark);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.formatLabel {
+  margin: 0 0 24px;
+  color: var(--color-primary-dark);
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
