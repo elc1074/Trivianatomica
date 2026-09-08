@@ -8,7 +8,6 @@ function createCardFromSeta(exercise, unit) {
         console.warn(`No marker found for exercise id: ${exercise.id}`)
         return null
     }
-    
     return {
         id: exercise.id,
         answer: exercise.name,

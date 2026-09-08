@@ -1,11 +1,15 @@
 import styles from './FlashcardsScreen.module.css'
+import { useLanguage } from '../../../i18n/useLanguage.js'
 
-function FlashcardsContentSelector({ 
+function FlashcardsContentSelector({
     decks,
     selectedDeckIds,
     onDeckChange,
     onStart
 }) {
+    const { t } = useLanguage()
+    const copy = t.flashcards
+
     function toggleDeck(deckId) {
         if (selectedDeckIds.includes(deckId)) {
             onDeckChange(selectedDeckIds.filter((id) => id !== deckId))
@@ -22,9 +26,9 @@ function FlashcardsContentSelector({
     return (
         <section className={styles.selector}>
             <div className={styles.selectorHeader}>
-                <h1 className={styles.title}>Flashcards</h1>
+                <h1 className={styles.title}>{copy.title}</h1>
                 <p className={styles.subtitle}>
-                    Seleciona lo que quieras estudiar: {selectedCardsCount} seleccionadas
+                    {copy.selection.subtitle(selectedCardsCount)}
                 </p>
             </div>
 
@@ -39,7 +43,7 @@ function FlashcardsContentSelector({
 
                         <span>
                             <strong>{deck.title}</strong>
-                            <small>{deck.cards.length} tarjetas</small>
+                            <small>{copy.selection.cardsCount(deck.cards.length)}</small>
                         </span>
                     </label>
                 ))}
@@ -51,10 +55,10 @@ function FlashcardsContentSelector({
                 disabled={selectedCardsCount === 0}
                 onClick={onStart}
             >
-                Comenzar a estudiar
+                {copy.selection.start}
             </button>
         </section>
     )
 }
-        
+
 export default FlashcardsContentSelector

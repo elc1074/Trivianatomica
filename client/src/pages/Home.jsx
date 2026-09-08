@@ -35,7 +35,7 @@ function Home() {
               </Link>
 
               <Link className="button button-light" to="/flashcards">
-                Flashcards
+                {t.home.hero.flashcardsCta}
                 <Icon name="style" size={20} color="currentColor" />
               </Link>
             </div>

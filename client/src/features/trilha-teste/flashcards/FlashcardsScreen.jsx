@@ -9,7 +9,7 @@ import castiel from '../../../assets/illustrations/castiel.png'
 import styles from './FlashcardsScreen.module.css'
 
 function FlashcardsScreen() {
-    const { language } = useLanguage()
+    const { language, t } = useLanguage()
 
     const decks = useMemo(() => getFlashcardDecks(language), [language])
 
@@ -22,10 +22,10 @@ function FlashcardsScreen() {
 
     function handleStart() {
         if (selectedCards.length === 0) {
-            alert('Please select at least one deck to start studying.')
+            alert(t.flashcards.selection.emptySelection)
             return
         }
-    
+
     setStarted(true)
     }
 
@@ -38,13 +38,13 @@ function FlashcardsScreen() {
             <section className={styles.flashcardsScreen}>
                 <img
                     src={kiba}
-                    alt="" 
+                    alt=""
                     className={`${styles.character} ${styles.kiba}`}
                 />
 
                 <img
                     src={castiel}
-                    alt="" 
+                    alt=""
                     className={`${styles.character} ${styles.castiel}`}
                 />
 
@@ -59,12 +59,13 @@ function FlashcardsScreen() {
                         />
                     ) : (
                         <FlashcardsStudy
+                            key={language}
                             cards={selectedCards}
                             onBack={handleBackToSelection}
                         />
                     )}
                 </div>
-            </section>  
+            </section>
         </PageLayout>
     )
 }

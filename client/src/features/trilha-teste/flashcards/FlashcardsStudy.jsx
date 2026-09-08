@@ -2,6 +2,7 @@ import { useState } from 'react'
 import PelvicLimbDiagram from '../PelvicLimbDiagram.jsx'
 import { normalizeAnswer } from '../normalizeAnswer.js'
 import { shuffle } from '../shuffle.js'
+import { useLanguage } from '../../../i18n/useLanguage.js'
 import styles from './FlashcardsScreen.module.css'
 
 function putCardBackInDeck(deck, card) {
@@ -19,6 +20,8 @@ function putCardBackInDeck(deck, card) {
 }
 
 function FlashcardsStudy({ cards, onBack }) {
+    const { t } = useLanguage()
+    const copy = t.flashcards.study
     const [deck, setDeck] = useState(() => shuffle(cards))
     const [answer, setAnswer] = useState('')
     const [revealed, setRevealed] = useState(false)
@@ -29,10 +32,10 @@ function FlashcardsStudy({ cards, onBack }) {
     if (!currentCard) {
         return (
             <section className={styles.completed}>
-                <h1 className={styles.title}>¡Felicidades!</h1>
-                <p className={styles.subtitle}>Has completado todas las tarjetas.</p>
+                <h1 className={styles.title}>{copy.completedTitle}</h1>
+                <p className={styles.subtitle}>{copy.completedMessage}</p>
                 <button type="button" className="button button-primary" onClick={onBack}>
-                    Volver a la selección
+                    {copy.backToSelection}
                 </button>
             </section>
         )
@@ -52,8 +55,8 @@ function FlashcardsStudy({ cards, onBack }) {
         const isCorrect = normalizeAnswer(answer) === normalizeAnswer(currentCard.answer)
 
         if (!isCorrect) {
-            setFeedback(`Incorrecto. La respuesta correcta es: ${currentCard.answer}`)
-            sendCurrentCardBack()
+            setFeedback(copy.wrongFeedback(currentCard.answer))
+            setRevealed(false)
             return
         }
 
@@ -77,50 +80,59 @@ function FlashcardsStudy({ cards, onBack }) {
         <section className={styles.study}>
             <div className={styles.studyHeader}>
                 <button type="button" className="button button-light" onClick={onBack}>
-                    Cambiar contenidos
+                    {copy.changeContents}
                 </button>
-        
-                <p className={styles.counter}>{deck.length} tarjetas restantes</p>
+
+                <p className={styles.counter}>{copy.remainingCards(deck.length)}</p>
             </div>
 
-        <PelvicLimbDiagram 
+        <PelvicLimbDiagram
             markerX={currentCard.marker.xPercent}
             markerY={currentCard.marker.yPercent}
         />
 
-        <form className={styles.answerForm} onSubmit={handleSubmit}>
-            <label className={styles.label} htmlFor="flashcard-answer">
-                ¿Qué es esto?
-            </label>
+        {!feedback && (
+            <form className={styles.answerForm} onSubmit={handleSubmit}>
+                <label className={styles.label} htmlFor="flashcard-answer">
+                    {copy.prompt}
+                </label>
 
-            <input
-                id="flashcard-answer"
-                className={styles.input}
-                type="text"
-                value={answer}
-                onChange={(e) => setAnswer(e.target.value)}
-                autoComplete="off"
-                autoFocus
-            />
+                <input
+                    id="flashcard-answer"
+                    className={styles.input}
+                    type="text"
+                    value={answer}
+                    onChange={(e) => setAnswer(e.target.value)}
+                    autoComplete="off"
+                    autoFocus
+                />
 
-            <div className={styles.formActions}>
-                <button type="button" className="button button-light" onClick={handleRoll}>
-                    Ver tarjeta
-                </button>
+                <div className={styles.formActions}>
+                    <button type="button" className="button button-light" onClick={handleRoll}>
+                        {copy.reveal}
+                    </button>
 
-                <button type="submit" className="button button-primary">
-                    Responder
+                    <button type="submit" className="button button-primary">
+                        {copy.answer}
+                    </button>
+                </div>
+            </form>
+        )}
+
+        {feedback && (
+            <div className={styles.feedback}>
+                <p>{feedback}</p>
+                <button type="button" className="button button-primary" onClick={handleContinue}>
+                    {copy.continueLabel}
                 </button>
             </div>
-        </form>
-
-        {feedback && <p className={styles.feedback}>{feedback}</p>}
+        )}
 
         {revealed && (
             <div className={styles.revealBox}>
-                <p>Respuesta: {currentCard.answer}</p>
+                <p>{copy.revealedAnswer(currentCard.answer)}</p>
                 <button type="button" className="button button-primary" onClick={handleContinue}>
-                    Continuar
+                    {copy.continueLabel}
                 </button>
             </div>
         )}
