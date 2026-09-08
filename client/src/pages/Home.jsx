@@ -27,10 +27,18 @@ function Home() {
               {t.home.hero.title}
             </h1>
             <p className={styles.heroDescription}>{t.home.hero.description}</p>
-            <Link className="button button-primary" to="/trilha">
-              {t.home.hero.cta}
-              <Icon name="arrow_forward" size={20} color="currentColor" />
-            </Link>
+
+            <div className={styles.heroActions}>
+              <Link className="button button-primary" to="/trilha">
+                {t.home.hero.cta}
+                <Icon name="arrow_forward" size={20} color="currentColor" />
+              </Link>
+
+              <Link className="button button-light" to="/flashcards">
+                Flashcards
+                <Icon name="style" size={20} color="currentColor" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>
