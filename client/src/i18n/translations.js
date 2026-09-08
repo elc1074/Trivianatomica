@@ -24,7 +24,8 @@ export const translations = {
       hero: {
         title: 'Estudia Anatomía Veterinaria de forma interactiva',
         description: 'Practica la identificación de estructuras anatómicas y repasa para tu prueba práctica.',
-        cta: 'Empezar a estudiar'
+        cta: 'Empezar a estudiar',
+        flashcardsCta: 'Flashcards',
       },
       valuePropsLabel: 'Por qué estudiar con Trivia Anatómica',
       valueProps: [
@@ -66,6 +67,28 @@ export const translations = {
         description: 'Elige una unidad y repasa a tu ritmo, una pregunta a la vez.',
         cta: 'Comienza ahora'
       }
+    },
+    flashcards: {
+      title: 'Flashcards',
+      selection: {
+        subtitle: (count) => `Selecciona lo que quieras estudiar: ${count} seleccionadas`,
+        cardsCount: (count) => `${count} tarjetas`,
+        start: 'Comenzar a estudiar',
+        emptySelection: 'Selecciona al menos un mazo para comenzar a estudiar.',
+      },
+      study: {
+        completedTitle: '¡Felicidades!',
+        completedMessage: 'Has completado todas las tarjetas.',
+        backToSelection: 'Volver a la selección',
+        wrongFeedback: (answer) => `Incorrecto. La respuesta correcta es: ${answer}`,
+        changeContents: 'Cambiar contenidos',
+        remainingCards: (count) => `${count} tarjetas restantes`,
+        prompt: '¿Qué es esto?',
+        reveal: 'Ver tarjeta',
+        answer: 'Responder',
+        revealedAnswer: (answer) => `Respuesta: ${answer}`,
+        continueLabel: 'Continuar',
+      },
     },
     trilha: {
       panel: {
@@ -215,7 +238,8 @@ export const translations = {
       hero: {
         title: 'Pratique anatomia veterinária',
         description: 'Treine o reconhecimento das estruturas anatômicas para a prova prática.',
-        cta: 'Começar a estudar'
+        cta: 'Começar a estudar',
+        flashcardsCta: 'Flashcards',
       },
       valuePropsLabel: 'Por que estudar com o Trivia Anatômica',
       valueProps: [
@@ -257,6 +281,28 @@ export const translations = {
         description: 'Escolha o conteúdo e comece a revisão.',
         cta: 'Comece agora'
       }
+    },
+    flashcards: {
+      title: 'Flashcards',
+      selection: {
+        subtitle: (count) => `Selecione o que deseja estudar: ${count} selecionados`,
+        cardsCount: (count) => `${count} cartões`,
+        start: 'Começar a estudar',
+        emptySelection: 'Selecione pelo menos um baralho para começar a estudar.',
+      },
+      study: {
+        completedTitle: 'Parabéns!',
+        completedMessage: 'Você concluiu todos os cartões.',
+        backToSelection: 'Voltar à seleção',
+        wrongFeedback: (answer) => `Incorreto. A resposta correta é: ${answer}`,
+        changeContents: 'Alterar conteúdos',
+        remainingCards: (count) => `${count} cartões restantes`,
+        prompt: 'O que é isto?',
+        reveal: 'Ver cartão',
+        answer: 'Responder',
+        revealedAnswer: (answer) => `Resposta: ${answer}`,
+        continueLabel: 'Continuar',
+      },
     },
     trilha: {
       panel: {
