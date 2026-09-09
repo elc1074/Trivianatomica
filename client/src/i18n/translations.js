@@ -93,8 +93,7 @@ export const translations = {
     trilha: {
       panel: {
         title: 'Panel de sistemas',
-        subtitle: 'Elige un animal para empezar la ruta.',
-        unitSubtitle: 'Elige una unidad para empezar.',
+        subtitle: 'Elige una unidad para empezar la ruta.',
         questionsCount: (count) => `${count} preguntas`,
       },
       lesson: {
@@ -150,10 +149,6 @@ export const translations = {
       },
     },
     quiz: {
-      species: [
-        { id: 'cachorro', title: 'Anatomía del perro', unitIds: ['osteologia-membro-pelvico'] },
-        { id: 'gato', title: 'Anatomía del gato', unitIds: ['anatomia-felina'] },
-      ],
       units: [
         {
           id: 'osteologia-membro-pelvico',
@@ -350,8 +345,7 @@ export const translations = {
     trilha: {
       panel: {
         title: 'Unidades de estudo',
-        subtitle: 'Escolha um animal para começar.',
-        unitSubtitle: 'Escolha uma unidade para começar.',
+        subtitle: 'Escolha uma unidade para começar.',
         questionsCount: (count) => `${count} perguntas`,
       },
       lesson: {
@@ -407,10 +401,6 @@ export const translations = {
       },
     },
     quiz: {
-      species: [
-        { id: 'cachorro', title: 'Anatomia do cachorro', unitIds: ['osteologia-membro-pelvico'] },
-        { id: 'gato', title: 'Anatomia do gato', unitIds: ['anatomia-felina'] },
-      ],
       units: [
         {
           id: 'osteologia-membro-pelvico',

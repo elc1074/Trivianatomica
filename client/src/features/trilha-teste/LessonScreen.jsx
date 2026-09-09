@@ -20,10 +20,10 @@ const EXERCISE_COMPONENTS = {
 }
 
 function LessonScreen() {
-  const { speciesId, unitId } = useParams()
+  const { unitId } = useParams()
   const navigate = useNavigate()
   const { language, t } = useLanguage()
-  const unit = getUnitById(unitId, language, speciesId)
+  const unit = getUnitById(unitId, language)
 
   const [exerciseIndex, setExerciseIndex] = useState(0)
   const [results, setResults] = useState([])
@@ -53,7 +53,7 @@ function LessonScreen() {
           unit={unit}
           results={results}
           onRetry={resetLesson}
-          onBackToPanel={() => navigate(`/trilha/${speciesId}`)}
+          onBackToPanel={() => navigate('/trilha')}
         />
       </PageLayout>
     )
