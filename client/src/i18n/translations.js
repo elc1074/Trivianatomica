@@ -217,6 +217,44 @@ export const translations = {
             },
           ],
         },
+        {
+          id: 'anatomia-felina',
+          title: 'Anatomía general del gato',
+          exercises: [
+            {
+              format: 'verdadeiro-falso',
+              id: 'vf-clavicula-gato',
+              statement: 'El gato posee una clavícula bien desarrollada.',
+              answer: false,
+            },
+            {
+              format: 'verdadeiro-falso',
+              id: 'vf-corazon-gato',
+              statement: 'El corazón del gato se encuentra en la cavidad torácica.',
+              answer: true,
+            },
+            {
+              format: 'completar',
+              id: 'lacuna-dedos-gato',
+              sentence: 'El gato normalmente presenta cinco dedos en cada miembro ___.',
+              answer: 'torácico',
+            },
+            {
+              format: 'associacao',
+              id: 'assoc-esqueleto-felino',
+              pairs: [
+                {
+                  term: 'Escápula',
+                  description: 'Hueso plano de la cintura torácica',
+                },
+                {
+                  term: 'Fémur',
+                  description: 'Hueso largo del miembro pélvico',
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
   },
@@ -427,6 +465,44 @@ export const translations = {
                 { term: 'Maléolo tibial', description: 'Descrito por medial na tíbia' },
                 { term: 'Maléolo fibular', description: 'Descrito por lateral na fíbula' },
                 { term: 'Incisura fibular', description: 'Onde a tíbia articula com a fíbula' },
+              ],
+            },
+          ],
+        },
+        {
+          id: 'anatomia-felina',
+          title: 'Anatomia geral do gato',
+          exercises: [
+            {
+              format: 'verdadeiro-falso',
+              id: 'vf-clavicula-gato',
+              statement: 'O gato possui uma clavícula bem desenvolvida.',
+              answer: false,
+            },
+            {
+              format: 'verdadeiro-falso',
+              id: 'vf-coracao-gato',
+              statement: 'O coração do gato está localizado na cavidade torácica.',
+              answer: true,
+            },
+            {
+              format: 'completar',
+              id: 'lacuna-dedos-gato',
+              sentence: 'O gato normalmente apresenta cinco dedos em cada membro ___.',
+              answer: 'torácico',
+            },
+            {
+              format: 'associacao',
+              id: 'assoc-esqueleto-felino',
+              pairs: [
+                {
+                  term: 'Escápula',
+                  description: 'Osso plano da cintura torácica',
+                },
+                {
+                  term: 'Fêmur',
+                  description: 'Osso longo do membro pélvico',
+                },
               ],
             },
           ],
