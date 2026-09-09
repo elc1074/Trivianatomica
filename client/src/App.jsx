@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import LessonScreen from './features/trilha-teste/LessonScreen.jsx'
 import SystemsPanel from './features/trilha-teste/SystemsPanel.jsx'
+import FlashcardsScreen from './features/trilha-teste/flashcards/FlashcardsScreen.jsx'
 import Home from './pages/Home.jsx'
 
 function App() {
@@ -8,8 +9,8 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/trilha" element={<SystemsPanel />} />
-      <Route path="/trilha/:speciesId" element={<SystemsPanel />} />
-      <Route path="/trilha/:speciesId/:unitId" element={<LessonScreen />} />
+      <Route path="/trilha/:unitId" element={<LessonScreen />} />
+      <Route path="/flashcards" element={<FlashcardsScreen />} />
     </Routes>
   )
 }
