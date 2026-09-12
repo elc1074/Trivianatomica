@@ -5,12 +5,12 @@ import { useLanguage } from '../../i18n/useLanguage.js'
 import { getMaxPoints } from './data.js'
 import styles from './LessonSummary.module.css'
 
-function LessonSummary({ unit, results, onRetry, onBackToPanel }) {
+function LessonSummary({ lesson, results, onRetry, onBackToPanel }) {
   const { t } = useLanguage()
   const formatLabels = t.trilha.lesson.formats
 
   const totalScore = results.reduce((sum, result) => sum + result.points, 0)
-  const maxScore = unit.exercises.reduce((sum, exercise) => sum + getMaxPoints(exercise), 0)
+  const maxScore = lesson.exercises.reduce((sum, exercise) => sum + getMaxPoints(exercise), 0)
 
   const formatBreakdown = Object.keys(formatLabels)
     .map((format) => {
@@ -36,9 +36,9 @@ function LessonSummary({ unit, results, onRetry, onBackToPanel }) {
         <div className={styles.card}>
           <img className={styles.mascot} src={mascotCelebrate} alt="" width="140" height="210" />
           <h1 className={styles.title}>{t.trilha.summary.title}</h1>
-          <p className={styles.unitName}>{unit.title}</p>
+          <p className={styles.unitName}>{lesson.title}</p>
 
-          <LessonProgress completed={results.length} total={unit.exercises.length} />
+          <LessonProgress completed={results.length} total={lesson.exercises.length} />
 
           <div className={styles.score}>
             {totalScore}{' '}

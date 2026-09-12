@@ -1,8 +1,8 @@
-import { getUnits } from '../data.js'
+import { fetchLesson, fetchUnitLessons, fetchUnits } from '../api.js'
 import { structureMarkers } from '../markerPositions.js'
 
-function createCardFromSeta(exercise, unit) {
-    const marker = structureMarkers[exercise.id]
+function createCardFromSeta(exercise) {
+    const marker = structureMarkers[exercise.diagram]?.[exercise.id]
 
     if (!marker) {
         console.warn(`No marker found for exercise id: ${exercise.id}`)
@@ -12,24 +12,33 @@ function createCardFromSeta(exercise, unit) {
         id: exercise.id,
         answer: exercise.name,
         marker,
-        unitId: unit.id,
-        unitTitle: unit.title,
+        diagram: exercise.diagram,
     }
 }
 
-export function getFlashcardDecks(language) {
-    return getUnits(language)
-        .map((unit) => {
-            const cards = unit.exercises
-            .filter((exercise) => exercise.format === 'seta')
-            .map((exercise) => createCardFromSeta(exercise, unit))
-            .filter(Boolean)
+export async function getFlashcardDecks(language) {
+    const units = await fetchUnits(language)
+
+    const decks = await Promise.all(
+        units.map(async (unit) => {
+            const unitWithLessons = await fetchUnitLessons(unit.id, language)
+            const fullLessons = await Promise.all(
+                unitWithLessons.lessons.map((lesson) => fetchLesson(lesson.id, language)),
+            )
+
+            const cards = fullLessons
+                .flatMap((lesson) => lesson.exercises)
+                .filter((exercise) => exercise.format === 'seta')
+                .map((exercise) => createCardFromSeta(exercise))
+                .filter(Boolean)
 
             return {
                 id: unit.id,
-                title: unit.title,
+                title: unitWithLessons.title,
                 cards,
             }
-        })
-    .filter((deck) => deck.cards.length > 0)
+        }),
+    )
+
+    return decks.filter((deck) => deck.cards.length > 0)
 }

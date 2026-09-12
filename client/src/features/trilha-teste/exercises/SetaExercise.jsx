@@ -1,9 +1,9 @@
 import { useMemo, useState } from 'react'
 import Icon from '../../../components/Icon.jsx'
 import { useLanguage } from '../../../i18n/useLanguage.js'
+import AnatomyDiagram from '../AnatomyDiagram.jsx'
 import FeedbackBanner from '../FeedbackBanner.jsx'
 import { structureMarkers } from '../markerPositions.js'
-import PelvicLimbDiagram from '../PelvicLimbDiagram.jsx'
 import { normalizeAnswer } from '../normalizeAnswer.js'
 import { shuffle } from '../shuffle.js'
 import styles from './SetaExercise.module.css'
@@ -16,7 +16,7 @@ function SetaExercise({ exercise, onComplete }) {
   const [inputValue, setInputValue] = useState('')
   const [feedback, setFeedback] = useState(null)
 
-  const marker = structureMarkers[exercise.id]
+  const marker = structureMarkers[exercise.diagram][exercise.id]
   const choices = useMemo(
     () => shuffle([exercise.name, ...exercise.distractors]),
     [exercise],
@@ -55,7 +55,7 @@ function SetaExercise({ exercise, onComplete }) {
 
   return (
     <div>
-      <PelvicLimbDiagram markerX={marker.xPercent} markerY={marker.yPercent} />
+      <AnatomyDiagram diagram={exercise.diagram} markerX={marker.xPercent} markerY={marker.yPercent} />
 
       {stage === 'free-text' && (
         <form className={styles.answerForm} onSubmit={handleSubmitFreeText}>

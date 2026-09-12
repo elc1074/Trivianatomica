@@ -70,6 +70,7 @@ export const translations = {
     },
     flashcards: {
       title: 'Flashcards',
+      loading: 'Cargando barajas...',
       selection: {
         subtitle: (count) => `Selecciona lo que quieras estudiar: ${count} seleccionadas`,
         cardsCount: (count) => `${count} tarjetas`,
@@ -95,8 +96,21 @@ export const translations = {
         title: 'Panel de sistemas',
         subtitle: 'Elige una unidad para empezar la ruta.',
         questionsCount: (count) => `${count} preguntas`,
+        lessonsCount: (count) => `${count} lecciones`,
+        loading: 'Cargando unidades...',
+        loadError: 'No se pudieron cargar las unidades. Intenta de nuevo.',
+        locked: 'Completa la unidad anterior para desbloquear',
+      },
+      unitPath: {
+        subtitle: 'Elige una lección para continuar.',
+        loading: 'Cargando lecciones...',
+        loadError: 'No se pudieron cargar las lecciones. Intenta de nuevo.',
+        locked: 'Completa la lección anterior para desbloquear',
+        backToPanel: 'Volver al panel',
       },
       lesson: {
+        loading: 'Cargando lección...',
+        loadError: 'No se pudo cargar esta unidad.',
         encouragement: '¡Ya completaste la mitad! Sigue a tu ritmo.',
         progress: (index, total) => `Pregunta ${index} de ${total}`,
         points: (points) => `${points} puntos`,
@@ -110,7 +124,7 @@ export const translations = {
       exercises: {
         seta: {
           diagramLabel:
-            'Diagrama de referencia del miembro pélvico, con un marcador indicando la estructura preguntada',
+            'Diagrama de referencia con un marcador indicando la estructura preguntada',
           diagramCredit: 'Ellenberger, Baum y Dittrich (1911), dominio público',
           inputLabel: 'Escribe el nombre de la estructura',
           skip: 'Pasar',
@@ -147,77 +161,6 @@ export const translations = {
         retry: 'Rehacer la lección',
         backToPanel: 'Volver al panel',
       },
-    },
-    quiz: {
-      units: [
-        {
-          id: 'osteologia-membro-pelvico',
-          title: 'Osteología del miembro pélvico',
-          exercises: [
-            { format: 'seta', id: 'coxal', name: 'Coxal', distractors: ['Fémur', 'Escápula', 'Húmero'] },
-            { format: 'seta', id: 'femur', name: 'Fémur', distractors: ['Tibia', 'Húmero', 'Radio'] },
-            { format: 'seta', id: 'tibia', name: 'Tibia', distractors: ['Fémur', 'Fíbula', 'Coxal'] },
-            {
-              format: 'verdadeiro-falso',
-              id: 'vf-trocanter',
-              statement: 'El trocánter mayor del fémur es una eminencia de tipo articular.',
-              answer: false,
-            },
-            {
-              format: 'verdadeiro-falso',
-              id: 'vf-tuberosidade',
-              statement: 'La tuberosidad tibial se prolonga hacia la diáfisis de la tibia.',
-              answer: true,
-            },
-            {
-              format: 'completar',
-              id: 'lacuna-femur',
-              sentence:
-                'La cabeza del fémur siempre va hacia ___, lo que determina si es derecho o izquierdo.',
-              answer: 'medial',
-            },
-            {
-              format: 'completar',
-              id: 'lacuna-isquio',
-              sentence: 'El isquion presenta una espina y una incisura isquiática ___.',
-              answer: 'menor',
-            },
-            {
-              format: 'completar',
-              id: 'lacuna-fibula',
-              sentence: 'La fíbula articula con el cóndilo lateral de la ___.',
-              answer: 'tibia',
-            },
-            {
-              format: 'associacao',
-              id: 'assoc-trocanteres',
-              pairs: [
-                {
-                  term: 'Trocánter mayor',
-                  description: 'Eminencia no articular, sirve de inserción muscular',
-                },
-                {
-                  term: 'Cresta intertrocantérica',
-                  description: 'Está entre los trocánteres mayor y menor',
-                },
-                {
-                  term: 'Fosa trocantérica',
-                  description: 'Bolsillo, parte del trocánter mayor',
-                },
-              ],
-            },
-            {
-              format: 'associacao',
-              id: 'assoc-maleolos',
-              pairs: [
-                { term: 'Maléolo tibial', description: 'Descrito por medial en la tibia' },
-                { term: 'Maléolo fibular', description: 'Descrito por lateral en la fíbula' },
-                { term: 'Incisura fibular', description: 'Donde la tibia articula con la fíbula' },
-              ],
-            },
-          ],
-        },
-      ],
     },
   },
   pt: {
@@ -284,6 +227,7 @@ export const translations = {
     },
     flashcards: {
       title: 'Flashcards',
+      loading: 'Carregando baralhos...',
       selection: {
         subtitle: (count) => `Selecione o que deseja estudar: ${count} selecionados`,
         cardsCount: (count) => `${count} cartões`,
@@ -309,8 +253,21 @@ export const translations = {
         title: 'Unidades de estudo',
         subtitle: 'Escolha uma unidade para começar.',
         questionsCount: (count) => `${count} perguntas`,
+        lessonsCount: (count) => `${count} lições`,
+        loading: 'Carregando unidades...',
+        loadError: 'Não foi possível carregar as unidades. Tente novamente.',
+        locked: 'Complete a unidade anterior para desbloquear',
+      },
+      unitPath: {
+        subtitle: 'Escolha uma lição para continuar.',
+        loading: 'Carregando lições...',
+        loadError: 'Não foi possível carregar as lições. Tente novamente.',
+        locked: 'Complete a lição anterior para desbloquear',
+        backToPanel: 'Voltar ao painel',
       },
       lesson: {
+        loading: 'Carregando lição...',
+        loadError: 'Não foi possível carregar esta unidade.',
         encouragement: 'Você chegou à metade da unidade!',
         progress: (index, total) => `Pergunta ${index} de ${total}`,
         points: (points) => `${points} pontos`,
@@ -324,7 +281,7 @@ export const translations = {
       exercises: {
         seta: {
           diagramLabel:
-            'Diagrama do membro pélvico com a estrutura da questão marcada em vermelho',
+            'Diagrama de referência com um marcador indicando a estrutura da pergunta',
           diagramCredit: 'Ellenberger, Baum e Dittrich (1911), domínio público',
           inputLabel: 'Digite o nome da estrutura',
           skip: 'Pular',
@@ -361,77 +318,6 @@ export const translations = {
         retry: 'Refazer a unidade',
         backToPanel: 'Voltar às unidades',
       },
-    },
-    quiz: {
-      units: [
-        {
-          id: 'osteologia-membro-pelvico',
-          title: 'Osteologia do membro pélvico',
-          exercises: [
-            { format: 'seta', id: 'coxal', name: 'Coxal', distractors: ['Fêmur', 'Escápula', 'Úmero'] },
-            { format: 'seta', id: 'femur', name: 'Fêmur', distractors: ['Tíbia', 'Úmero', 'Rádio'] },
-            { format: 'seta', id: 'tibia', name: 'Tíbia', distractors: ['Fêmur', 'Fíbula', 'Coxal'] },
-            {
-              format: 'verdadeiro-falso',
-              id: 'vf-trocanter',
-              statement: 'O trocânter maior do fêmur é uma eminência de tipo articular.',
-              answer: false,
-            },
-            {
-              format: 'verdadeiro-falso',
-              id: 'vf-tuberosidade',
-              statement: 'A tuberosidade tibial se prolonga para a diáfise da tíbia.',
-              answer: true,
-            },
-            {
-              format: 'completar',
-              id: 'lacuna-femur',
-              sentence:
-                'A cabeça do fêmur sempre vai para ___, o que determina se é direito ou esquerdo.',
-              answer: 'medial',
-            },
-            {
-              format: 'completar',
-              id: 'lacuna-isquio',
-              sentence: 'O ísquio apresenta uma espina e uma incisura isquiática ___.',
-              answer: 'menor',
-            },
-            {
-              format: 'completar',
-              id: 'lacuna-fibula',
-              sentence: 'A fíbula articula com o côndilo lateral da ___.',
-              answer: 'tíbia',
-            },
-            {
-              format: 'associacao',
-              id: 'assoc-trocanteres',
-              pairs: [
-                {
-                  term: 'Trocânter maior',
-                  description: 'Eminência não articular, serve de inserção muscular',
-                },
-                {
-                  term: 'Cresta intertrocantérica',
-                  description: 'Fica entre os trocânteres maior e menor',
-                },
-                {
-                  term: 'Fossa trocantérica',
-                  description: 'Bolsillo, parte do trocânter maior',
-                },
-              ],
-            },
-            {
-              format: 'associacao',
-              id: 'assoc-maleolos',
-              pairs: [
-                { term: 'Maléolo tibial', description: 'Descrito por medial na tíbia' },
-                { term: 'Maléolo fibular', description: 'Descrito por lateral na fíbula' },
-                { term: 'Incisura fibular', description: 'Onde a tíbia articula com a fíbula' },
-              ],
-            },
-          ],
-        },
-      ],
     },
   },
 }

@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import PageLayout from '../../../components/PageLayout.jsx';
 import { useLanguage } from '../../../i18n/useLanguage.js';
 import FlashcardsContentSelector from './FlashcardsContentSelector.jsx';
@@ -11,7 +11,26 @@ import styles from './FlashcardsScreen.module.css'
 function FlashcardsScreen() {
     const { language, t } = useLanguage()
 
-    const decks = useMemo(() => getFlashcardDecks(language), [language])
+    const [result, setResult] = useState({ language: null, decks: [] })
+
+    useEffect(() => {
+        let cancelled = false
+
+        getFlashcardDecks(language)
+            .then((data) => {
+                if (!cancelled) setResult({ language, decks: data })
+            })
+            .catch(() => {
+                if (!cancelled) setResult({ language, decks: [] })
+            })
+
+        return () => {
+            cancelled = true
+        }
+    }, [language])
+
+    const loading = result.language !== language
+    const decks = loading ? [] : result.decks
 
     const [selectedDeckIds, setSelectedDeckIds] = useState([])
     const [started, setStarted] = useState(false)
@@ -50,7 +69,9 @@ function FlashcardsScreen() {
 
 
                 <div className={`container ${styles.flashcardsContent}`}>
-                    {!started ? (
+                    {loading ? (
+                        <p>{t.flashcards.loading}</p>
+                    ) : !started ? (
                         <FlashcardsContentSelector
                             decks={decks}
                             selectedDeckIds={selectedDeckIds}

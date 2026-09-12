@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import PelvicLimbDiagram from '../PelvicLimbDiagram.jsx'
+import AnatomyDiagram from '../AnatomyDiagram.jsx'
 import { normalizeAnswer } from '../normalizeAnswer.js'
 import { shuffle } from '../shuffle.js'
 import { useLanguage } from '../../../i18n/useLanguage.js'
@@ -86,7 +86,8 @@ function FlashcardsStudy({ cards, onBack }) {
                 <p className={styles.counter}>{copy.remainingCards(deck.length)}</p>
             </div>
 
-        <PelvicLimbDiagram
+        <AnatomyDiagram
+            diagram={currentCard.diagram}
             markerX={currentCard.marker.xPercent}
             markerY={currentCard.marker.yPercent}
         />

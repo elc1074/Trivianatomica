@@ -1,77 +1,84 @@
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import mascotWelcome from '../../assets/illustrations/mascot-welcome.png'
 import Icon from '../../components/Icon.jsx'
 import PageLayout from '../../components/PageLayout.jsx'
 import { useLanguage } from '../../i18n/useLanguage.js'
-import { fetchUnits } from './api.js'
+import { fetchUnitLessons } from './api.js'
 import styles from './PathList.module.css'
-import { isUnitUnlocked } from './progress.js'
+import { isLessonUnlocked } from './progress.js'
 
-function SystemsPanel() {
+function UnitPath() {
+  const { unitId } = useParams()
   const navigate = useNavigate()
   const { language, t } = useLanguage()
-  const [result, setResult] = useState({ language: null, units: null, error: false })
+  const [result, setResult] = useState({ key: null, unit: null, error: false })
 
   useEffect(() => {
     let cancelled = false
+    const key = `${unitId}:${language}`
 
-    fetchUnits(language)
+    fetchUnitLessons(unitId, language)
       .then((data) => {
-        if (!cancelled) setResult({ language, units: data, error: false })
+        if (!cancelled) setResult({ key, unit: data, error: false })
       })
       .catch(() => {
-        if (!cancelled) setResult({ language, units: null, error: true })
+        if (!cancelled) setResult({ key, unit: null, error: true })
       })
 
     return () => {
       cancelled = true
     }
-  }, [language])
+  }, [unitId, language])
 
-  const loading = result.language !== language
-  const units = loading ? null : result.units
+  const loading = result.key !== `${unitId}:${language}`
+  const unit = loading ? null : result.unit
   const loadError = !loading && result.error
 
   return (
     <PageLayout>
       <section className={styles.panel}>
         <div className="container">
+          <Link to="/trilha" className={styles.backLink}>
+            <Icon name="arrow_back" size={20} color="currentColor" />
+            {t.trilha.unitPath.backToPanel}
+          </Link>
+
           <div className={styles.intro}>
             <img className={styles.mascot} src={mascotWelcome} alt="" width="160" height="184" />
             <div>
-              <h1 className={styles.title}>{t.trilha.panel.title}</h1>
-              <p className={styles.subtitle}>{t.trilha.panel.subtitle}</p>
+              <h1 className={styles.title}>{unit ? unit.title : t.trilha.panel.title}</h1>
+              <p className={styles.subtitle}>{t.trilha.unitPath.subtitle}</p>
             </div>
           </div>
 
-          {loadError && <p className={styles.status}>{t.trilha.panel.loadError}</p>}
-          {loading && <p className={styles.status}>{t.trilha.panel.loading}</p>}
+          {loadError && <p className={styles.status}>{t.trilha.unitPath.loadError}</p>}
+          {loading && <p className={styles.status}>{t.trilha.unitPath.loading}</p>}
 
-          {units && (
+          {unit && (
             <ul className={styles.unitList}>
-              {units.map((unit) => {
-                const unlocked = isUnitUnlocked(unit, units)
+              {unit.lessons.map((lesson) => {
+                const unlocked = isLessonUnlocked(lesson, unit.lessons)
 
                 return (
-                  <li key={unit.id}>
+                  <li key={lesson.id}>
                     <button
                       type="button"
                       className={`${styles.unitCard} ${unlocked ? '' : styles.unitCardLocked}`}
-                      onClick={() => unlocked && navigate(`/trilha/${unit.id}`)}
+                      onClick={() => unlocked && navigate(`/trilha/${unitId}/${lesson.id}`)}
                       disabled={!unlocked}
                       aria-disabled={!unlocked}
-                      title={unlocked ? undefined : t.trilha.panel.locked}
+                      title={unlocked ? undefined : t.trilha.unitPath.locked}
                     >
                       <span className={styles.unitIcon}>
                         <Icon name={unlocked ? 'category' : 'lock'} size={28} color="currentColor" />
                       </span>
                       <span className={styles.unitText}>
-                        <span className={styles.unitName}>{unit.title}</span>
+                        <span className={styles.unitName}>{lesson.title}</span>
                         <span className={styles.unitCount}>
                           {unlocked
-                            ? t.trilha.panel.lessonsCount(unit.lessons.length)
-                            : t.trilha.panel.locked}
+                            ? t.trilha.panel.questionsCount(lesson.exerciseCount)
+                            : t.trilha.unitPath.locked}
                         </span>
                       </span>
                       {unlocked && <Icon name="arrow_forward" size={22} color="currentColor" />}
@@ -87,4 +94,4 @@ function SystemsPanel() {
   )
 }
 
-export default SystemsPanel
+export default UnitPath
