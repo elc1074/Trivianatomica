@@ -42,7 +42,9 @@ No server:
 
 ## Banco e conteúdo
 
-O arquivo `server/src/db/schema.sql` cria as tabelas sem apagar dados existentes. Para carregar ou atualizar o catálogo no Supabase, configure o `.env` do server e rode:
+O arquivo `server/src/db/schema.sql` cria as tabelas sem apagar dados existentes. Em um projeto Supabase novo, aplique esse SQL pelo SQL Editor antes do seed.
+
+Depois configure o `.env` do server e rode:
 
 ```
 cd server

@@ -122,12 +122,34 @@ async function deleteStaleExercises(lessonId, expectedExerciseIds) {
   }
 }
 
+async function deleteStaleUnits(expectedUnitIds) {
+  const { data: storedUnits, error: storedUnitsError } = await supabase.from('units').select('id')
+
+  if (storedUnitsError) {
+    throw new Error(`Failed to load stored units: ${storedUnitsError.message}`)
+  }
+
+  const staleUnitIds = storedUnits
+    .map((unit) => unit.id)
+    .filter((unitId) => !expectedUnitIds.includes(unitId))
+
+  if (staleUnitIds.length === 0) return
+
+  const { error: deleteUnitsError } = await supabase.from('units').delete().in('id', staleUnitIds)
+
+  if (deleteUnitsError) {
+    throw new Error(`Failed to delete stale units: ${deleteUnitsError.message}`)
+  }
+}
+
 async function seed() {
   if (!supabase) {
     throw new Error(
       'SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set in server/.env before seeding.',
     )
   }
+
+  await deleteStaleUnits(units.map((unit) => unit.id))
 
   for (const unit of units) {
     const { error: unitError } = await supabase.from('units').upsert({
