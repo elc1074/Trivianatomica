@@ -1,15 +1,16 @@
-import diagramImage from '../../assets/diagrams/dog-pelvic-limb-skeleton.jpg'
 import { useLanguage } from '../../i18n/useLanguage.js'
-import styles from './PelvicLimbDiagram.module.css'
+import { diagramImages } from './diagramAssets.js'
+import styles from './AnatomyDiagram.module.css'
 
-function PelvicLimbDiagram({ markerX, markerY }) {
+function AnatomyDiagram({ diagram, markerX, markerY }) {
   const { t } = useLanguage()
   const copy = t.trilha.exercises.seta
+  const image = diagramImages[diagram]
 
   return (
     <figure className={styles.frame}>
       <div className={styles.imageWrapper}>
-        <img src={diagramImage} alt={copy.diagramLabel} className={styles.image} />
+        <img src={image} alt={copy.diagramLabel} className={styles.image} />
         <span
           className={styles.marker}
           style={{ left: `${markerX}%`, top: `${markerY}%` }}
@@ -23,4 +24,4 @@ function PelvicLimbDiagram({ markerX, markerY }) {
   )
 }
 
-export default PelvicLimbDiagram
+export default AnatomyDiagram

@@ -5,7 +5,8 @@ import styles from './TrueFalseExercise.module.css'
 
 function TrueFalseExercise({ exercise, onComplete }) {
   const { t } = useLanguage()
-  const copy = t.trilha.exercises.verdadeiroFalso
+  const exerciseCopy = t.trilha.exercises
+  const copy = exerciseCopy.verdadeiroFalso
 
   const [feedback, setFeedback] = useState(null)
 
@@ -32,6 +33,7 @@ function TrueFalseExercise({ exercise, onComplete }) {
             ? copy.correctFeedback(feedback.points)
             : copy.wrongFeedback(exercise.answer)
         }
+        continueLabel={exerciseCopy.continueLabel}
         onContinue={handleContinue}
       />
     )

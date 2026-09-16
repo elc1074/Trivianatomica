@@ -1,8 +1,8 @@
-import { getUnits } from '../data.js'
+import { fetchFlashcardDecks } from '../api.js'
 import { structureMarkers } from '../markerPositions.js'
 
-function createCardFromSeta(exercise, unit) {
-    const marker = structureMarkers[exercise.id]
+function createCardFromSeta(exercise) {
+    const marker = structureMarkers[exercise.diagram]?.[exercise.id]
 
     if (!marker) {
         console.warn(`No marker found for exercise id: ${exercise.id}`)
@@ -12,24 +12,17 @@ function createCardFromSeta(exercise, unit) {
         id: exercise.id,
         answer: exercise.name,
         marker,
-        unitId: unit.id,
-        unitTitle: unit.title,
+        diagram: exercise.diagram,
     }
 }
 
-export function getFlashcardDecks(language) {
-    return getUnits(language)
-        .map((unit) => {
-            const cards = unit.exercises
-            .filter((exercise) => exercise.format === 'seta')
-            .map((exercise) => createCardFromSeta(exercise, unit))
-            .filter(Boolean)
+export async function getFlashcardDecks(language) {
+    const decks = await fetchFlashcardDecks(language)
 
-            return {
-                id: unit.id,
-                title: unit.title,
-                cards,
-            }
-        })
-    .filter((deck) => deck.cards.length > 0)
+    return decks
+        .map((deck) => ({
+            ...deck,
+            cards: deck.cards.map((exercise) => createCardFromSeta(exercise)).filter(Boolean),
+        }))
+        .filter((deck) => deck.cards.length > 0)
 }

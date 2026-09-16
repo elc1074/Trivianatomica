@@ -1,26 +1,36 @@
 import { useMemo, useState } from 'react'
 import Icon from '../../../components/Icon.jsx'
 import { useLanguage } from '../../../i18n/useLanguage.js'
+import AnatomyDiagram from '../AnatomyDiagram.jsx'
 import FeedbackBanner from '../FeedbackBanner.jsx'
 import { structureMarkers } from '../markerPositions.js'
-import PelvicLimbDiagram from '../PelvicLimbDiagram.jsx'
 import { normalizeAnswer } from '../normalizeAnswer.js'
 import { shuffle } from '../shuffle.js'
 import styles from './SetaExercise.module.css'
 
 function SetaExercise({ exercise, onComplete }) {
   const { t } = useLanguage()
-  const copy = t.trilha.exercises.seta
+  const exerciseCopy = t.trilha.exercises
+  const copy = exerciseCopy.seta
 
   const [stage, setStage] = useState('free-text')
   const [inputValue, setInputValue] = useState('')
   const [feedback, setFeedback] = useState(null)
 
-  const marker = structureMarkers[exercise.id]
+  const marker = structureMarkers[exercise.diagram]?.[exercise.id]
   const choices = useMemo(
     () => shuffle([exercise.name, ...exercise.distractors]),
     [exercise],
   )
+
+  function handleMissingMarker() {
+    onComplete({
+      exerciseId: exercise.id,
+      label: exercise.name,
+      points: 0,
+      correct: false,
+    })
+  }
 
   function handleSubmitFreeText(event) {
     event.preventDefault()
@@ -53,9 +63,20 @@ function SetaExercise({ exercise, onComplete }) {
     })
   }
 
+  if (!marker) {
+    return (
+      <FeedbackBanner
+        correct={false}
+        message={copy.markerMissing}
+        continueLabel={exerciseCopy.continueLabel}
+        onContinue={handleMissingMarker}
+      />
+    )
+  }
+
   return (
     <div>
-      <PelvicLimbDiagram markerX={marker.xPercent} markerY={marker.yPercent} />
+      <AnatomyDiagram diagram={exercise.diagram} markerX={marker.xPercent} markerY={marker.yPercent} />
 
       {stage === 'free-text' && (
         <form className={styles.answerForm} onSubmit={handleSubmitFreeText}>
@@ -109,6 +130,7 @@ function SetaExercise({ exercise, onComplete }) {
               ? copy.correctFeedback(feedback.points)
               : copy.wrongFeedback(exercise.name)
           }
+          continueLabel={exerciseCopy.continueLabel}
           onContinue={handleContinue}
         />
       )}

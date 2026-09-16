@@ -7,7 +7,8 @@ import styles from './FillBlankExercise.module.css'
 
 function FillBlankExercise({ exercise, onComplete }) {
   const { t } = useLanguage()
-  const copy = t.trilha.exercises.completar
+  const exerciseCopy = t.trilha.exercises
+  const copy = exerciseCopy.completar
 
   const [inputValue, setInputValue] = useState('')
   const [feedback, setFeedback] = useState(null)
@@ -36,6 +37,7 @@ function FillBlankExercise({ exercise, onComplete }) {
             ? copy.correctFeedback(feedback.points)
             : copy.wrongFeedback(exercise.answer)
         }
+        continueLabel={exerciseCopy.continueLabel}
         onContinue={handleContinue}
       />
     )
