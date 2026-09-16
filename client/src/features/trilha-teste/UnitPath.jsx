@@ -1,29 +1,34 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
 import mascotWelcome from '../../assets/illustrations/mascot-welcome.png'
 import Icon from '../../components/Icon.jsx'
 import PageLayout from '../../components/PageLayout.jsx'
 import { useLanguage } from '../../i18n/useLanguage.js'
-import { fetchUnitLessons } from './api.js'
+import { fetchUnitLessons, fetchUnits } from './api.js'
 import styles from './PathList.module.css'
-import { isLessonUnlocked } from './progress.js'
+import { isLessonUnlocked, isUnitUnlocked } from './progress.js'
 
 function UnitPath() {
   const { unitId } = useParams()
   const navigate = useNavigate()
   const { language, t } = useLanguage()
-  const [result, setResult] = useState({ key: null, unit: null, error: false })
+  const [unitRequest, setUnitRequest] = useState({
+    requestKey: null,
+    unit: null,
+    units: null,
+    error: false,
+  })
 
   useEffect(() => {
     let cancelled = false
     const key = `${unitId}:${language}`
 
-    fetchUnitLessons(unitId, language)
-      .then((data) => {
-        if (!cancelled) setResult({ key, unit: data, error: false })
+    Promise.all([fetchUnits(language), fetchUnitLessons(unitId, language)])
+      .then(([units, unit]) => {
+        if (!cancelled) setUnitRequest({ requestKey: key, unit, units, error: false })
       })
       .catch(() => {
-        if (!cancelled) setResult({ key, unit: null, error: true })
+        if (!cancelled) setUnitRequest({ requestKey: key, unit: null, units: null, error: true })
       })
 
     return () => {
@@ -31,9 +36,16 @@ function UnitPath() {
     }
   }, [unitId, language])
 
-  const loading = result.key !== `${unitId}:${language}`
-  const unit = loading ? null : result.unit
-  const loadError = !loading && result.error
+  const loading = unitRequest.requestKey !== `${unitId}:${language}`
+  const unit = loading ? null : unitRequest.unit
+  const units = loading ? null : unitRequest.units
+  const loadError = !loading && unitRequest.error
+  const unitSummary = units?.find((candidateUnit) => candidateUnit.id === unitId)
+  const lockedUnit = Boolean(unitSummary && units && !isUnitUnlocked(unitSummary, units))
+
+  if (lockedUnit) {
+    return <Navigate to="/trilha" replace />
+  }
 
   return (
     <PageLayout>

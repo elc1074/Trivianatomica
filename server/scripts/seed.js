@@ -65,6 +65,63 @@ function buildExerciseRows(lessonId, esExercises, ptExercises) {
   })
 }
 
+async function deleteStaleLessons(unitId, expectedLessonIds) {
+  const { data: storedLessons, error: storedLessonsError } = await supabase
+    .from('lessons')
+    .select('id')
+    .eq('unit_id', unitId)
+
+  if (storedLessonsError) {
+    throw new Error(`Failed to load stored lessons for ${unitId}: ${storedLessonsError.message}`)
+  }
+
+  const staleLessonIds = storedLessons
+    .map((lesson) => lesson.id)
+    .filter((lessonId) => !expectedLessonIds.includes(lessonId))
+
+  if (staleLessonIds.length === 0) return
+
+  const { error: deleteLessonsError } = await supabase
+    .from('lessons')
+    .delete()
+    .in('id', staleLessonIds)
+
+  if (deleteLessonsError) {
+    throw new Error(`Failed to delete stale lessons for ${unitId}: ${deleteLessonsError.message}`)
+  }
+}
+
+async function deleteStaleExercises(lessonId, expectedExerciseIds) {
+  const { data: storedExercises, error: storedExercisesError } = await supabase
+    .from('exercises')
+    .select('id')
+    .eq('lesson_id', lessonId)
+
+  if (storedExercisesError) {
+    throw new Error(
+      `Failed to load stored exercises for ${lessonId}: ${storedExercisesError.message}`,
+    )
+  }
+
+  const staleExerciseIds = storedExercises
+    .map((exercise) => exercise.id)
+    .filter((exerciseId) => !expectedExerciseIds.includes(exerciseId))
+
+  if (staleExerciseIds.length === 0) return
+
+  const { error: deleteExercisesError } = await supabase
+    .from('exercises')
+    .delete()
+    .eq('lesson_id', lessonId)
+    .in('id', staleExerciseIds)
+
+  if (deleteExercisesError) {
+    throw new Error(
+      `Failed to delete stale exercises for ${lessonId}: ${deleteExercisesError.message}`,
+    )
+  }
+}
+
 async function seed() {
   if (!supabase) {
     throw new Error(
@@ -85,6 +142,11 @@ async function seed() {
     }
 
     const lessons = buildLessonRows(unit)
+    await deleteStaleLessons(
+      unit.id,
+      lessons.map((lesson) => lesson.row.id),
+    )
+
     const { error: lessonsError } = await supabase
       .from('lessons')
       .upsert(lessons.map((lesson) => lesson.row))
@@ -96,6 +158,11 @@ async function seed() {
     let exerciseCount = 0
     for (const lesson of lessons) {
       const rows = buildExerciseRows(lesson.row.id, lesson.esExercises, lesson.ptExercises)
+      await deleteStaleExercises(
+        lesson.row.id,
+        rows.map((row) => row.id),
+      )
+
       const { error: exercisesError } = await supabase.from('exercises').upsert(rows)
 
       if (exercisesError) {

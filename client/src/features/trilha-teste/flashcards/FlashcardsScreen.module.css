@@ -33,10 +33,24 @@
 
 .selector,
 .study,
-.completed {
+.completed,
+.flashcardsStatus {
   max-width: 720px;
   margin: 0 auto;
   text-align: center;
+}
+
+.flashcardsStatus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.flashcardsStatus p {
+  margin: 0;
+  color: var(--color-text);
+  font-weight: 700;
 }
 
 .selectorHeader {

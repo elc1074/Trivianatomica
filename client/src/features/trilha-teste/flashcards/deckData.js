@@ -1,4 +1,4 @@
-import { fetchLesson, fetchUnitLessons, fetchUnits } from '../api.js'
+import { fetchFlashcardDecks } from '../api.js'
 import { structureMarkers } from '../markerPositions.js'
 
 function createCardFromSeta(exercise) {
@@ -17,28 +17,12 @@ function createCardFromSeta(exercise) {
 }
 
 export async function getFlashcardDecks(language) {
-    const units = await fetchUnits(language)
+    const decks = await fetchFlashcardDecks(language)
 
-    const decks = await Promise.all(
-        units.map(async (unit) => {
-            const unitWithLessons = await fetchUnitLessons(unit.id, language)
-            const fullLessons = await Promise.all(
-                unitWithLessons.lessons.map((lesson) => fetchLesson(lesson.id, language)),
-            )
-
-            const cards = fullLessons
-                .flatMap((lesson) => lesson.exercises)
-                .filter((exercise) => exercise.format === 'seta')
-                .map((exercise) => createCardFromSeta(exercise))
-                .filter(Boolean)
-
-            return {
-                id: unit.id,
-                title: unitWithLessons.title,
-                cards,
-            }
-        }),
-    )
-
-    return decks.filter((deck) => deck.cards.length > 0)
+    return decks
+        .map((deck) => ({
+            ...deck,
+            cards: deck.cards.map((exercise) => createCardFromSeta(exercise)).filter(Boolean),
+        }))
+        .filter((deck) => deck.cards.length > 0)
 }

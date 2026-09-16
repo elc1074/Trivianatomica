@@ -1,15 +1,11 @@
-drop table if exists exercises;
-drop table if exists lessons;
-drop table if exists units;
-
-create table units (
+create table if not exists units (
   id text primary key,
   order_index integer not null unique,
   title_es text not null,
   title_pt text not null
 );
 
-create table lessons (
+create table if not exists lessons (
   id text primary key,
   unit_id text not null references units (id) on delete cascade,
   order_index integer not null,
@@ -18,7 +14,7 @@ create table lessons (
   unique (unit_id, order_index)
 );
 
-create table exercises (
+create table if not exists exercises (
   lesson_id text not null references lessons (id) on delete cascade,
   id text not null,
   format text not null check (format in ('seta', 'verdadeiro-falso', 'completar', 'associacao')),

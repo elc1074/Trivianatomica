@@ -4,14 +4,14 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import mascotEncourage from '../../assets/illustrations/mascot-encourage.png'
 import PageLayout from '../../components/PageLayout.jsx'
 import { useLanguage } from '../../i18n/useLanguage.js'
-import { fetchLesson } from './api.js'
+import { fetchLesson, fetchUnitLessons, fetchUnits } from './api.js'
 import { getMaxPoints } from './data.js'
 import FillBlankExercise from './exercises/FillBlankExercise.jsx'
 import MatchingExercise from './exercises/MatchingExercise.jsx'
 import SetaExercise from './exercises/SetaExercise.jsx'
 import TrueFalseExercise from './exercises/TrueFalseExercise.jsx'
 import LessonSummary from './LessonSummary.jsx'
-import { markLessonCompleted } from './progress.js'
+import { isLessonUnlocked, isUnitUnlocked, markLessonCompleted } from './progress.js'
 import styles from './LessonScreen.module.css'
 
 const EXERCISE_COMPONENTS = {
@@ -39,27 +39,50 @@ function LessonContent({ unitId, lessonId, language }) {
   const navigate = useNavigate()
   const { t } = useLanguage()
 
-  const [result, setResult] = useState({ lesson: null, error: false })
+  const [lessonRequest, setLessonRequest] = useState({
+    lesson: null,
+    error: false,
+    redirectPath: null,
+  })
   const [exerciseIndex, setExerciseIndex] = useState(0)
   const [results, setResults] = useState([])
 
   useEffect(() => {
     let cancelled = false
 
-    fetchLesson(lessonId, language)
-      .then((data) => {
-        if (!cancelled) setResult({ lesson: data, error: false })
+    Promise.all([fetchUnits(language), fetchUnitLessons(unitId, language), fetchLesson(lessonId, language)])
+      .then(([units, unit, lesson]) => {
+        const unitSummary = units.find((candidateUnit) => candidateUnit.id === unitId)
+        const lessonSummary = unit.lessons.find((candidateLesson) => candidateLesson.id === lessonId)
+        const unitMatchesLesson = lesson.unitId === unitId
+        const unitUnlocked = unitSummary ? isUnitUnlocked(unitSummary, units) : false
+        const lessonUnlocked = lessonSummary ? isLessonUnlocked(lessonSummary, unit.lessons) : false
+
+        if (!unitMatchesLesson || !unitUnlocked || !lessonUnlocked) {
+          const redirectPath = unitUnlocked ? `/trilha/${unitId}` : '/trilha'
+
+          if (!cancelled) {
+            setLessonRequest({ lesson: null, error: true, redirectPath })
+          }
+          return
+        }
+
+        if (!cancelled) {
+          setLessonRequest({ lesson, error: false, redirectPath: null })
+        }
       })
       .catch(() => {
-        if (!cancelled) setResult({ lesson: null, error: true })
+        if (!cancelled) {
+          setLessonRequest({ lesson: null, error: true, redirectPath: `/trilha/${unitId}` })
+        }
       })
 
     return () => {
       cancelled = true
     }
-  }, [lessonId, language])
+  }, [unitId, lessonId, language])
 
-  const { lesson, error: loadError } = result
+  const { lesson, error: loadError, redirectPath } = lessonRequest
   const lessonFinished = Boolean(lesson) && exerciseIndex >= lesson.exercises.length
 
   useEffect(() => {
@@ -67,7 +90,7 @@ function LessonContent({ unitId, lessonId, language }) {
   }, [lessonFinished, lesson])
 
   if (loadError) {
-    return <Navigate to={`/trilha/${unitId}`} replace />
+    return <Navigate to={redirectPath ?? `/trilha/${unitId}`} replace />
   }
 
   if (!lesson) {

@@ -11,26 +11,28 @@ import styles from './FlashcardsScreen.module.css'
 function FlashcardsScreen() {
     const { language, t } = useLanguage()
 
-    const [result, setResult] = useState({ language: null, decks: [] })
+    const [deckRequest, setDeckRequest] = useState({ language: null, decks: [], error: false })
+    const [reloadIndex, setReloadIndex] = useState(0)
 
     useEffect(() => {
         let cancelled = false
 
         getFlashcardDecks(language)
             .then((data) => {
-                if (!cancelled) setResult({ language, decks: data })
+                if (!cancelled) setDeckRequest({ language, decks: data, error: false })
             })
             .catch(() => {
-                if (!cancelled) setResult({ language, decks: [] })
+                if (!cancelled) setDeckRequest({ language, decks: [], error: true })
             })
 
         return () => {
             cancelled = true
         }
-    }, [language])
+    }, [language, reloadIndex])
 
-    const loading = result.language !== language
-    const decks = loading ? [] : result.decks
+    const loading = deckRequest.language !== language
+    const loadError = !loading && deckRequest.error
+    const decks = loading ? [] : deckRequest.decks
 
     const [selectedDeckIds, setSelectedDeckIds] = useState([])
     const [started, setStarted] = useState(false)
@@ -71,6 +73,17 @@ function FlashcardsScreen() {
                 <div className={`container ${styles.flashcardsContent}`}>
                     {loading ? (
                         <p>{t.flashcards.loading}</p>
+                    ) : loadError ? (
+                        <div className={styles.flashcardsStatus}>
+                            <p>{t.flashcards.loadError}</p>
+                            <button
+                                type="button"
+                                className="button button-primary"
+                                onClick={() => setReloadIndex((currentIndex) => currentIndex + 1)}
+                            >
+                                {t.flashcards.retry}
+                            </button>
+                        </div>
                     ) : !started ? (
                         <FlashcardsContentSelector
                             decks={decks}

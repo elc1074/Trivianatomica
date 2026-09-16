@@ -29,3 +29,13 @@ export async function fetchLesson(lessonId, language) {
 
   return response.json()
 }
+
+export async function fetchFlashcardDecks(language) {
+  const response = await fetch(`${API_URL}/api/flashcard-decks?lang=${language}`)
+
+  if (!response.ok) {
+    throw new Error('Failed to load flashcard decks')
+  }
+
+  return response.json()
+}

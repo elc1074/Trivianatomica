@@ -81,6 +81,70 @@ router.get('/units/:unitId/lessons', async (req, res) => {
   })
 })
 
+router.get('/flashcard-decks', async (req, res) => {
+  const language = req.query.lang === 'pt' ? 'pt' : 'es'
+  const titleColumn = language === 'pt' ? 'title_pt' : 'title_es'
+
+  const { data: units, error: unitsError } = await supabase
+    .from('units')
+    .select(`id, order_index, ${titleColumn}`)
+    .order('order_index', { ascending: true })
+
+  if (unitsError) {
+    return res.status(500).json({ error: unitsError.message })
+  }
+
+  const { data: lessons, error: lessonsError } = await supabase
+    .from('lessons')
+    .select('id, unit_id, order_index')
+    .order('order_index', { ascending: true })
+
+  if (lessonsError) {
+    return res.status(500).json({ error: lessonsError.message })
+  }
+
+  const lessonIds = lessons.map((lesson) => lesson.id)
+
+  if (lessonIds.length === 0) {
+    return res.json([])
+  }
+
+  const { data: exercises, error: exercisesError } = await supabase
+    .from('exercises')
+    .select('id, lesson_id, format, order_index, data_es, data_pt')
+    .eq('format', 'seta')
+    .in('lesson_id', lessonIds)
+    .order('order_index', { ascending: true })
+
+  if (exercisesError) {
+    return res.status(500).json({ error: exercisesError.message })
+  }
+
+  const lessonsByUnit = new Map()
+  lessons.forEach((lesson) => {
+    const unitLessons = lessonsByUnit.get(lesson.unit_id) ?? []
+    unitLessons.push(lesson)
+    lessonsByUnit.set(lesson.unit_id, unitLessons)
+  })
+
+  const exercisesByLesson = new Map()
+  exercises.forEach((exercise) => {
+    const lessonExercises = exercisesByLesson.get(exercise.lesson_id) ?? []
+    lessonExercises.push(assembleExercise(exercise, language))
+    exercisesByLesson.set(exercise.lesson_id, lessonExercises)
+  })
+
+  const decks = units.map((unit) => ({
+    id: unit.id,
+    title: unit[titleColumn],
+    cards: (lessonsByUnit.get(unit.id) ?? []).flatMap(
+      (lesson) => exercisesByLesson.get(lesson.id) ?? [],
+    ),
+  }))
+
+  res.json(decks.filter((deck) => deck.cards.length > 0))
+})
+
 router.get('/lessons/:lessonId', async (req, res) => {
   const language = req.query.lang === 'pt' ? 'pt' : 'es'
   const titleColumn = language === 'pt' ? 'title_pt' : 'title_es'

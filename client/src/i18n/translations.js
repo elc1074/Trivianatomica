@@ -25,7 +25,7 @@ export const translations = {
         title: 'Estudia Anatomía Veterinaria de forma interactiva',
         description: 'Practica la identificación de estructuras anatómicas y repasa para tu prueba práctica.',
         cta: 'Empezar a estudiar',
-        flashcardsCta: 'Flashcards',
+      flashcardsCta: 'Flashcards',
       },
       valuePropsLabel: 'Por qué estudiar con Trivia Anatómica',
       valueProps: [
@@ -71,6 +71,8 @@ export const translations = {
     flashcards: {
       title: 'Flashcards',
       loading: 'Cargando barajas...',
+      loadError: 'No se pudieron cargar las barajas. Intenta de nuevo.',
+      retry: 'Intentar de nuevo',
       selection: {
         subtitle: (count) => `Selecciona lo que quieras estudiar: ${count} seleccionadas`,
         cardsCount: (count) => `${count} tarjetas`,
@@ -122,6 +124,7 @@ export const translations = {
         },
       },
       exercises: {
+        continueLabel: 'Continuar',
         seta: {
           diagramLabel:
             'Diagrama de referencia con un marcador indicando la estructura preguntada',
@@ -130,6 +133,7 @@ export const translations = {
           skip: 'Pasar',
           answer: 'Responder',
           chooseCorrect: 'Elige la alternativa correcta',
+          markerMissing: 'No se pudo cargar el marcador de esta pregunta.',
           correctFeedback: (points) => `¡Correcto! +${points} puntos`,
           wrongFeedback: (name) => `La respuesta correcta era ${name}.`,
         },
@@ -228,6 +232,8 @@ export const translations = {
     flashcards: {
       title: 'Flashcards',
       loading: 'Carregando baralhos...',
+      loadError: 'Não foi possível carregar os baralhos. Tente novamente.',
+      retry: 'Tentar novamente',
       selection: {
         subtitle: (count) => `Selecione o que deseja estudar: ${count} selecionados`,
         cardsCount: (count) => `${count} cartões`,
@@ -279,6 +285,7 @@ export const translations = {
         },
       },
       exercises: {
+        continueLabel: 'Continuar',
         seta: {
           diagramLabel:
             'Diagrama de referência com um marcador indicando a estrutura da pergunta',
@@ -287,6 +294,7 @@ export const translations = {
           skip: 'Pular',
           answer: 'Responder',
           chooseCorrect: 'Escolha a alternativa certa',
+          markerMissing: 'Não foi possível carregar o marcador desta questão.',
           correctFeedback: (points) => `Certo! +${points} pontos`,
           wrongFeedback: (name) => `A resposta é ${name}.`,
         },

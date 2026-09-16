@@ -10,17 +10,27 @@ import styles from './SetaExercise.module.css'
 
 function SetaExercise({ exercise, onComplete }) {
   const { t } = useLanguage()
-  const copy = t.trilha.exercises.seta
+  const exerciseCopy = t.trilha.exercises
+  const copy = exerciseCopy.seta
 
   const [stage, setStage] = useState('free-text')
   const [inputValue, setInputValue] = useState('')
   const [feedback, setFeedback] = useState(null)
 
-  const marker = structureMarkers[exercise.diagram][exercise.id]
+  const marker = structureMarkers[exercise.diagram]?.[exercise.id]
   const choices = useMemo(
     () => shuffle([exercise.name, ...exercise.distractors]),
     [exercise],
   )
+
+  function handleMissingMarker() {
+    onComplete({
+      exerciseId: exercise.id,
+      label: exercise.name,
+      points: 0,
+      correct: false,
+    })
+  }
 
   function handleSubmitFreeText(event) {
     event.preventDefault()
@@ -51,6 +61,17 @@ function SetaExercise({ exercise, onComplete }) {
       points: feedback.points,
       correct: feedback.correct,
     })
+  }
+
+  if (!marker) {
+    return (
+      <FeedbackBanner
+        correct={false}
+        message={copy.markerMissing}
+        continueLabel={exerciseCopy.continueLabel}
+        onContinue={handleMissingMarker}
+      />
+    )
   }
 
   return (
@@ -109,6 +130,7 @@ function SetaExercise({ exercise, onComplete }) {
               ? copy.correctFeedback(feedback.points)
               : copy.wrongFeedback(exercise.name)
           }
+          continueLabel={exerciseCopy.continueLabel}
           onContinue={handleContinue}
         />
       )}

@@ -266,7 +266,7 @@ export const osteologiaMembroPelvico = {
               },
               {
                 term: 'Fossa trocantérica',
-                description: 'Bolsillo, parte do trocânter maior',
+                description: 'Bolso, parte do trocânter maior',
               },
             ],
           },
