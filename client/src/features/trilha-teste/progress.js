@@ -13,6 +13,10 @@ export function getCompletedLessonIds() {
   return readCompletedLessonIds()
 }
 
+export function isLessonCompleted(lessonId) {
+  return readCompletedLessonIds().includes(lessonId)
+}
+
 export function markLessonCompleted(lessonId) {
   const completed = readCompletedLessonIds()
 
@@ -42,6 +46,19 @@ export function isUnitCompleted(unit) {
 
   const completed = readCompletedLessonIds()
   return unit.lessons.every((lesson) => completed.includes(lesson.id))
+}
+
+export function getRecommendedLessonId(lessons) {
+  const completed = readCompletedLessonIds()
+  const recommendedLesson = lessons.find((lesson) => !completed.includes(lesson.id))
+
+  return recommendedLesson?.id ?? lessons[0]?.id ?? null
+}
+
+export function getRecommendedUnitId(units) {
+  const recommendedUnit = units.find((unit) => !isUnitCompleted(unit))
+
+  return recommendedUnit?.id ?? units[0]?.id ?? null
 }
 
 export function isUnitUnlocked(unit, units) {

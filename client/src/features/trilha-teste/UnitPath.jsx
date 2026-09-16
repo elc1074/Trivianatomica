@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import { Link, Navigate, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import mascotWelcome from '../../assets/illustrations/mascot-welcome.png'
 import Icon from '../../components/Icon.jsx'
 import PageLayout from '../../components/PageLayout.jsx'
 import { useLanguage } from '../../i18n/useLanguage.js'
-import { fetchUnitLessons, fetchUnits } from './api.js'
+import { fetchUnitLessons } from './api.js'
 import styles from './PathList.module.css'
-import { isLessonUnlocked, isUnitUnlocked } from './progress.js'
+import { getRecommendedLessonId, isLessonCompleted } from './progress.js'
 
 function UnitPath() {
   const { unitId } = useParams()
@@ -15,7 +15,6 @@ function UnitPath() {
   const [unitRequest, setUnitRequest] = useState({
     requestKey: null,
     unit: null,
-    units: null,
     error: false,
   })
 
@@ -23,12 +22,12 @@ function UnitPath() {
     let cancelled = false
     const key = `${unitId}:${language}`
 
-    Promise.all([fetchUnits(language), fetchUnitLessons(unitId, language)])
-      .then(([units, unit]) => {
-        if (!cancelled) setUnitRequest({ requestKey: key, unit, units, error: false })
+    fetchUnitLessons(unitId, language)
+      .then((unit) => {
+        if (!cancelled) setUnitRequest({ requestKey: key, unit, error: false })
       })
       .catch(() => {
-        if (!cancelled) setUnitRequest({ requestKey: key, unit: null, units: null, error: true })
+        if (!cancelled) setUnitRequest({ requestKey: key, unit: null, error: true })
       })
 
     return () => {
@@ -38,14 +37,8 @@ function UnitPath() {
 
   const loading = unitRequest.requestKey !== `${unitId}:${language}`
   const unit = loading ? null : unitRequest.unit
-  const units = loading ? null : unitRequest.units
   const loadError = !loading && unitRequest.error
-  const unitSummary = units?.find((candidateUnit) => candidateUnit.id === unitId)
-  const lockedUnit = Boolean(unitSummary && units && !isUnitUnlocked(unitSummary, units))
-
-  if (lockedUnit) {
-    return <Navigate to="/trilha" replace />
-  }
+  const recommendedLessonId = unit ? getRecommendedLessonId(unit.lessons) : null
 
   return (
     <PageLayout>
@@ -70,30 +63,29 @@ function UnitPath() {
           {unit && (
             <ul className={styles.unitList}>
               {unit.lessons.map((lesson) => {
-                const unlocked = isLessonUnlocked(lesson, unit.lessons)
+                const completed = isLessonCompleted(lesson.id)
+                const recommended = lesson.id === recommendedLessonId && !completed
+                const lessonStatus = completed
+                  ? t.trilha.unitPath.completed
+                  : recommended
+                    ? t.trilha.unitPath.suggested
+                    : t.trilha.panel.questionsCount(lesson.exerciseCount)
 
                 return (
                   <li key={lesson.id}>
                     <button
                       type="button"
-                      className={`${styles.unitCard} ${unlocked ? '' : styles.unitCardLocked}`}
-                      onClick={() => unlocked && navigate(`/trilha/${unitId}/${lesson.id}`)}
-                      disabled={!unlocked}
-                      aria-disabled={!unlocked}
-                      title={unlocked ? undefined : t.trilha.unitPath.locked}
+                      className={styles.unitCard}
+                      onClick={() => navigate(`/trilha/${unitId}/${lesson.id}`)}
                     >
                       <span className={styles.unitIcon}>
-                        <Icon name={unlocked ? 'category' : 'lock'} size={28} color="currentColor" />
+                        <Icon name={completed ? 'task_alt' : 'category'} size={28} color="currentColor" />
                       </span>
                       <span className={styles.unitText}>
                         <span className={styles.unitName}>{lesson.title}</span>
-                        <span className={styles.unitCount}>
-                          {unlocked
-                            ? t.trilha.panel.questionsCount(lesson.exerciseCount)
-                            : t.trilha.unitPath.locked}
-                        </span>
+                        <span className={styles.unitCount}>{lessonStatus}</span>
                       </span>
-                      {unlocked && <Icon name="arrow_forward" size={22} color="currentColor" />}
+                      <Icon name="arrow_forward" size={22} color="currentColor" />
                     </button>
                   </li>
                 )

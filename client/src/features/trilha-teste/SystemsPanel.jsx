@@ -6,7 +6,7 @@ import PageLayout from '../../components/PageLayout.jsx'
 import { useLanguage } from '../../i18n/useLanguage.js'
 import { fetchUnits } from './api.js'
 import styles from './PathList.module.css'
-import { isUnitUnlocked } from './progress.js'
+import { getRecommendedUnitId, isUnitCompleted } from './progress.js'
 
 function SystemsPanel() {
   const navigate = useNavigate()
@@ -32,6 +32,7 @@ function SystemsPanel() {
   const loading = result.language !== language
   const units = loading ? null : result.units
   const loadError = !loading && result.error
+  const recommendedUnitId = units ? getRecommendedUnitId(units) : null
 
   return (
     <PageLayout>
@@ -51,30 +52,29 @@ function SystemsPanel() {
           {units && (
             <ul className={styles.unitList}>
               {units.map((unit) => {
-                const unlocked = isUnitUnlocked(unit, units)
+                const completed = isUnitCompleted(unit)
+                const recommended = unit.id === recommendedUnitId && !completed
+                const unitStatus = completed
+                  ? t.trilha.panel.completed
+                  : recommended
+                    ? t.trilha.panel.suggested
+                    : t.trilha.panel.lessonsCount(unit.lessons.length)
 
                 return (
                   <li key={unit.id}>
                     <button
                       type="button"
-                      className={`${styles.unitCard} ${unlocked ? '' : styles.unitCardLocked}`}
-                      onClick={() => unlocked && navigate(`/trilha/${unit.id}`)}
-                      disabled={!unlocked}
-                      aria-disabled={!unlocked}
-                      title={unlocked ? undefined : t.trilha.panel.locked}
+                      className={styles.unitCard}
+                      onClick={() => navigate(`/trilha/${unit.id}`)}
                     >
                       <span className={styles.unitIcon}>
-                        <Icon name={unlocked ? 'category' : 'lock'} size={28} color="currentColor" />
+                        <Icon name={completed ? 'task_alt' : 'category'} size={28} color="currentColor" />
                       </span>
                       <span className={styles.unitText}>
                         <span className={styles.unitName}>{unit.title}</span>
-                        <span className={styles.unitCount}>
-                          {unlocked
-                            ? t.trilha.panel.lessonsCount(unit.lessons.length)
-                            : t.trilha.panel.locked}
-                        </span>
+                        <span className={styles.unitCount}>{unitStatus}</span>
                       </span>
-                      {unlocked && <Icon name="arrow_forward" size={22} color="currentColor" />}
+                      <Icon name="arrow_forward" size={22} color="currentColor" />
                     </button>
                   </li>
                 )

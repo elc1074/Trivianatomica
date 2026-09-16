@@ -4,14 +4,14 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import mascotEncourage from '../../assets/illustrations/mascot-encourage.png'
 import PageLayout from '../../components/PageLayout.jsx'
 import { useLanguage } from '../../i18n/useLanguage.js'
-import { fetchLesson, fetchUnitLessons, fetchUnits } from './api.js'
+import { fetchLesson } from './api.js'
 import { getMaxPoints } from './data.js'
 import FillBlankExercise from './exercises/FillBlankExercise.jsx'
 import MatchingExercise from './exercises/MatchingExercise.jsx'
 import SetaExercise from './exercises/SetaExercise.jsx'
 import TrueFalseExercise from './exercises/TrueFalseExercise.jsx'
 import LessonSummary from './LessonSummary.jsx'
-import { isLessonUnlocked, isUnitUnlocked, markLessonCompleted } from './progress.js'
+import { markLessonCompleted } from './progress.js'
 import styles from './LessonScreen.module.css'
 
 const EXERCISE_COMPONENTS = {
@@ -50,19 +50,13 @@ function LessonContent({ unitId, lessonId, language }) {
   useEffect(() => {
     let cancelled = false
 
-    Promise.all([fetchUnits(language), fetchUnitLessons(unitId, language), fetchLesson(lessonId, language)])
-      .then(([units, unit, lesson]) => {
-        const unitSummary = units.find((candidateUnit) => candidateUnit.id === unitId)
-        const lessonSummary = unit.lessons.find((candidateLesson) => candidateLesson.id === lessonId)
+    fetchLesson(lessonId, language)
+      .then((lesson) => {
         const unitMatchesLesson = lesson.unitId === unitId
-        const unitUnlocked = unitSummary ? isUnitUnlocked(unitSummary, units) : false
-        const lessonUnlocked = lessonSummary ? isLessonUnlocked(lessonSummary, unit.lessons) : false
 
-        if (!unitMatchesLesson || !unitUnlocked || !lessonUnlocked) {
-          const redirectPath = unitUnlocked ? `/trilha/${unitId}` : '/trilha'
-
+        if (!unitMatchesLesson) {
           if (!cancelled) {
-            setLessonRequest({ lesson: null, error: true, redirectPath })
+            setLessonRequest({ lesson: null, error: true, redirectPath: `/trilha/${unitId}` })
           }
           return
         }
