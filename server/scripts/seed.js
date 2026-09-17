@@ -4,8 +4,9 @@ import { osteologiaMembroPelvico } from './content/osteologia-membro-pelvico.js'
 import { artrologia } from './content/artrologia.js'
 import { osteologiaCraneo } from './content/osteologia-craneo.js'
 import { colunaVertebral } from './content/coluna-vertebral.js'
+import { anatomiaFelina } from './content/anatomia-felina.js'
 
-const units = [osteologiaMembroPelvico, artrologia, osteologiaCraneo, colunaVertebral]
+const units = [osteologiaMembroPelvico, artrologia, osteologiaCraneo, colunaVertebral, anatomiaFelina]
 
 function buildLessonRows(unit) {
   const { es, pt } = unit
