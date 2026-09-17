@@ -8,6 +8,21 @@ function assembleExercise(row, language) {
   return { id: row.id, format: row.format, ...data }
 }
 
+function assembleFlashcard(row, language) {
+  const exercise = assembleExercise(row, language)
+
+  return {
+    id: `${row.lesson_id}:${row.id}`,
+    lessonId: row.lesson_id,
+    exerciseId: row.id,
+    structureId: row.id,
+    format: row.format,
+    answer: exercise.name,
+    name: exercise.name,
+    diagram: exercise.diagram,
+  }
+}
+
 router.use((req, res, next) => {
   if (!supabase) {
     return res.status(503).json({ error: 'Supabase is not configured on the server' })
@@ -130,7 +145,7 @@ router.get('/flashcard-decks', async (req, res) => {
   const exercisesByLesson = new Map()
   exercises.forEach((exercise) => {
     const lessonExercises = exercisesByLesson.get(exercise.lesson_id) ?? []
-    lessonExercises.push(assembleExercise(exercise, language))
+    lessonExercises.push(assembleFlashcard(exercise, language))
     exercisesByLesson.set(exercise.lesson_id, lessonExercises)
   })
 
