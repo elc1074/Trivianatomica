@@ -144,6 +144,10 @@
   font-weight: 700;
 }
 
+.progressBar {
+  margin-bottom: 24px;
+}
+
 .answerForm {
   max-width: 420px;
   margin: 28px auto 0;

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import AnatomyDiagram from '../AnatomyDiagram.jsx'
+import LessonProgress from '../LessonProgress.jsx'
 import { normalizeAnswer } from '../normalizeAnswer.js'
 import { shuffle } from '../shuffle.js'
 import { useLanguage } from '../../../i18n/useLanguage.js'
@@ -23,11 +24,13 @@ function FlashcardsStudy({ cards, onBack }) {
     const { t } = useLanguage()
     const copy = t.flashcards.study
     const [deck, setDeck] = useState(() => shuffle(cards))
+    const [totalCards] = useState(cards.length)
     const [answer, setAnswer] = useState('')
     const [revealed, setRevealed] = useState(false)
     const [feedback, setFeedback] = useState('')
 
     const currentCard = deck[0]
+    const completedCards = totalCards - deck.length
 
     if (!currentCard) {
         return (
@@ -84,6 +87,10 @@ function FlashcardsStudy({ cards, onBack }) {
                 </button>
 
                 <p className={styles.counter}>{copy.remainingCards(deck.length)}</p>
+            </div>
+
+            <div className={styles.progressBar}>
+                <LessonProgress completed={completedCards} total={totalCards} />
             </div>
 
         <AnatomyDiagram
