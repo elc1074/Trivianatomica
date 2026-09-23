@@ -200,51 +200,6 @@ const medialMuscleExercises = [
   },
 ]
 
-const distalFootMuscleExercises = [
-  {
-    format: 'seta',
-    id: 'flexorDigitorumBrevis',
-    name: 'M. flexor digitorum brevis',
-    distractors: ['M. flexor digitorum profundus', 'M. flexor digitorum superficialis', 'Mm. interossei'],
-    diagram: 'pelvic-limb-muscles-a',
-  },
-  {
-    format: 'seta',
-    id: 'abductorDigitiV',
-    name: 'M. abductor digiti V',
-    distractors: ['M. adductor digiti V', 'M. adductor digiti II', 'Mm. interossei'],
-    diagram: 'pelvic-limb-muscles-a',
-  },
-  {
-    format: 'seta',
-    id: 'adductorDigitiV',
-    name: 'M. adductor digiti V',
-    distractors: ['M. abductor digiti V', 'M. adductor digiti II', 'M. flexor digitorum brevis'],
-    diagram: 'pelvic-limb-muscles-a',
-  },
-  {
-    format: 'seta',
-    id: 'adductorDigitiII',
-    name: 'M. adductor digiti II',
-    distractors: ['M. abductor digiti II', 'M. adductor digiti V', 'M. abductor digiti V'],
-    diagram: 'pelvic-limb-muscles-a',
-  },
-  {
-    format: 'seta',
-    id: 'abductorDigitiII',
-    name: 'M. abductor digiti II',
-    distractors: ['M. adductor digiti II', 'M. adductor digiti V', 'Mm. interossei'],
-    diagram: 'pelvic-limb-muscles-a',
-  },
-  {
-    format: 'seta',
-    id: 'interossei',
-    name: 'Mm. interossei',
-    distractors: ['M. flexor digitorum brevis', 'M. adductor digiti II', 'M. abductor digiti V'],
-    diagram: 'pelvic-limb-muscles-a',
-  },
-]
-
 const knowledgeExercisesEs = [
   {
     format: 'verdadeiro-falso',
@@ -347,7 +302,6 @@ export const miologiaMembroPelvico = {
         exercises: [
           ...lateralMuscleExercises,
           ...medialMuscleExercises,
-          ...distalFootMuscleExercises,
           ...knowledgeExercisesEs,
         ],
       },
@@ -362,7 +316,6 @@ export const miologiaMembroPelvico = {
         exercises: [
           ...lateralMuscleExercises,
           ...medialMuscleExercises,
-          ...distalFootMuscleExercises,
           ...knowledgeExercisesPt,
         ],
       },
