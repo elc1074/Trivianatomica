@@ -1,6 +1,6 @@
 export const anatomiaFelina = {
   id: 'anatomia-felina',
-  orderIndex: 5,
+  orderIndex: 4,
   es: {
     title: 'Anatomía general del gato',
     lessons: [

@@ -13,7 +13,7 @@ const units = [
   osteologiaCraneo,
   colunaVertebral,
   anatomiaFelina,
-  miologiaMembroPelvico,
+  miologiaMembroPelvico
 ]
 
 function buildLessonRows(unit) {
