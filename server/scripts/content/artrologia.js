@@ -49,6 +49,47 @@ export const artrologia = {
             answer: true,
           },
           {
+            format: 'verdadeiro-falso',
+            id: 'vf-codo-flexion-extension',
+            statement:
+              'La articulación del codo permite principalmente movimientos de flexión y extensión.',
+            answer: true,
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-escapula-plano',
+            statement:
+              'La escápula se clasifica como un hueso plano y participa en la formación del cinturón torácico.',
+            answer: true,
+          },
+          {
+            format: 'completar',
+            id: 'lacuna-escapula-espina',
+            sentence: 'En la cara lateral de la escápula se destaca la ___ de la escápula.',
+            answer: 'espina',
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-radio-carga',
+            statement:
+              'En el antebrazo, el radio se articula con los huesos del carpo y soporta gran parte de la carga.',
+            answer: true,
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-carpo-accesorio',
+            statement:
+              'El hueso accesorio del carpo se localiza en la región palmar/lateral y actúa como punto de palanca.',
+            answer: true,
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-clavicula-rudimentaria',
+            statement:
+              'En perros y gatos, la clavícula es rudimentaria y no articula directamente con el esqueleto axial.',
+            answer: true,
+          },
+          {
             format: 'completar',
             id: 'lacuna-humeral-labro',
             sentence: 'La articulación humeral posee un labro ___.',
@@ -129,6 +170,20 @@ export const artrologia = {
             sentence: 'La articulación genual posee los ___.',
             answer: 'meniscos',
           },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-meniscos-congruencia',
+            statement:
+              'Los meniscos de la articulación genual aumentan la congruencia articular y distribuyen cargas.',
+            answer: true,
+          },
+          {
+            format: 'completar',
+            id: 'lacuna-cruzados',
+            sentence:
+              'Los ligamentos cruzados limitan el desplazamiento ___ de la tibia respecto al fémur.',
+            answer: 'craneocaudal',
+          },
         ],
       },
       {
@@ -174,6 +229,25 @@ export const artrologia = {
             id: 'lacuna-costovertebral',
             sentence: 'La articulación costovertebral es una articulación sinovial compuesta ___.',
             answer: 'plana',
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-atlantoaxial-rotacion',
+            statement: 'La articulación atlantoaxial se relaciona principalmente con la rotación de la cabeza.',
+            answer: true,
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-atm-bisagra',
+            statement:
+              'La articulación temporomandibular de perros y gatos permite apertura y cierre de la boca, con escasa lateralidad.',
+            answer: true,
+          },
+          {
+            format: 'completar',
+            id: 'lacuna-sacroiliaca',
+            sentence: 'La articulación sacroilíaca conecta el sacro con el hueso ___.',
+            answer: 'coxal',
           },
           {
             format: 'associacao',
@@ -259,6 +333,47 @@ export const artrologia = {
             answer: true,
           },
           {
+            format: 'verdadeiro-falso',
+            id: 'vf-codo-flexion-extension',
+            statement:
+              'A articulação do cotovelo permite principalmente movimentos de flexão e extensão.',
+            answer: true,
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-escapula-plano',
+            statement:
+              'A escápula é classificada como um osso plano e participa da formação da cintura torácica.',
+            answer: true,
+          },
+          {
+            format: 'completar',
+            id: 'lacuna-escapula-espina',
+            sentence: 'Na face lateral da escápula se destaca a ___ da escápula.',
+            answer: 'espinha',
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-radio-carga',
+            statement:
+              'No antebraço, o rádio se articula com os ossos do carpo e suporta grande parte da carga.',
+            answer: true,
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-carpo-accesorio',
+            statement:
+              'O osso acessório do carpo se localiza na região palmar/lateral e atua como ponto de alavanca.',
+            answer: true,
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-clavicula-rudimentaria',
+            statement:
+              'Em cães e gatos, a clavícula é rudimentar e não articula diretamente com o esqueleto axial.',
+            answer: true,
+          },
+          {
             format: 'completar',
             id: 'lacuna-humeral-labro',
             sentence: 'A articulação umeral possui um lábio ___.',
@@ -339,6 +454,20 @@ export const artrologia = {
             sentence: 'A articulação genual possui os ___.',
             answer: 'meniscos',
           },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-meniscos-congruencia',
+            statement:
+              'Os meniscos da articulação genual aumentam a congruência articular e distribuem cargas.',
+            answer: true,
+          },
+          {
+            format: 'completar',
+            id: 'lacuna-cruzados',
+            sentence:
+              'Os ligamentos cruzados limitam o deslocamento ___ da tíbia em relação ao fêmur.',
+            answer: 'craniocaudal',
+          },
         ],
       },
       {
@@ -384,6 +513,25 @@ export const artrologia = {
             id: 'lacuna-costovertebral',
             sentence: 'A articulação costovertebral é uma articulação sinovial composta ___.',
             answer: 'plana',
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-atlantoaxial-rotacion',
+            statement: 'A articulação atlantoaxial se relaciona principalmente com a rotação da cabeça.',
+            answer: true,
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-atm-bisagra',
+            statement:
+              'A articulação temporomandibular de cães e gatos permite abertura e fechamento da boca, com pouca lateralidade.',
+            answer: true,
+          },
+          {
+            format: 'completar',
+            id: 'lacuna-sacroiliaca',
+            sentence: 'A articulação sacroilíaca conecta o sacro com o osso ___.',
+            answer: 'coxal',
           },
           {
             format: 'associacao',
