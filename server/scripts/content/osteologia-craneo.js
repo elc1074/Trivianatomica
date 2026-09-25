@@ -16,6 +16,12 @@ export const osteologiaCraneo = {
             answer: true,
           },
           {
+            format: 'verdadeiro-falso',
+            id: 'vf-suturas-movilidad',
+            statement: 'Las suturas unen huesos craneales con poca movilidad.',
+            answer: true,
+          },
+          {
             format: 'completar',
             id: 'lacuna-division',
             sentence: 'El cráneo se divide en Neurocráneo y ___.',
@@ -227,6 +233,12 @@ export const osteologiaCraneo = {
             id: 'vf-suturas',
             statement:
               'O crânio é formado por ossos planos que se articulam entre si por meio de articulações fibrosas do tipo sutura.',
+            answer: true,
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-suturas-movilidad',
+            statement: 'As suturas unem ossos cranianos com pouca mobilidade.',
             answer: true,
           },
           {

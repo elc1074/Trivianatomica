@@ -31,6 +31,12 @@ export const osteologiaMembroPelvico = {
             answer: true,
           },
           {
+            format: 'verdadeiro-falso',
+            id: 'vf-cavidad-acetabular',
+            statement: 'El hueso coxal participa en la formación de la cavidad acetabular.',
+            answer: true,
+          },
+          {
             format: 'completar',
             id: 'lacuna-coxal-fusion',
             sentence: 'El ilion, el isquion y el pubis se fusionan en el ___.',
@@ -190,6 +196,12 @@ export const osteologiaMembroPelvico = {
             format: 'verdadeiro-falso',
             id: 'vf-coxal-fusion',
             statement: 'O coxal se forma pela fusão de três ossos: ílio, ísquio e púbis.',
+            answer: true,
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-cavidad-acetabular',
+            statement: 'O osso coxal participa da formação da cavidade acetabular.',
             answer: true,
           },
           {
