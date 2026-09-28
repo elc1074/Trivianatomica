@@ -1,9 +1,12 @@
 import { useState } from 'react'
 import AnatomyDiagram from '../AnatomyDiagram.jsx'
 import LessonProgress from '../LessonProgress.jsx'
+import Icon from '../../../components/Icon.jsx'
+import mascotCelebrate from '../../../assets/illustrations/kiba-castiel-celebrate.png'
 import { normalizeAnswer } from '../normalizeAnswer.js'
 import { shuffle } from '../shuffle.js'
 import { useLanguage } from '../../../i18n/useLanguage.js'
+import summaryStyles from '../LessonSummary.module.css'
 import styles from './FlashcardsScreen.module.css'
 
 function putCardBackInDeck(deck, card) {
@@ -32,14 +35,48 @@ function FlashcardsStudy({ cards, onBack }) {
     const currentCard = deck[0]
     const completedCards = totalCards - deck.length
 
+    function handleRetry() {
+        setDeck(shuffle(cards))
+        setAnswer('')
+        setRevealed(false)
+        setFeedback('')
+    }
+
     if (!currentCard) {
         return (
-            <section className={styles.completed}>
-                <h1 className={styles.title}>{copy.completedTitle}</h1>
-                <p className={styles.subtitle}>{copy.completedMessage}</p>
-                <button type="button" className="button button-primary" onClick={onBack}>
-                    {copy.backToSelection}
-                </button>
+            <section className={summaryStyles.summary}>
+                <div className={summaryStyles.card}>
+                    <img
+                        className={`${summaryStyles.mascot} ${styles.celebrateMascot}`}
+                        src={mascotCelebrate}
+                        alt=""
+                        width="240"
+                        height="150"
+                    />
+                    <h1 className={summaryStyles.title}>{copy.completedTitle}</h1>
+                    <p className={summaryStyles.unitName}>{copy.completedMessage}</p>
+
+                    <LessonProgress completed={totalCards} total={totalCards} />
+
+                    <div className={styles.completedScore}>
+                        {totalCards}{' '}
+                        <span className={summaryStyles.scoreMax}>
+                            / {totalCards} {copy.scoreSuffix}
+                        </span>
+                    </div>
+
+                    <p className={summaryStyles.perfect}>{copy.perfect}</p>
+
+                    <div className={summaryStyles.actions}>
+                        <button type="button" className="button button-light" onClick={handleRetry}>
+                            {copy.retry}
+                        </button>
+                        <button type="button" className="button button-primary" onClick={onBack}>
+                            {copy.backToSelection}
+                            <Icon name="arrow_forward" size={20} color="currentColor" />
+                        </button>
+                    </div>
+                </div>
             </section>
         )
     }
