@@ -4,7 +4,7 @@ import { useLanguage } from '../../../i18n/useLanguage.js'
 import AnatomyDiagram from '../AnatomyDiagram.jsx'
 import FeedbackBanner from '../FeedbackBanner.jsx'
 import { structureMarkers } from '../markerPositions.js'
-import { normalizeAnswer } from '../normalizeAnswer.js'
+import { isAnswerCorrect } from '../normalizeAnswer.js'
 import { shuffle } from '../shuffle.js'
 import styles from './SetaExercise.module.css'
 
@@ -35,7 +35,7 @@ function SetaExercise({ exercise, onComplete }) {
   function handleSubmitFreeText(event) {
     event.preventDefault()
 
-    if (normalizeAnswer(inputValue) === normalizeAnswer(exercise.name)) {
+    if (isAnswerCorrect(inputValue, exercise.name)) {
       setFeedback({ correct: true, points: 20 })
       setStage('feedback')
       return
