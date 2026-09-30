@@ -208,6 +208,11 @@
   margin: 0;
 }
 
+.feedbackCorrect {
+  background: var(--color-success-soft);
+  color: var(--color-success);
+}
+
 .revealBox {
   display: flex;
   flex-direction: column;
