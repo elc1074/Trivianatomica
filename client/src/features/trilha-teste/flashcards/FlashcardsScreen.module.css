@@ -1,7 +1,7 @@
 .flashcardsScreen {
   position: relative;
   min-height: calc(100vh - 160px);
-  padding: 56px 0 96px;
+  padding: 64px 0 96px;
   overflow: hidden;
 }
 
@@ -10,30 +10,8 @@
   z-index: 2;
 }
 
-.character {
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  width: 360px;
-  max-height: 360px;
-  height: auto;
-  object-fit: contain;
-  pointer-events: none;
-  user-select: none;
-  transform: translateY(-50%);
-}
-
-.kiba {
-  left: 60px;
-}
-
-.castiel {
-  right: 60px;
-}
-
 .selector,
 .study,
-.completed,
 .flashcardsStatus {
   max-width: 720px;
   margin: 0 auto;
@@ -54,7 +32,18 @@
 }
 
 .selectorHeader {
-  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 4vw, 40px);
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.selectorMascot {
+  width: clamp(100px, 16vw, 160px);
+  height: auto;
+  flex-shrink: 0;
+  object-fit: contain;
 }
 
 .title {
@@ -148,6 +137,20 @@
   margin-bottom: 24px;
 }
 
+.celebrateMascot {
+  width: min(100%, 300px);
+  height: 180px;
+  margin-top: -20px;
+}
+
+.completedScore {
+  margin: 0 0 32px;
+  color: var(--color-primary-dark);
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 800;
+}
+
 .answerForm {
   max-width: 420px;
   margin: 28px auto 0;
@@ -205,6 +208,11 @@
   margin: 0;
 }
 
+.feedbackCorrect {
+  background: var(--color-success-soft);
+  color: var(--color-success);
+}
+
 .revealBox {
   display: flex;
   flex-direction: column;
@@ -218,21 +226,25 @@
 
 @media (max-width: 480px) {
   .flashcardsScreen {
-    padding: 40px 0 72px;
+    padding: 48px 0 64px;
   }
 
-  .character {
-    bottom: 16px;
-    width: 60px;
-    max-height: 80px;
+  .selectorHeader {
+    align-items: flex-start;
+    gap: 16px;
   }
 
-  .kiba {
-    left: 12px;
+  .selectorMascot {
+    width: 88px;
   }
 
-  .castiel {
-    right: 12px;
+  .selectorHeader .title {
+    font-size: 1.6rem;
+  }
+
+  .celebrateMascot {
+    width: min(100%, 240px);
+    height: 150px;
   }
 
   .studyHeader,
