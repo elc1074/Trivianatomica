@@ -222,8 +222,8 @@ const knowledgeExercisesEs = [
   {
     format: 'verdadeiro-falso',
     id: 'vf-quadriceps-extensor',
-    statement: 'El M. quadriceps femoris actúa principalmente como extensor de la rodilla.',
-    answer: true,
+    statement: 'El M. quadriceps femoris actúa principalmente como flexor de la rodilla.',
+    answer: false,
   },
   {
     format: 'completar',
@@ -273,8 +273,8 @@ const knowledgeExercisesPt = [
   {
     format: 'verdadeiro-falso',
     id: 'vf-quadriceps-extensor',
-    statement: 'O M. quadriceps femoris atua principalmente como extensor do joelho.',
-    answer: true,
+    statement: 'O M. quadriceps femoris atua principalmente como flexor do joelho.',
+    answer: false,
   },
   {
     format: 'completar',

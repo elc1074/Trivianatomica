@@ -59,8 +59,8 @@ export const artrologia = {
             format: 'verdadeiro-falso',
             id: 'vf-escapula-plano',
             statement:
-              'La escápula se clasifica como un hueso plano y participa en la formación del cinturón torácico.',
-            answer: true,
+              'La escápula se clasifica como un hueso largo y participa en la formación del cinturón torácico.',
+            answer: false,
           },
           {
             format: 'completar',
@@ -72,8 +72,8 @@ export const artrologia = {
             format: 'verdadeiro-falso',
             id: 'vf-radio-carga',
             statement:
-              'En el antebrazo, el radio se articula con los huesos del carpo y soporta gran parte de la carga.',
-            answer: true,
+              'En el antebrazo, el radio no participa en el soporte de la carga.',
+            answer: false,
           },
           {
             format: 'verdadeiro-falso',
@@ -86,8 +86,8 @@ export const artrologia = {
             format: 'verdadeiro-falso',
             id: 'vf-clavicula-rudimentaria',
             statement:
-              'En perros y gatos, la clavícula es rudimentaria y no articula directamente con el esqueleto axial.',
-            answer: true,
+              'En perros y gatos, la clavícula articula directamente con el esqueleto axial.',
+            answer: false,
           },
           {
             format: 'completar',
@@ -174,8 +174,8 @@ export const artrologia = {
             format: 'verdadeiro-falso',
             id: 'vf-meniscos-congruencia',
             statement:
-              'Los meniscos de la articulación genual aumentan la congruencia articular y distribuyen cargas.',
-            answer: true,
+              'Los meniscos de la articulación genual disminuyen la congruencia articular.',
+            answer: false,
           },
           {
             format: 'completar',
@@ -343,8 +343,8 @@ export const artrologia = {
             format: 'verdadeiro-falso',
             id: 'vf-escapula-plano',
             statement:
-              'A escápula é classificada como um osso plano e participa da formação da cintura torácica.',
-            answer: true,
+              'A escápula é classificada como um osso longo e participa da formação da cintura torácica.',
+            answer: false,
           },
           {
             format: 'completar',
@@ -356,8 +356,8 @@ export const artrologia = {
             format: 'verdadeiro-falso',
             id: 'vf-radio-carga',
             statement:
-              'No antebraço, o rádio se articula com os ossos do carpo e suporta grande parte da carga.',
-            answer: true,
+              'No antebraço, o rádio não participa da sustentação da carga.',
+            answer: false,
           },
           {
             format: 'verdadeiro-falso',
@@ -370,8 +370,8 @@ export const artrologia = {
             format: 'verdadeiro-falso',
             id: 'vf-clavicula-rudimentaria',
             statement:
-              'Em cães e gatos, a clavícula é rudimentar e não articula diretamente com o esqueleto axial.',
-            answer: true,
+              'Em cães e gatos, a clavícula articula diretamente com o esqueleto axial.',
+            answer: false,
           },
           {
             format: 'completar',
@@ -458,8 +458,8 @@ export const artrologia = {
             format: 'verdadeiro-falso',
             id: 'vf-meniscos-congruencia',
             statement:
-              'Os meniscos da articulação genual aumentam a congruência articular e distribuem cargas.',
-            answer: true,
+              'Os meniscos da articulação genual diminuem a congruência articular.',
+            answer: false,
           },
           {
             format: 'completar',

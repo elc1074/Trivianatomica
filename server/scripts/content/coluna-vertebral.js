@@ -32,8 +32,8 @@ export const colunaVertebral = {
           {
             format: 'verdadeiro-falso',
             id: 'vf-atlas-cuerpo',
-            statement: 'El atlas se diferencia de una vértebra típica porque no presenta un cuerpo vertebral típico.',
-            answer: true,
+            statement: 'El atlas presenta un cuerpo vertebral típico.',
+            answer: false,
           },
           {
             format: 'completar',
@@ -46,8 +46,8 @@ export const colunaVertebral = {
             format: 'verdadeiro-falso',
             id: 'vf-discos-sinfisis',
             statement:
-              'Los discos intervertebrales unen cuerpos vertebrales adyacentes y se clasifican como articulaciones cartilaginosas de tipo sínfisis.',
-            answer: true,
+              'Las uniones entre cuerpos vertebrales mediante discos intervertebrales se clasifican como articulaciones sinoviales.',
+            answer: false,
           },
           {
             format: 'associacao',
@@ -206,8 +206,8 @@ export const colunaVertebral = {
             format: 'verdadeiro-falso',
             id: 'vf-costillas-verdaderas-esternon',
             statement:
-              'Las costillas verdaderas se articulan con el esternón mediante sus cartílagos costales.',
-            answer: true,
+              'Las costillas verdaderas carecen de conexión con el esternón mediante sus cartílagos costales.',
+            answer: false,
           },
           {
             format: 'verdadeiro-falso',
@@ -220,8 +220,8 @@ export const colunaVertebral = {
             format: 'verdadeiro-falso',
             id: 'vf-intercostales-inspiracion',
             statement:
-              'Los músculos intercostales externos participan en la inspiración al favorecer la elevación de las costillas.',
-            answer: true,
+              'Los músculos intercostales externos no participan en la inspiración.',
+            answer: false,
           },
           {
             format: 'associacao',
@@ -281,8 +281,8 @@ export const colunaVertebral = {
           {
             format: 'verdadeiro-falso',
             id: 'vf-atlas-cuerpo',
-            statement: 'O atlas se diferencia de uma vértebra típica porque não apresenta um corpo vertebral típico.',
-            answer: true,
+            statement: 'O atlas apresenta um corpo vertebral típico.',
+            answer: false,
           },
           {
             format: 'completar',
@@ -295,8 +295,8 @@ export const colunaVertebral = {
             format: 'verdadeiro-falso',
             id: 'vf-discos-sinfisis',
             statement:
-              'Os discos intervertebrais unem corpos vertebrais adjacentes e são classificados como articulações cartilaginosas do tipo sínfise.',
-            answer: true,
+              'As uniões entre corpos vertebrais por meio dos discos intervertebrais são classificadas como articulações sinoviais.',
+            answer: false,
           },
           {
             format: 'associacao',
@@ -454,8 +454,8 @@ export const colunaVertebral = {
             format: 'verdadeiro-falso',
             id: 'vf-costillas-verdaderas-esternon',
             statement:
-              'As costelas verdadeiras se articulam com o esterno por meio de suas cartilagens costais.',
-            answer: true,
+              'As costelas verdadeiras não possuem conexão com o esterno por meio de suas cartilagens costais.',
+            answer: false,
           },
           {
             format: 'verdadeiro-falso',
@@ -468,8 +468,8 @@ export const colunaVertebral = {
             format: 'verdadeiro-falso',
             id: 'vf-intercostales-inspiracion',
             statement:
-              'Os músculos intercostais externos participam da inspiração ao favorecer a elevação das costelas.',
-            answer: true,
+              'Os músculos intercostais externos não participam da inspiração.',
+            answer: false,
           },
           {
             format: 'associacao',

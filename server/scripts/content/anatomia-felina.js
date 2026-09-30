@@ -37,15 +37,15 @@ export const anatomiaFelina = {
             format: 'verdadeiro-falso',
             id: 'vf-planos-regiones',
             statement:
-              'La identificación de planos y regiones corporales ayuda a localizar estructuras y describir relaciones espaciales con precisión.',
-            answer: true,
+              'Los planos y las regiones corporales no sirven como referencias para localizar estructuras anatómicas.',
+            answer: false,
           },
           {
             format: 'verdadeiro-falso',
             id: 'vf-comparada-variaciones',
             statement:
-              'Comparar perro y gato permite reconocer patrones comunes y variaciones anatómicas relevantes.',
-            answer: true,
+              'El perro y el gato presentan una anatomía idéntica, sin variaciones entre las dos especies.',
+            answer: false,
           },
           {
             format: 'completar',
@@ -107,15 +107,15 @@ export const anatomiaFelina = {
             format: 'verdadeiro-falso',
             id: 'vf-planos-regiones',
             statement:
-              'A identificação de planos e regiões corporais ajuda a localizar estruturas e descrever relações espaciais com precisão.',
-            answer: true,
+              'Os planos e as regiões corporais não servem como referências para localizar estruturas anatômicas.',
+            answer: false,
           },
           {
             format: 'verdadeiro-falso',
             id: 'vf-comparada-variaciones',
             statement:
-              'Comparar cão e gato permite reconhecer padrões comuns e variações anatômicas relevantes.',
-            answer: true,
+              'O cão e o gato apresentam anatomia idêntica, sem variações entre as duas espécies.',
+            answer: false,
           },
           {
             format: 'completar',

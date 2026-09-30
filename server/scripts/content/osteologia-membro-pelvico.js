@@ -33,8 +33,8 @@ export const osteologiaMembroPelvico = {
           {
             format: 'verdadeiro-falso',
             id: 'vf-cavidad-acetabular',
-            statement: 'El hueso coxal participa en la formación de la cavidad acetabular.',
-            answer: true,
+            statement: 'La cavidad acetabular se localiza en el fémur.',
+            answer: false,
           },
           {
             format: 'completar',
@@ -81,8 +81,8 @@ export const osteologiaMembroPelvico = {
           {
             format: 'verdadeiro-falso',
             id: 'vf-patela-sesamoideo',
-            statement: 'La patela es un hueso sesamoideo que se articula con la tróclea del fémur.',
-            answer: true,
+            statement: 'La patela es un hueso largo que se articula con la tróclea del fémur.',
+            answer: false,
           },
           {
             format: 'completar',
@@ -201,8 +201,8 @@ export const osteologiaMembroPelvico = {
           {
             format: 'verdadeiro-falso',
             id: 'vf-cavidad-acetabular',
-            statement: 'O osso coxal participa da formação da cavidade acetabular.',
-            answer: true,
+            statement: 'A cavidade acetabular se localiza no fêmur.',
+            answer: false,
           },
           {
             format: 'completar',
@@ -249,8 +249,8 @@ export const osteologiaMembroPelvico = {
           {
             format: 'verdadeiro-falso',
             id: 'vf-patela-sesamoideo',
-            statement: 'A patela é um osso sesamoide que se articula com a tróclea do fêmur.',
-            answer: true,
+            statement: 'A patela é um osso longo que se articula com a tróclea do fêmur.',
+            answer: false,
           },
           {
             format: 'completar',
