@@ -9,46 +9,44 @@
 
   position: relative;
   display: inline-block;
+  width: auto;
+  height: auto;
+  max-width: min(100%, var(--diagram-max-width));
+  max-height: var(--diagram-max-height);
   border-radius: var(--radius-card);
   overflow: hidden;
   background: var(--color-surface);
   box-shadow: var(--shadow-card);
 }
 
-.image {
+/*
+ * A proporção real da imagem (largura/altura) é aplicada inline pelo
+ * AnatomyDiagram, via `style={{ aspectRatio }}`. Com isso o navegador deriva
+ * a largura e a altura do wrapper respeitando max-width/max-height E a
+ * proporção ao mesmo tempo, diferente do cálculo "shrink-to-fit" que um
+ * <img>/<svg> solto teria, que ignora max-height ao medir a largura
+ * preferida e deixava sobra em branco nas imagens na horizontal.
+ */
+
+.diagramSvg {
   display: block;
-  width: auto;
-  height: auto;
-  max-width: min(100%, var(--diagram-max-width));
-  max-height: min(46vh, var(--diagram-max-height));
+  width: 100%;
+  height: 100%;
 }
 
 .marker {
-  position: absolute;
-  display: grid;
-  place-items: center;
-  width: 0;
-  height: 0;
-  transform: translate(-50%, -50%);
+  pointer-events: none;
 }
 
 .markerDot {
-  position: absolute;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: #16a34a;
-  border: 2px solid var(--color-surface);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  fill: #16a34a;
+  stroke: var(--color-surface);
 }
 
 .markerPulse {
-  position: absolute;
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  background: #16a34a;
+  fill: #16a34a;
   opacity: 0.4;
+  transform-box: fill-box;
   transform-origin: center;
   animation: pulse 1.6s ease-out infinite;
 }

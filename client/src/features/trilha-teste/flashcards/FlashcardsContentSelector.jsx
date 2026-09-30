@@ -25,13 +25,6 @@ function FlashcardsContentSelector({
 
     return (
         <section className={styles.selector}>
-            <div className={styles.selectorHeader}>
-                <h1 className={styles.title}>{copy.title}</h1>
-                <p className={styles.subtitle}>
-                    {copy.selection.subtitle(selectedCardsCount)}
-                </p>
-            </div>
-
             <div className={styles.deckList}>
                 {decks.map((deck) => (
                     <label key={deck.id} className={styles.deckOption}>
