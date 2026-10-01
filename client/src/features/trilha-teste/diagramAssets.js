@@ -15,3 +15,16 @@ export const diagramImages = {
   forelimb: forelimbImage,
   spine: spineImage,
 }
+
+// Dimensões reais (em pixels) de cada imagem, usadas para montar o viewBox do
+// SVG em AnatomyDiagram. Isso garante que a imagem e o marcador escalem juntos,
+// sem bordas brancas e respeitando o zoom do navegador.
+export const diagramDimensions = {
+  'pelvic-limb': { width: 631, height: 2005 },
+  'pelvic-limb-muscles': { width: 748, height: 781 },
+  'pelvic-limb-muscles-a': { width: 253, height: 462 },
+  'pelvic-limb-muscles-b': { width: 410, height: 620 },
+  skull: { width: 595, height: 325 },
+  forelimb: { width: 800, height: 1250 },
+  spine: { width: 2200, height: 620 },
+}

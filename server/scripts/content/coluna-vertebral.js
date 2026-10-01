@@ -30,11 +30,24 @@ export const colunaVertebral = {
             answer: false,
           },
           {
+            format: 'verdadeiro-falso',
+            id: 'vf-atlas-cuerpo',
+            statement: 'El atlas presenta un cuerpo vertebral típico.',
+            answer: false,
+          },
+          {
             format: 'completar',
             id: 'lacuna-pediculo',
             sentence:
               'El ___ es la porción ventral del arco vertebral, lugar de unión con el cuerpo de la vértebra.',
             answer: 'pedículo',
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-discos-sinfisis',
+            statement:
+              'Las uniones entre cuerpos vertebrales mediante discos intervertebrales se clasifican como articulaciones sinoviales.',
+            answer: false,
           },
           {
             format: 'associacao',
@@ -90,6 +103,13 @@ export const colunaVertebral = {
             id: 'lacuna-atlas-fosseta',
             sentence: 'El atlas presenta una fosita dental que recibe al proceso ___ del axis.',
             answer: 'odontoide',
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-diente-axis-rotacion',
+            statement:
+              'El diente del axis se asocia con la rotación de la cabeza sobre la segunda vértebra cervical.',
+            answer: true,
           },
           {
             format: 'verdadeiro-falso',
@@ -183,6 +203,27 @@ export const colunaVertebral = {
             answer: true,
           },
           {
+            format: 'verdadeiro-falso',
+            id: 'vf-costillas-verdaderas-esternon',
+            statement:
+              'Las costillas verdaderas carecen de conexión con el esternón mediante sus cartílagos costales.',
+            answer: false,
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-linea-alba-rafe',
+            statement:
+              'La línea alba corresponde a un rafe tendinoso medio ventral formado por aponeurosis de los músculos abdominales.',
+            answer: true,
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-intercostales-inspiracion',
+            statement:
+              'Los músculos intercostales externos no participan en la inspiración.',
+            answer: false,
+          },
+          {
             format: 'associacao',
             id: 'assoc-torax',
             pairs: [
@@ -238,11 +279,24 @@ export const colunaVertebral = {
             answer: false,
           },
           {
+            format: 'verdadeiro-falso',
+            id: 'vf-atlas-cuerpo',
+            statement: 'O atlas apresenta um corpo vertebral típico.',
+            answer: false,
+          },
+          {
             format: 'completar',
             id: 'lacuna-pediculo',
             sentence:
               'O ___ é a porção ventral do arco vertebral, local de união com o corpo da vértebra.',
             answer: 'pedículo',
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-discos-sinfisis',
+            statement:
+              'As uniões entre corpos vertebrais por meio dos discos intervertebrais são classificadas como articulações sinoviais.',
+            answer: false,
           },
           {
             format: 'associacao',
@@ -298,6 +352,13 @@ export const colunaVertebral = {
             id: 'lacuna-atlas-fosseta',
             sentence: 'O atlas apresenta uma fosseta do dente que recebe o processo ___ do áxis.',
             answer: 'odontoide',
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-diente-axis-rotacion',
+            statement:
+              'O dente do áxis se associa à rotação da cabeça sobre a segunda vértebra cervical.',
+            answer: true,
           },
           {
             format: 'verdadeiro-falso',
@@ -388,6 +449,27 @@ export const colunaVertebral = {
             statement:
               'Dos 13 pares de costelas, 9 pares correspondem a costelas esternais ou verdadeiras.',
             answer: true,
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-costillas-verdaderas-esternon',
+            statement:
+              'As costelas verdadeiras não possuem conexão com o esterno por meio de suas cartilagens costais.',
+            answer: false,
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-linea-alba-rafe',
+            statement:
+              'A linha alba corresponde a uma rafe tendínea média ventral formada por aponeuroses dos músculos abdominais.',
+            answer: true,
+          },
+          {
+            format: 'verdadeiro-falso',
+            id: 'vf-intercostales-inspiracion',
+            statement:
+              'Os músculos intercostais externos não participam da inspiração.',
+            answer: false,
           },
           {
             format: 'associacao',

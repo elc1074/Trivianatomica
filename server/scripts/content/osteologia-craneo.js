@@ -16,6 +16,12 @@ export const osteologiaCraneo = {
             answer: true,
           },
           {
+            format: 'verdadeiro-falso',
+            id: 'vf-suturas-movilidad',
+            statement: 'Las suturas permiten amplia movilidad entre los huesos craneales.',
+            answer: false,
+          },
+          {
             format: 'completar',
             id: 'lacuna-division',
             sentence: 'El cráneo se divide en Neurocráneo y ___.',
@@ -102,8 +108,8 @@ export const osteologiaCraneo = {
             format: 'verdadeiro-falso',
             id: 'vf-frontal-neumatico',
             statement:
-              'El hueso frontal es un hueso neumático porque posee un seno con aire en su interior.',
-            answer: true,
+              'El hueso frontal carece de un seno con aire en su interior.',
+            answer: false,
           },
           {
             format: 'verdadeiro-falso',
@@ -230,6 +236,12 @@ export const osteologiaCraneo = {
             answer: true,
           },
           {
+            format: 'verdadeiro-falso',
+            id: 'vf-suturas-movilidad',
+            statement: 'As suturas permitem ampla mobilidade entre os ossos cranianos.',
+            answer: false,
+          },
+          {
             format: 'completar',
             id: 'lacuna-division',
             sentence: 'O crânio se divide em Neurocrânio e ___.',
@@ -316,8 +328,8 @@ export const osteologiaCraneo = {
             format: 'verdadeiro-falso',
             id: 'vf-frontal-neumatico',
             statement:
-              'O osso frontal é um osso pneumático porque possui um seio com ar em seu interior.',
-            answer: true,
+              'O osso frontal não possui um seio com ar em seu interior.',
+            answer: false,
           },
           {
             format: 'verdadeiro-falso',

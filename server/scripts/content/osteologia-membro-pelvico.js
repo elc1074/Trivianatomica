@@ -31,6 +31,12 @@ export const osteologiaMembroPelvico = {
             answer: true,
           },
           {
+            format: 'verdadeiro-falso',
+            id: 'vf-cavidad-acetabular',
+            statement: 'La cavidad acetabular se localiza en el fémur.',
+            answer: false,
+          },
+          {
             format: 'completar',
             id: 'lacuna-coxal-fusion',
             sentence: 'El ilion, el isquion y el pubis se fusionan en el ___.',
@@ -75,8 +81,8 @@ export const osteologiaMembroPelvico = {
           {
             format: 'verdadeiro-falso',
             id: 'vf-patela-sesamoideo',
-            statement: 'La patela es un hueso sesamoideo que se articula con la tróclea del fémur.',
-            answer: true,
+            statement: 'La patela es un hueso largo que se articula con la tróclea del fémur.',
+            answer: false,
           },
           {
             format: 'completar',
@@ -193,6 +199,12 @@ export const osteologiaMembroPelvico = {
             answer: true,
           },
           {
+            format: 'verdadeiro-falso',
+            id: 'vf-cavidad-acetabular',
+            statement: 'A cavidade acetabular se localiza no fêmur.',
+            answer: false,
+          },
+          {
             format: 'completar',
             id: 'lacuna-coxal-fusion',
             sentence: 'O ílio, o ísquio e o púbis se fundem no ___.',
@@ -237,8 +249,8 @@ export const osteologiaMembroPelvico = {
           {
             format: 'verdadeiro-falso',
             id: 'vf-patela-sesamoideo',
-            statement: 'A patela é um osso sesamoide que se articula com a tróclea do fêmur.',
-            answer: true,
+            statement: 'A patela é um osso longo que se articula com a tróclea do fêmur.',
+            answer: false,
           },
           {
             format: 'completar',

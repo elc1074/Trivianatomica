@@ -220,6 +220,12 @@ const knowledgeExercisesEs = [
     answer: 'quadriceps',
   },
   {
+    format: 'verdadeiro-falso',
+    id: 'vf-quadriceps-extensor',
+    statement: 'El M. quadriceps femoris actúa principalmente como flexor de la rodilla.',
+    answer: false,
+  },
+  {
     format: 'completar',
     id: 'lacuna-peroneus-synonym',
     sentence: 'En la nomenclatura anatómica, peroneus también puede denominarse ___.',
@@ -263,6 +269,12 @@ const knowledgeExercisesPt = [
     id: 'lacuna-quadriceps-rectus',
     sentence: 'O M. rectus femoris faz parte do grupo muscular ___.',
     answer: 'quadriceps',
+  },
+  {
+    format: 'verdadeiro-falso',
+    id: 'vf-quadriceps-extensor',
+    statement: 'O M. quadriceps femoris atua principalmente como flexor do joelho.',
+    answer: false,
   },
   {
     format: 'completar',
