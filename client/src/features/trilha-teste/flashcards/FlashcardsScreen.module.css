@@ -10,25 +10,33 @@
   z-index: 2;
 }
 
+.selectionLayout {
+  display: grid;
+  grid-template-columns: 175px minmax(0, 720px);
+  align-items: start;
+  gap: 20px;
+  margin: 0;
+}
+
+.characterGroup {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 145px;
+  padding-top: 4px;
+}
+
 .character {
-  position: absolute;
-  z-index: 1;
-  top: 50%;
-  width: 360px;
-  max-height: 360px;
+  width: 112px;
+  max-height: 145px;
   height: auto;
   object-fit: contain;
   pointer-events: none;
   user-select: none;
-  transform: translateY(-50%);
 }
 
-.kiba {
-  left: 60px;
-}
-
-.castiel {
-  right: 60px;
+.character + .character {
+  margin-left: -28px;
 }
 
 .selector,
@@ -212,23 +220,38 @@
   margin: 0;
 }
 
+@media (max-width: 640px) {
+  .selectionLayout {
+    display: block;
+  }
+
+  .characterGroup {
+    display: none;
+  }
+}
+
 @media (max-width: 480px) {
   .flashcardsScreen {
     padding: 40px 0 72px;
   }
 
+  .selectionLayout {
+    grid-template-columns: 82px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .characterGroup {
+    min-height: 92px;
+    padding-top: 4px;
+  }
+
   .character {
-    bottom: 16px;
-    width: 60px;
+    width: 58px;
     max-height: 80px;
   }
 
-  .kiba {
-    left: 12px;
-  }
-
-  .castiel {
-    right: 12px;
+  .character + .character {
+    margin-left: -18px;
   }
 
   .studyHeader,

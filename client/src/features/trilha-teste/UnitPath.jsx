@@ -17,6 +17,7 @@ function UnitPath() {
     unit: null,
     error: false,
   })
+  const [reloadIndex, setReloadIndex] = useState(0)
 
   useEffect(() => {
     let cancelled = false
@@ -33,7 +34,7 @@ function UnitPath() {
     return () => {
       cancelled = true
     }
-  }, [unitId, language])
+  }, [unitId, language, reloadIndex])
 
   const loading = unitRequest.requestKey !== `${unitId}:${language}`
   const unit = loading ? null : unitRequest.unit
@@ -57,7 +58,18 @@ function UnitPath() {
             </div>
           </div>
 
-          {loadError && <p className={styles.status}>{t.trilha.unitPath.loadError}</p>}
+          {loadError && (
+            <div className={styles.status}>
+              <p>{t.trilha.unitPath.loadError}</p>
+              <button
+                type="button"
+                className="button button-primary"
+                onClick={() => setReloadIndex((currentIndex) => currentIndex + 1)}
+              >
+                {t.trilha.unitPath.retry}
+              </button>
+            </div>
+          )}
           {loading && <p className={styles.status}>{t.trilha.unitPath.loading}</p>}
 
           {unit && (

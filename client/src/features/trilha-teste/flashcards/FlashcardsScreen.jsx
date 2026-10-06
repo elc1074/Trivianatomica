@@ -57,19 +57,6 @@ function FlashcardsScreen() {
     return (
         <PageLayout>
             <section className={styles.flashcardsScreen}>
-                <img
-                    src={kiba}
-                    alt=""
-                    className={`${styles.character} ${styles.kiba}`}
-                />
-
-                <img
-                    src={castiel}
-                    alt=""
-                    className={`${styles.character} ${styles.castiel}`}
-                />
-
-
                 <div className={`container ${styles.flashcardsContent}`}>
                     {loading ? (
                         <p>{t.flashcards.loading}</p>
@@ -84,13 +71,23 @@ function FlashcardsScreen() {
                                 {t.flashcards.retry}
                             </button>
                         </div>
+                    ) : !started && decks.length === 0 ? (
+                        <div className={styles.flashcardsStatus}>
+                            <p>{t.flashcards.emptyDecks}</p>
+                        </div>
                     ) : !started ? (
-                        <FlashcardsContentSelector
-                            decks={decks}
-                            selectedDeckIds={selectedDeckIds}
-                            onDeckChange={setSelectedDeckIds}
-                            onStart={handleStart}
-                        />
+                        <div className={styles.selectionLayout}>
+                            <div className={styles.characterGroup} aria-hidden="true">
+                                <img src={kiba} alt="" className={styles.character} />
+                                <img src={castiel} alt="" className={styles.character} />
+                            </div>
+                            <FlashcardsContentSelector
+                                decks={decks}
+                                selectedDeckIds={selectedDeckIds}
+                                onDeckChange={setSelectedDeckIds}
+                                onStart={handleStart}
+                            />
+                        </div>
                     ) : (
                         <FlashcardsStudy
                             key={language}
