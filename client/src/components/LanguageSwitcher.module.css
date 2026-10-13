@@ -28,6 +28,10 @@
   border-radius: 6px;
 }
 
+.labelShort {
+  display: none;
+}
+
 .chevron {
   display: grid;
   place-items: center;
@@ -80,5 +84,19 @@
 @media (max-width: 640px) {
   .trigger {
     font-size: 0.7rem;
+  }
+
+  .labelShort {
+    display: inline;
+  }
+
+  /* Some visualmente, mas continua acessível a leitores de tela. */
+  .labelFull {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 }

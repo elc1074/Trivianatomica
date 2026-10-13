@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import mascotWelcome from '../../assets/illustrations/mascot-welcome.png'
+import Breadcrumb from '../../components/Breadcrumb.jsx'
 import Icon from '../../components/Icon.jsx'
 import PageLayout from '../../components/PageLayout.jsx'
 import { useLanguage } from '../../i18n/useLanguage.js'
@@ -44,10 +45,12 @@ function UnitPath() {
     <PageLayout>
       <section className={styles.panel}>
         <div className="container">
-          <Link to="/trilha" className={styles.backLink}>
-            <Icon name="arrow_back" size={20} color="currentColor" />
-            {t.trilha.unitPath.backToPanel}
-          </Link>
+          <Breadcrumb
+            items={[
+              { label: t.chrome.nav.lessons, to: '/trilha' },
+              { label: unit ? unit.title : t.chrome.nav.unit },
+            ]}
+          />
 
           <div className={styles.intro}>
             <img className={styles.mascot} src={mascotWelcome} alt="" width="160" height="184" />

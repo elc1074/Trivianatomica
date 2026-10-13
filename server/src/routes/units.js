@@ -166,7 +166,7 @@ router.get('/lessons/:lessonId', async (req, res) => {
 
   const { data: lesson, error: lessonError } = await supabase
     .from('lessons')
-    .select(`id, order_index, ${titleColumn}, unit_id`)
+    .select(`id, order_index, ${titleColumn}, unit_id, units(${titleColumn})`)
     .eq('id', req.params.lessonId)
     .maybeSingle()
 
@@ -191,6 +191,7 @@ router.get('/lessons/:lessonId', async (req, res) => {
   res.json({
     id: lesson.id,
     unitId: lesson.unit_id,
+    unitTitle: lesson.units?.[titleColumn] ?? null,
     orderIndex: lesson.order_index,
     title: lesson[titleColumn],
     exercises: exercises.map((row) => assembleExercise(row, language)),
