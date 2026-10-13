@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import AnatomyDiagram from '../AnatomyDiagram.jsx'
 import LessonProgress from '../LessonProgress.jsx'
 import Icon from '../../../components/Icon.jsx'
@@ -83,6 +84,11 @@ function FlashcardsStudy({ cards, onBack }) {
                             <Icon name="arrow_forward" size={20} color="currentColor" />
                         </button>
                     </div>
+
+                    <Link className={`button button-light ${summaryStyles.crossLink}`} to="/trilha">
+                        {copy.practiceTrail}
+                        <Icon name="school" size={20} color="currentColor" />
+                    </Link>
                 </div>
             </section>
         )

@@ -2,6 +2,7 @@ import LessonProgress from './LessonProgress.jsx'
 import { useEffect, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import mascotEncourage from '../../assets/illustrations/mascot-encourage.png'
+import Breadcrumb from '../../components/Breadcrumb.jsx'
 import PageLayout from '../../components/PageLayout.jsx'
 import { useLanguage } from '../../i18n/useLanguage.js'
 import { fetchLesson } from './api.js'
@@ -141,11 +142,25 @@ function LessonContent({ unitId, lessonId, language }) {
   const exercise = lesson.exercises[exerciseIndex]
   const sessionScore = results.reduce((sum, result) => sum + result.points, 0)
   const ExerciseComponent = EXERCISE_COMPONENTS[exercise.format]
+  const confirmLeave = lessonInProgress ? t.trilha.lesson.leaveConfirm : null
+
+  function guardNavigation(event) {
+    if (confirmLeave && !window.confirm(confirmLeave)) event.preventDefault()
+  }
 
   return (
-    <PageLayout confirmLeave={lessonInProgress ? t.trilha.lesson.leaveConfirm : null}>
+    <PageLayout confirmLeave={confirmLeave}>
       <section className={styles.lesson}>
         <div className="container">
+          <Breadcrumb
+            onNavigate={guardNavigation}
+            items={[
+              { label: t.chrome.nav.lessons, to: '/trilha' },
+              { label: lesson.unitTitle ?? t.chrome.nav.unit, to: `/trilha/${unitId}` },
+              { label: lesson.title },
+            ]}
+          />
+
           <div className={styles.statusBar}>
             <p className={styles.progress}>
               {t.trilha.lesson.progress(exerciseIndex + 1, lesson.exercises.length)}

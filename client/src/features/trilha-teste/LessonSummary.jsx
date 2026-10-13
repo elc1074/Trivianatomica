@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import LessonProgress from './LessonProgress.jsx'
 import mascotCelebrate from '../../assets/illustrations/mascot-celebrate.png'
 import Icon from '../../components/Icon.jsx'
@@ -29,6 +30,8 @@ function LessonSummary({ lesson, results, onRetry, onBackToPanel }) {
     .filter(Boolean)
 
   const reviewResults = results.filter((result) => !result.correct)
+  // Os baralhos de flashcards são montados a partir dos exercícios de seta de cada unidade.
+  const hasFlashcards = lesson.exercises.some((exercise) => exercise.format === 'seta')
 
   return (
     <section className={styles.summary}>
@@ -85,6 +88,16 @@ function LessonSummary({ lesson, results, onRetry, onBackToPanel }) {
               <Icon name="arrow_forward" size={20} color="currentColor" />
             </button>
           </div>
+
+          {hasFlashcards && (
+            <Link
+              className={`button button-dark ${styles.crossLink}`}
+              to={`/flashcards?deck=${encodeURIComponent(lesson.unitId)}`}
+            >
+              {t.trilha.summary.reviewFlashcards}
+              <Icon name="style" size={20} color="currentColor" />
+            </Link>
+          )}
         </div>
       </div>
     </section>
