@@ -1,8 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import AnatomyDiagram from '../AnatomyDiagram.jsx'
-import { normalizeAnswer } from '../normalizeAnswer.js'
+import LessonProgress from '../LessonProgress.jsx'
+import Icon from '../../../components/Icon.jsx'
+import mascotCelebrate from '../../../assets/illustrations/kiba-castiel-celebrate.png'
+import { isAnswerCorrect } from '../normalizeAnswer.js'
 import { shuffle } from '../shuffle.js'
 import { useLanguage } from '../../../i18n/useLanguage.js'
+import summaryStyles from '../LessonSummary.module.css'
 import styles from './FlashcardsScreen.module.css'
 
 function putCardBackInDeck(deck, card) {
@@ -23,20 +27,63 @@ function FlashcardsStudy({ cards, onBack }) {
     const { t } = useLanguage()
     const copy = t.flashcards.study
     const [deck, setDeck] = useState(() => shuffle(cards))
+    const [totalCards] = useState(cards.length)
     const [answer, setAnswer] = useState('')
     const [revealed, setRevealed] = useState(false)
-    const [feedback, setFeedback] = useState('')
+    const [feedback, setFeedback] = useState(null)
+    const inputRef = useRef(null)
 
     const currentCard = deck[0]
+    const completedCards = totalCards - deck.length
+
+    useEffect(() => {
+        if (!feedback) {
+            inputRef.current?.focus()
+        }
+    }, [feedback, currentCard])
+
+    function handleRetry() {
+        setDeck(shuffle(cards))
+        setAnswer('')
+        setRevealed(false)
+        setFeedback(null)
+    }
 
     if (!currentCard) {
         return (
-            <section className={styles.completed}>
-                <h1 className={styles.title}>{copy.completedTitle}</h1>
-                <p className={styles.subtitle}>{copy.completedMessage}</p>
-                <button type="button" className="button button-primary" onClick={onBack}>
-                    {copy.backToSelection}
-                </button>
+            <section className={summaryStyles.summary}>
+                <div className={summaryStyles.card}>
+                    <img
+                        className={`${summaryStyles.mascot} ${styles.celebrateMascot}`}
+                        src={mascotCelebrate}
+                        alt=""
+                        width="240"
+                        height="150"
+                    />
+                    <h1 className={summaryStyles.title}>{copy.completedTitle}</h1>
+                    <p className={summaryStyles.unitName}>{copy.completedMessage}</p>
+
+                    <LessonProgress completed={totalCards} total={totalCards} />
+
+                    <div className={styles.completedScore}>
+                        {totalCards}{' '}
+                        <span className={summaryStyles.scoreMax}>
+                            / {totalCards} {copy.scoreSuffix}
+                        </span>
+                    </div>
+
+                    <p className={summaryStyles.perfect}>{copy.perfect}</p>
+
+                    <div className={summaryStyles.actions}>
+                        <button type="button" className="button button-light" onClick={handleRetry}>
+                            {copy.retry}
+                        </button>
+                        <button type="button" className="button button-primary" onClick={onBack}>
+                            {copy.backToSelection}
+                            <Icon name="arrow_forward" size={20} color="currentColor" />
+                        </button>
+                    </div>
+                </div>
             </section>
         )
     }
@@ -52,27 +99,39 @@ function FlashcardsStudy({ cards, onBack }) {
     function handleSubmit(event) {
         event.preventDefault()
 
-        const isCorrect = normalizeAnswer(answer) === normalizeAnswer(currentCard.answer)
+        if (feedback) {
+            handleContinue()
+            return
+        }
 
-        if (!isCorrect) {
-            setFeedback(copy.wrongFeedback(currentCard.answer))
+        const correct = isAnswerCorrect(answer, currentCard.answer)
+
+        if (!correct) {
+            setFeedback({ correct: false, message: copy.wrongFeedback(currentCard.answer) })
             setRevealed(false)
             return
         }
 
-        setDeck(deck.slice(1))
-        setAnswer('')
+        setFeedback({ correct: true, message: copy.correctFeedback })
         setRevealed(false)
-        setFeedback('')
     }
 
     function handleRoll(){
         setRevealed(true)
-        setFeedback('')
+        setFeedback(null)
     }
 
     function handleContinue() {
-        setFeedback('')
+        const wasCorrect = feedback?.correct
+        setFeedback(null)
+
+        if (wasCorrect) {
+            setDeck(deck.slice(1))
+            setAnswer('')
+            setRevealed(false)
+            return
+        }
+
         sendCurrentCardBack()
     }
 
@@ -86,28 +145,33 @@ function FlashcardsStudy({ cards, onBack }) {
                 <p className={styles.counter}>{copy.remainingCards(deck.length)}</p>
             </div>
 
+            <div className={styles.progressBar}>
+                <LessonProgress completed={completedCards} total={totalCards} />
+            </div>
+
         <AnatomyDiagram
             diagram={currentCard.diagram}
             markerX={currentCard.marker.xPercent}
             markerY={currentCard.marker.yPercent}
         />
 
-        {!feedback && (
-            <form className={styles.answerForm} onSubmit={handleSubmit}>
-                <label className={styles.label} htmlFor="flashcard-answer">
-                    {copy.prompt}
-                </label>
+        <form className={styles.answerForm} onSubmit={handleSubmit}>
+            <label className={styles.label} htmlFor="flashcard-answer">
+                {copy.prompt}
+            </label>
 
-                <input
-                    id="flashcard-answer"
-                    className={styles.input}
-                    type="text"
-                    value={answer}
-                    onChange={(e) => setAnswer(e.target.value)}
-                    autoComplete="off"
-                    autoFocus
-                />
+            <input
+                ref={inputRef}
+                id="flashcard-answer"
+                className={styles.input}
+                type="text"
+                value={answer}
+                onChange={(e) => setAnswer(e.target.value)}
+                autoComplete="off"
+                readOnly={!!feedback}
+            />
 
+            {!feedback && (
                 <div className={styles.formActions}>
                     <button type="button" className="button button-light" onClick={handleRoll}>
                         {copy.reveal}
@@ -117,12 +181,23 @@ function FlashcardsStudy({ cards, onBack }) {
                         {copy.answer}
                     </button>
                 </div>
-            </form>
+            )}
+        </form>
+
+        {feedback?.correct && (
+            <div className={`${styles.feedback} ${styles.feedbackCorrect}`}>
+                <Icon name="check_circle" size={28} color="currentColor" />
+                <p>{feedback.message}</p>
+                <p>{copy.correctAnswer(currentCard.answer)}</p>
+                <button type="button" className="button button-primary" onClick={handleContinue}>
+                    {copy.continueLabel}
+                </button>
+            </div>
         )}
 
-        {feedback && (
+        {feedback && !feedback.correct && (
             <div className={styles.feedback}>
-                <p>{feedback}</p>
+                <p>{feedback.message}</p>
                 <button type="button" className="button button-primary" onClick={handleContinue}>
                     {copy.continueLabel}
                 </button>

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Icon from '../../../components/Icon.jsx'
 import { useLanguage } from '../../../i18n/useLanguage.js'
 import FeedbackBanner from '../FeedbackBanner.jsx'
-import { normalizeAnswer } from '../normalizeAnswer.js'
+import { isAnswerCorrect } from '../normalizeAnswer.js'
 import styles from './FillBlankExercise.module.css'
 
 function FillBlankExercise({ exercise, onComplete }) {
@@ -15,7 +15,7 @@ function FillBlankExercise({ exercise, onComplete }) {
 
   function handleSubmit(event) {
     event.preventDefault()
-    const isCorrect = normalizeAnswer(inputValue) === normalizeAnswer(exercise.answer)
+    const isCorrect = isAnswerCorrect(inputValue, exercise.answer)
     setFeedback({ correct: isCorrect, points: isCorrect ? 15 : 0 })
   }
 

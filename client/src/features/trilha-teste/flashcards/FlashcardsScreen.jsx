@@ -6,6 +6,7 @@ import FlashcardsStudy from './FlashcardsStudy.jsx';
 import { getFlashcardDecks } from './deckData.js';
 import kiba from '../../../assets/illustrations/kiba-png.png'
 import castiel from '../../../assets/illustrations/castiel.png'
+import flashcardsMascot from '../../../assets/illustrations/mascots-flashcards-header.png'
 import styles from './FlashcardsScreen.module.css'
 
 function FlashcardsScreen() {
@@ -58,6 +59,25 @@ function FlashcardsScreen() {
         <PageLayout>
             <section className={styles.flashcardsScreen}>
                 <div className={`container ${styles.flashcardsContent}`}>
+                    {!started && (
+                        <div className={styles.selectorHeader}>
+                            <img
+                                className={styles.selectorMascot}
+                                src={flashcardsMascot}
+                                alt=""
+                                width="160"
+                                height="160"
+                            />
+
+                            <div>
+                                <h1 className={styles.title}>{t.flashcards.title}</h1>
+                                <p className={styles.subtitle}>
+                                    {t.flashcards.selection.subtitle(selectedCards.length)}
+                                </p>
+                            </div>
+                        </div>
+                    )}
+
                     {loading ? (
                         <p>{t.flashcards.loading}</p>
                     ) : loadError ? (
