@@ -2,10 +2,10 @@ import Footer from './Footer'
 import Header from './Header'
 import styles from './PageLayout.module.css'
 
-function PageLayout({ children }) {
+function PageLayout({ children, confirmLeave }) {
   return (
     <div className={styles.shell}>
-      <Header />
+      <Header confirmLeave={confirmLeave} />
       <main className={styles.main}>{children}</main>
       <Footer />
     </div>

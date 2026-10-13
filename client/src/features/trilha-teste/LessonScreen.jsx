@@ -78,10 +78,22 @@ function LessonContent({ unitId, lessonId, language }) {
 
   const { lesson, error: loadError, redirectPath } = lessonRequest
   const lessonFinished = Boolean(lesson) && exerciseIndex >= lesson.exercises.length
+  const lessonInProgress = results.length > 0 && !lessonFinished
 
   useEffect(() => {
     if (lessonFinished) markLessonCompleted(lesson.id)
   }, [lessonFinished, lesson])
+
+  useEffect(() => {
+    if (!lessonInProgress) return
+
+    function handleBeforeUnload(event) {
+      event.preventDefault()
+    }
+
+    window.addEventListener('beforeunload', handleBeforeUnload)
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload)
+  }, [lessonInProgress])
 
   if (loadError) {
     return <Navigate to={redirectPath ?? `/trilha/${unitId}`} replace />
@@ -131,7 +143,7 @@ function LessonContent({ unitId, lessonId, language }) {
   const ExerciseComponent = EXERCISE_COMPONENTS[exercise.format]
 
   return (
-    <PageLayout>
+    <PageLayout confirmLeave={lessonInProgress ? t.trilha.lesson.leaveConfirm : null}>
       <section className={styles.lesson}>
         <div className="container">
           <div className={styles.statusBar}>

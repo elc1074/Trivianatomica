@@ -19,6 +19,14 @@ export const translations = {
       languageLabel: 'Idioma del sitio',
       footerLine1: 'Proyecto COIL UFSM – UST • 2026',
       footerLine2: 'Anatomía Veterinaria',
+      nav: {
+        label: 'Navegación principal',
+        open: 'Abrir menú',
+        close: 'Cerrar menú',
+        home: 'Inicio',
+        lessons: 'Lecciones',
+        flashcards: 'Flashcards',
+      },
     },
     home: {
       hero: {
@@ -119,6 +127,7 @@ export const translations = {
       },
       lesson: {
         loading: 'Cargando lección...',
+        leaveConfirm: '¿Salir de la lección? Se perderá tu progreso en esta lección.',
         loadError: 'No se pudo cargar esta unidad.',
         encouragement: '¡Ya completaste la mitad! Sigue a tu ritmo.',
         progress: (index, total) => `Pregunta ${index} de ${total}`,
@@ -187,6 +196,14 @@ export const translations = {
       languageLabel: 'Idioma do site',
       footerLine1: 'Projeto COIL UFSM – UST • 2026',
       footerLine2: 'Anatomia Veterinária',
+      nav: {
+        label: 'Navegação principal',
+        open: 'Abrir menu',
+        close: 'Fechar menu',
+        home: 'Início',
+        lessons: 'Lições',
+        flashcards: 'Flashcards',
+      },
     },
     home: {
       hero: {
@@ -287,6 +304,7 @@ export const translations = {
       },
       lesson: {
         loading: 'Carregando lição...',
+        leaveConfirm: 'Sair da lição? Seu progresso nesta lição será perdido.',
         loadError: 'Não foi possível carregar esta unidade.',
         encouragement: 'Você chegou à metade da unidade!',
         progress: (index, total) => `Pergunta ${index} de ${total}`,

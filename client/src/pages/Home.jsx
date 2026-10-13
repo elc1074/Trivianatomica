@@ -34,7 +34,7 @@ function Home() {
                 <Icon name="arrow_forward" size={20} color="currentColor" />
               </Link>
 
-              <Link className="button button-light" to="/flashcards">
+              <Link className="button button-dark" to="/flashcards">
                 {t.home.hero.flashcardsCta}
                 <Icon name="style" size={20} color="currentColor" />
               </Link>
