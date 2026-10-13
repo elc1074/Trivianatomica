@@ -4,6 +4,8 @@ import { useLanguage } from '../../../i18n/useLanguage.js';
 import FlashcardsContentSelector from './FlashcardsContentSelector.jsx';
 import FlashcardsStudy from './FlashcardsStudy.jsx';
 import { getFlashcardDecks } from './deckData.js';
+import kiba from '../../../assets/illustrations/kiba-png.png'
+import castiel from '../../../assets/illustrations/castiel.png'
 import flashcardsMascot from '../../../assets/illustrations/mascots-flashcards-header.png'
 import styles from './FlashcardsScreen.module.css'
 
@@ -89,13 +91,23 @@ function FlashcardsScreen() {
                                 {t.flashcards.retry}
                             </button>
                         </div>
+                    ) : !started && decks.length === 0 ? (
+                        <div className={styles.flashcardsStatus}>
+                            <p>{t.flashcards.emptyDecks}</p>
+                        </div>
                     ) : !started ? (
-                        <FlashcardsContentSelector
-                            decks={decks}
-                            selectedDeckIds={selectedDeckIds}
-                            onDeckChange={setSelectedDeckIds}
-                            onStart={handleStart}
-                        />
+                        <div className={styles.selectionLayout}>
+                            <div className={styles.characterGroup} aria-hidden="true">
+                                <img src={kiba} alt="" className={styles.character} />
+                                <img src={castiel} alt="" className={styles.character} />
+                            </div>
+                            <FlashcardsContentSelector
+                                decks={decks}
+                                selectedDeckIds={selectedDeckIds}
+                                onDeckChange={setSelectedDeckIds}
+                                onStart={handleStart}
+                            />
+                        </div>
                     ) : (
                         <FlashcardsStudy
                             key={language}
