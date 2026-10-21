@@ -34,6 +34,83 @@
   height: 100%;
 }
 
+.modal {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: rgba(20, 24, 28, 0.94);
+}
+
+.closeButton,
+.zoomControls button {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  cursor: pointer;
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+
+.closeButton {
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
+}
+
+.zoomControls {
+  position: absolute;
+  z-index: 2;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.closeButton:hover,
+.zoomControls button:hover {
+  background: var(--color-primary);
+}
+
+.zoomArea {
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  display: grid;
+  place-items: center;
+}
+
+.zoomContent {
+  display: grid;
+  min-width: 100%;
+  min-height: 100%;
+  place-items: center;
+  padding: 48px 16px 96px;
+}
+
+.expandedDiagram {
+  position: relative;
+  flex: none;
+  cursor: grab;
+  transform-origin: center;
+  transition: transform 160ms ease;
+  touch-action: none;
+  user-select: none;
+}
+
+.expandedDiagram:active {
+  cursor: grabbing;
+}
+
+.expandedDiagramSvg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .marker {
   pointer-events: none;
 }
@@ -74,5 +151,9 @@
   .markerPulse {
     animation: none;
     opacity: 0.35;
+  }
+
+  .expandedDiagram {
+    transition: none;
   }
 }
