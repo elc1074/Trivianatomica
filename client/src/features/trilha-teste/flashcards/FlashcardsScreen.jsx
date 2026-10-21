@@ -95,6 +95,10 @@ function FlashcardsScreen() {
                                 {t.flashcards.retry}
                             </button>
                         </div>
+                    ) : !started && decks.length === 0 ? (
+                        <div className={styles.flashcardsStatus}>
+                            <p>{t.flashcards.emptyDecks}</p>
+                        </div>
                     ) : !started ? (
                         <FlashcardsContentSelector
                             decks={decks}
