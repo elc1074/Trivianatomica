@@ -33,8 +33,13 @@ function AnatomyDiagram({ diagram, markerX, markerY }) {
       }
     }
 
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
     document.addEventListener('keydown', handleKeyDown)
-    return () => document.removeEventListener('keydown', handleKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', handleKeyDown)
+    }
   }, [isOpen])
 
   function openImage() {
@@ -53,15 +58,13 @@ function AnatomyDiagram({ diagram, markerX, markerY }) {
   }
 
   function changeZoom(amount) {
-    setZoom((currentZoom) => {
-      const nextZoom = Math.min(3, Math.max(1, currentZoom + amount))
+    const nextZoom = Math.min(3, Math.max(1, zoom + amount))
 
-      if (nextZoom === 1) {
-        setPosition({ x: 0, y: 0 })
-      }
+    setZoom(nextZoom)
 
-      return nextZoom
-    })
+    if (nextZoom === 1) {
+      setPosition({ x: 0, y: 0 })
+    }
   }
 
   function resetZoom() {
@@ -147,9 +150,9 @@ function AnatomyDiagram({ diagram, markerX, markerY }) {
           onClick={closeImage}
         >
           <div className={styles.zoomArea}>
-            <div className={styles.zoomContent} onClick={(event) => event.stopPropagation()}>
+            <div className={styles.zoomContent}>
               <div
-                className={styles.expandedDiagram}
+                className={`${styles.expandedDiagram} ${dragStart ? styles.dragging : ''}`}
                 style={{
                   width: `${expandedWidth}px`,
                   aspectRatio: `${width} / ${height}`,
@@ -159,6 +162,7 @@ function AnatomyDiagram({ diagram, markerX, markerY }) {
                 onPointerMove={handlePointerMove}
                 onPointerUp={handlePointerUp}
                 onPointerCancel={handlePointerUp}
+                onClick={(event) => event.stopPropagation()}
               >
                 {renderDiagram(styles.expandedDiagramSvg)}
               </div>

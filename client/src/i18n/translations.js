@@ -147,6 +147,11 @@ export const translations = {
           diagramLabel:
             'Diagrama de referencia con un marcador indicando la estructura preguntada',
           diagramCredit: 'Ellenberger, Baum y Dittrich (1911), dominio público',
+          openImage: 'Abrir imagen en pantalla completa',
+          closeImage: 'Cerrar imagen',
+          zoomIn: 'Acercar imagen',
+          zoomOut: 'Alejar imagen',
+          resetZoom: 'Restablecer zoom',
           inputLabel: 'Escribe el nombre de la estructura',
           skip: 'Pasar',
           answer: 'Responder',
@@ -327,6 +332,11 @@ export const translations = {
           diagramLabel:
             'Diagrama de referência com um marcador indicando a estrutura da pergunta',
           diagramCredit: 'Ellenberger, Baum e Dittrich (1911), domínio público',
+          openImage: 'Abrir imagem em tela cheia',
+          closeImage: 'Fechar imagem',
+          zoomIn: 'Aumentar zoom',
+          zoomOut: 'Diminuir zoom',
+          resetZoom: 'Restabelecer zoom',
           inputLabel: 'Digite o nome da estrutura',
           skip: 'Pular',
           answer: 'Responder',
