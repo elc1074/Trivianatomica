@@ -14,14 +14,46 @@
 
 .pairRow {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 16px;
+  gap: 8px 16px;
 }
 
 .term {
   flex: 0 0 40%;
   color: var(--color-ink);
   font-weight: 700;
+}
+
+.correctAnswer {
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  color: var(--color-success);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.result {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 16px;
+  border-radius: var(--radius-card);
+  padding: 14px 18px;
+  font-weight: 700;
+}
+
+.resultCorrect {
+  background: var(--color-success-soft);
+  color: var(--color-success);
+}
+
+.resultWrong {
+  background: var(--color-error-soft);
+  color: var(--color-error);
 }
 
 .card :global(.button-primary) {
@@ -32,11 +64,13 @@
 @media (max-width: 560px) {
   .pairRow {
     flex-direction: column;
+    flex-wrap: nowrap;
     align-items: stretch;
     gap: 6px;
   }
 
-  .term {
+  .term,
+  .correctAnswer {
     flex: none;
   }
 }

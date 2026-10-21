@@ -176,6 +176,10 @@ export const translations = {
           placeholder: 'Selecciona la descripción',
           check: 'Comprobar asociaciones',
           continueLabel: 'Continuar',
+          allCorrect: '¡Todas las asociaciones son correctas!',
+          someWrong: (correct, total) =>
+            `Acertaste ${correct} de ${total}. Revisa las respuestas correctas abajo.`,
+          correctAnswer: (description) => `Correcta: ${description}`,
           resultLabel: (correct, total) => `Asociación (${correct}/${total} pares)`,
         },
       },
@@ -362,6 +366,10 @@ export const translations = {
           placeholder: 'Escolha a descrição',
           check: 'Conferir associações',
           continueLabel: 'Continuar',
+          allCorrect: 'Todas as associações estão certas!',
+          someWrong: (correct, total) =>
+            `Você acertou ${correct} de ${total}. Veja as respostas certas abaixo.`,
+          correctAnswer: (description) => `Certa: ${description}`,
           resultLabel: (correct, total) => `Associação (${correct}/${total} pares)`,
         },
       },
