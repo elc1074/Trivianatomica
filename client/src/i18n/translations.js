@@ -159,7 +159,7 @@ export const translations = {
           wrongTryChoices: 'No es esa. Elige entre las alternativas:',
           markerMissing: 'No se pudo cargar el marcador de esta pregunta.',
           correctFeedback: (points) => `¡Correcto! +${points} puntos`,
-          wrongFeedback: (name) => `La respuesta correcta era ${name}.`,
+          wrongFeedback: (name) => `Incorrecto. La respuesta correcta era ${name}.`,
         },
         verdadeiroFalso: {
           false: 'Falso',
@@ -170,7 +170,7 @@ export const translations = {
         completar: {
           answer: 'Responder',
           correctFeedback: (points) => `¡Correcto! +${points} puntos`,
-          wrongFeedback: (answer) => `La respuesta correcta era "${answer}".`,
+          wrongFeedback: (answer) => `Incorrecto. La respuesta correcta era "${answer}".`,
         },
         associacao: {
           placeholder: 'Selecciona la descripción',
@@ -349,18 +349,19 @@ export const translations = {
           wrongTryChoices: 'Não é essa. Escolha entre as alternativas:',
           markerMissing: 'Não foi possível carregar o marcador desta questão.',
           correctFeedback: (points) => `Certo! +${points} pontos`,
-          wrongFeedback: (name) => `A resposta é ${name}.`,
+          wrongFeedback: (name) => `Incorreto. A resposta certa é ${name}.`,
         },
         verdadeiroFalso: {
           false: 'Falso',
           true: 'Verdadeiro',
           correctFeedback: (points) => `Certo! +${points} pontos`,
-          wrongFeedback: (answer) => `A afirmação é ${answer ? 'verdadeira' : 'falsa'}.`,
+          wrongFeedback: (answer) =>
+            `Incorreto. A afirmação é ${answer ? 'verdadeira' : 'falsa'}.`,
         },
         completar: {
           answer: 'Responder',
           correctFeedback: (points) => `Certo! +${points} pontos`,
-          wrongFeedback: (answer) => `A resposta é "${answer}".`,
+          wrongFeedback: (answer) => `Incorreto. A resposta certa é "${answer}".`,
         },
         associacao: {
           placeholder: 'Escolha a descrição',
