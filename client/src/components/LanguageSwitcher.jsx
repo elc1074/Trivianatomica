@@ -31,7 +31,12 @@ function LanguageSwitcher() {
         aria-haspopup="listbox"
         aria-expanded={open}
       >
-        {t.chrome.languageLabel}: {currentLabel.toUpperCase()}
+        <span className={styles.labelFull}>
+          {t.chrome.languageLabel}: {currentLabel.toUpperCase()}
+        </span>
+        <span className={styles.labelShort} aria-hidden="true">
+          {language.toUpperCase()}
+        </span>
         <span className={`${styles.chevron} ${open ? styles.chevronOpen : ''}`}>
           <Icon name="expand_more" size={18} color="currentColor" />
         </span>

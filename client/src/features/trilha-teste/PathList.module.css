@@ -38,20 +38,6 @@
   font-size: 1.05rem;
 }
 
-.backLink {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0 0 24px;
-  color: var(--color-primary-dark);
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.backLink:hover {
-  color: var(--color-primary-press);
-}
-
 .unitList {
   display: flex;
   flex-direction: column;

@@ -4,10 +4,12 @@ import logo from '../assets/illustrations/logo.png'
 import { useLanguage } from '../i18n/useLanguage.js'
 import styles from './Header.module.css'
 import LanguageSwitcher from './LanguageSwitcher.jsx'
+import NavMenu from './NavMenu.jsx'
 
 const SCROLL_THRESHOLD = 120
 
-function Header() {
+// confirmLeave: mensagem pedindo confirmação antes de sair da página atual (ex.: lição em andamento).
+function Header({ confirmLeave }) {
   const { t } = useLanguage()
   const { pathname } = useLocation()
   const isHome = pathname === '/'
@@ -27,10 +29,19 @@ function Header() {
 
   const showCta = isHome && scrolled
 
+  function guardNavigation(event) {
+    if (confirmLeave && !window.confirm(confirmLeave)) event.preventDefault()
+  }
+
   return (
     <header className={`${styles.siteHeader} ${showCta ? styles.scrolled : ''}`}>
       <div className={`container ${styles.headerContent}`}>
-        <Link className={styles.brand} to="/" aria-label={t.chrome.brand}>
+        <Link
+          className={styles.brand}
+          to="/"
+          aria-label={t.chrome.brand}
+          onClick={guardNavigation}
+        >
           <img src={logo} alt="" className={styles.brandMark} />
           <span className={styles.brandName}>{t.chrome.brand}</span>
         </Link>
@@ -43,6 +54,7 @@ function Header() {
           ) : (
             <LanguageSwitcher />
           )}
+          <NavMenu onNavigate={guardNavigation} />
         </div>
       </div>
     </header>

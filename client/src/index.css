@@ -151,6 +151,22 @@ select {
   transform: translateY(3px);
 }
 
+.button-dark {
+  color: var(--color-primary);
+  background: #111111;
+  box-shadow: 0 4px 0 #000000;
+}
+
+.button-dark:hover {
+  color: var(--color-primary-light);
+  background: #262626;
+}
+
+.button-dark:active {
+  box-shadow: 0 1px 0 #000000;
+  transform: translateY(3px);
+}
+
 .button-outline {
   color: #ffffff;
   background: transparent;
@@ -169,6 +185,7 @@ select {
 
   .button-primary,
   .button-light,
+  .button-dark,
   .button-outline {
     width: 100%;
   }

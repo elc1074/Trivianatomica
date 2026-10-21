@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import PageLayout from '../../../components/PageLayout.jsx';
 import { useLanguage } from '../../../i18n/useLanguage.js';
 import FlashcardsContentSelector from './FlashcardsContentSelector.jsx';
@@ -33,7 +34,12 @@ function FlashcardsScreen() {
     const loadError = !loading && deckRequest.error
     const decks = loading ? [] : deckRequest.decks
 
-    const [selectedDeckIds, setSelectedDeckIds] = useState([])
+    // ?deck=<unitId> chega do resumo da lição e já deixa o baralho daquela unidade marcado.
+    const [searchParams] = useSearchParams()
+    const [selectedDeckIds, setSelectedDeckIds] = useState(() => {
+        const deckId = searchParams.get('deck')
+        return deckId ? [deckId] : []
+    })
     const [started, setStarted] = useState(false)
 
     const selectedCards = decks

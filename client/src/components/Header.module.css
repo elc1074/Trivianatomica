@@ -62,6 +62,10 @@
     height: 36px;
   }
 
+  .headerActions {
+    gap: 10px;
+  }
+
   .headerActions :global(.button-primary) {
     min-height: 40px;
     padding: 0 16px;
