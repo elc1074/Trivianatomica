@@ -12,6 +12,7 @@ function SystemsPanel() {
   const navigate = useNavigate()
   const { language, t } = useLanguage()
   const [result, setResult] = useState({ language: null, units: null, error: false })
+  const [reloadIndex, setReloadIndex] = useState(0)
 
   useEffect(() => {
     let cancelled = false
@@ -27,7 +28,12 @@ function SystemsPanel() {
     return () => {
       cancelled = true
     }
-  }, [language])
+  }, [language, reloadIndex])
+
+  function handleRetry() {
+    setResult({ language: null, units: null, error: false })
+    setReloadIndex((currentIndex) => currentIndex + 1)
+  }
 
   const loading = result.language !== language
   const units = loading ? null : result.units
@@ -46,7 +52,14 @@ function SystemsPanel() {
             </div>
           </div>
 
-          {loadError && <p className={styles.status}>{t.trilha.panel.loadError}</p>}
+          {loadError && (
+            <div className={styles.status}>
+              <p>{t.trilha.panel.loadError}</p>
+              <button type="button" className="button button-primary" onClick={handleRetry}>
+                {t.trilha.panel.retry}
+              </button>
+            </div>
+          )}
           {loading && <p className={styles.status}>{t.trilha.panel.loading}</p>}
 
           {units && (

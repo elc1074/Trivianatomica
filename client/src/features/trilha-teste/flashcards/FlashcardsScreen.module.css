@@ -213,6 +213,11 @@
   color: var(--color-success);
 }
 
+.feedbackWrong {
+  background: var(--color-error-soft);
+  color: var(--color-error);
+}
+
 .revealBox {
   display: flex;
   flex-direction: column;

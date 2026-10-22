@@ -4,6 +4,10 @@
   font-weight: 700;
 }
 
+.labelWrong {
+  color: var(--color-error);
+}
+
 .answerForm {
   max-width: 420px;
   margin: 0 auto;

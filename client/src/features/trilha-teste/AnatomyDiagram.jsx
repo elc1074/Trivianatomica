@@ -3,6 +3,10 @@ import { useLanguage } from '../../i18n/useLanguage.js'
 import { diagramDimensions, diagramImages } from './diagramAssets.js'
 import styles from './AnatomyDiagram.module.css'
 
+const DIAGRAM_MAX_WIDTH = 336
+const DIAGRAM_MAX_HEIGHT = 408
+const MARKER_RADIUS_PX = 5
+
 function AnatomyDiagram({ diagram, markerX, markerY }) {
   const { t } = useLanguage()
   const copy = t.trilha.exercises.seta
@@ -17,10 +21,7 @@ function AnatomyDiagram({ diagram, markerX, markerY }) {
 
   const markerCx = (width * markerX) / 100
   const markerCy = (height * markerY) / 100
-  // Raio expresso em unidades do viewBox, como fração da largura da imagem,
-  // para que o marcador pareça do mesmo tamanho visual em qualquer diagrama,
-  // independente da resolução original do arquivo.
-  const markerRadius = width * 0.018
+  const markerRadius = MARKER_RADIUS_PX * Math.max(width / DIAGRAM_MAX_WIDTH, height / DIAGRAM_MAX_HEIGHT)
 
   useEffect(() => {
     if (!isOpen) {
@@ -33,8 +34,13 @@ function AnatomyDiagram({ diagram, markerX, markerY }) {
       }
     }
 
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
     document.addEventListener('keydown', handleKeyDown)
-    return () => document.removeEventListener('keydown', handleKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', handleKeyDown)
+    }
   }, [isOpen])
 
   function openImage() {
@@ -53,15 +59,13 @@ function AnatomyDiagram({ diagram, markerX, markerY }) {
   }
 
   function changeZoom(amount) {
-    setZoom((currentZoom) => {
-      const nextZoom = Math.min(3, Math.max(1, currentZoom + amount))
+    const nextZoom = Math.min(3, Math.max(1, zoom + amount))
 
-      if (nextZoom === 1) {
-        setPosition({ x: 0, y: 0 })
-      }
+    setZoom(nextZoom)
 
-      return nextZoom
-    })
+    if (nextZoom === 1) {
+      setPosition({ x: 0, y: 0 })
+    }
   }
 
   function resetZoom() {
@@ -113,6 +117,12 @@ function AnatomyDiagram({ diagram, markerX, markerY }) {
         <g className={styles.marker}>
           <circle className={styles.markerPulse} cx={markerCx} cy={markerCy} r={markerRadius} />
           <circle
+            className={styles.markerOutline}
+            cx={markerCx}
+            cy={markerCy}
+            r={markerRadius * 1.5}
+          />
+          <circle
             className={styles.markerDot}
             cx={markerCx}
             cy={markerCy}
@@ -147,9 +157,9 @@ function AnatomyDiagram({ diagram, markerX, markerY }) {
           onClick={closeImage}
         >
           <div className={styles.zoomArea}>
-            <div className={styles.zoomContent} onClick={(event) => event.stopPropagation()}>
+            <div className={styles.zoomContent}>
               <div
-                className={styles.expandedDiagram}
+                className={`${styles.expandedDiagram} ${dragStart ? styles.dragging : ''}`}
                 style={{
                   width: `${expandedWidth}px`,
                   aspectRatio: `${width} / ${height}`,
@@ -159,6 +169,7 @@ function AnatomyDiagram({ diagram, markerX, markerY }) {
                 onPointerMove={handlePointerMove}
                 onPointerUp={handlePointerUp}
                 onPointerCancel={handlePointerUp}
+                onClick={(event) => event.stopPropagation()}
               >
                 {renderDiagram(styles.expandedDiagramSvg)}
               </div>

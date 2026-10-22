@@ -18,6 +18,10 @@ function MatchingExercise({ exercise, onComplete }) {
   )
 
   const allSelected = exercise.pairs.every((pair) => selections[pair.term])
+  const correctCount = exercise.pairs.filter(
+    (pair) => selections[pair.term] === pair.description,
+  ).length
+  const allCorrect = correctCount === exercise.pairs.length
 
   function handleSelect(term, description) {
     setSelections((prev) => ({ ...prev, [term]: description }))
@@ -28,15 +32,11 @@ function MatchingExercise({ exercise, onComplete }) {
   }
 
   function handleContinue() {
-    const correctCount = exercise.pairs.filter(
-      (pair) => selections[pair.term] === pair.description,
-    ).length
-
     onComplete({
       exerciseId: exercise.id,
       label: copy.resultLabel(correctCount, exercise.pairs.length),
       points: correctCount * 10,
-      correct: correctCount === exercise.pairs.length,
+      correct: allCorrect,
     })
   }
 
@@ -58,6 +58,12 @@ function MatchingExercise({ exercise, onComplete }) {
                 disabled={checked}
                 status={checked ? (isRowCorrect ? 'correct' : 'wrong') : null}
               />
+              {checked && !isRowCorrect && (
+                <p className={styles.correctAnswer}>
+                  <Icon name="check_circle" size={18} color="currentColor" />
+                  {copy.correctAnswer(pair.description)}
+                </p>
+              )}
             </li>
           )
         })}
@@ -74,10 +80,19 @@ function MatchingExercise({ exercise, onComplete }) {
           <Icon name="arrow_forward" size={20} color="currentColor" />
         </button>
       ) : (
-        <button type="button" className="button button-primary" onClick={handleContinue}>
-          {copy.continueLabel}
-          <Icon name="arrow_forward" size={20} color="currentColor" />
-        </button>
+        <>
+          <p
+            className={`${styles.result} ${allCorrect ? styles.resultCorrect : styles.resultWrong}`}
+            role="status"
+          >
+            <Icon name={allCorrect ? 'check_circle' : 'cancel'} size={24} color="currentColor" />
+            {allCorrect ? copy.allCorrect : copy.someWrong(correctCount, exercise.pairs.length)}
+          </p>
+          <button type="button" className="button button-primary" onClick={handleContinue}>
+            {copy.continueLabel}
+            <Icon name="arrow_forward" size={20} color="currentColor" />
+          </button>
+        </>
       )}
     </div>
   )

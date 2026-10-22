@@ -202,7 +202,8 @@ function FlashcardsStudy({ cards, onBack }) {
         )}
 
         {feedback && !feedback.correct && (
-            <div className={styles.feedback}>
+            <div className={`${styles.feedback} ${styles.feedbackWrong}`} role="status">
+                <Icon name="cancel" size={28} color="currentColor" />
                 <p>{feedback.message}</p>
                 <button type="button" className="button button-primary" onClick={handleContinue}>
                     {copy.continueLabel}

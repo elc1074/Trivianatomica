@@ -16,6 +16,7 @@ function SetaExercise({ exercise, onComplete }) {
   const [stage, setStage] = useState('free-text')
   const [inputValue, setInputValue] = useState('')
   const [feedback, setFeedback] = useState(null)
+  const [freeTextWrong, setFreeTextWrong] = useState(false)
 
   const marker = structureMarkers[exercise.diagram]?.[exercise.id]
   const choices = useMemo(
@@ -41,6 +42,7 @@ function SetaExercise({ exercise, onComplete }) {
       return
     }
 
+    setFreeTextWrong(true)
     setStage('multiple-choice')
   }
 
@@ -106,7 +108,11 @@ function SetaExercise({ exercise, onComplete }) {
 
       {stage === 'multiple-choice' && (
         <div className={styles.choices}>
-          <p className={styles.label}>{copy.chooseCorrect}</p>
+          {freeTextWrong ? (
+            <p className={`${styles.label} ${styles.labelWrong}`}>{copy.wrongTryChoices}</p>
+          ) : (
+            <p className={styles.label}>{copy.chooseCorrect}</p>
+          )}
           <div className={styles.choiceGrid}>
             {choices.map((choice) => (
               <button
