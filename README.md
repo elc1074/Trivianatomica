@@ -42,7 +42,7 @@ No server:
 
 ## Banco e conteúdo
 
-O arquivo `server/src/db/schema.sql` cria as tabelas sem apagar dados existentes. Em um projeto Supabase novo, aplique esse SQL pelo SQL Editor antes do seed.
+O arquivo `server/src/db/schema.sql` cria as tabelas de conteúdo, autenticação e progresso sem apagar dados existentes. Aplique esse SQL pelo SQL Editor antes do seed. Ele também cria o perfil e a sequência de estudos automaticamente quando uma conta é criada no Supabase Auth.
 
 Depois configure o `.env` do server e rode:
 
@@ -50,6 +50,8 @@ Depois configure o `.env` do server e rode:
 cd server
 npm run seed
 ```
+
+O front-end usa a API do servidor para criar contas, entrar e salvar o progresso. Configure `VITE_API_URL` no client e mantenha `SUPABASE_SERVICE_ROLE_KEY` somente no `.env` do server.
 
 O seed atualiza unidades, lições e exercícios existentes, e remove registros antigos que não estão mais nos arquivos de conteúdo.
 
