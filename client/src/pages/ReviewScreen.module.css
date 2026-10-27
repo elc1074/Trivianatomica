@@ -1,0 +1,78 @@
+.page {
+  min-height: calc(100vh - 162px);
+  padding: 40px 0 140px;
+}
+
+.review,
+.emptyCard {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 26px;
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--color-primary-dark);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.header h1,
+.emptyCard h1 {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.header p:not(.eyebrow):not(.context),
+.emptyCard p {
+  margin: 12px auto 0;
+  color: var(--color-text);
+  line-height: 1.55;
+}
+
+.context {
+  margin: 18px 0 0;
+  color: var(--color-primary-dark);
+  font-weight: 700;
+}
+
+.counter {
+  margin: 18px 0 24px;
+  color: var(--color-text-muted);
+  font-size: 0.84rem;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.emptyCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 2px solid var(--color-border);
+  border-radius: 24px;
+  padding: 48px 28px;
+  background: var(--color-surface);
+  box-shadow: 0 4px 0 var(--color-border);
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+.emptyCard h1 { margin-top: 18px; font-size: 1.8rem; }
+.emptyCard .button { margin-top: 24px; }
+.status { color: var(--color-text); text-align: center; }
+.exerciseSaving { opacity: 0.7; pointer-events: none; }
+
+.loadError {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}

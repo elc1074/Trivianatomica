@@ -1,41 +1,65 @@
+import { getAuthHeaders } from '../../services/auth.js'
+
 const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:3001').replace(/\/$/, '')
 
-export async function fetchUnits(language) {
-  const response = await fetch(`${API_URL}/api/units?lang=${language}`)
+async function request(path, { method = 'GET', body } = {}) {
+  const headers = { ...getAuthHeaders(), ...(body ? { 'Content-Type': 'application/json' } : {}) }
+  let response
 
-  if (!response.ok) {
-    throw new Error('Failed to load units')
+  try {
+    response = await fetch(`${API_URL}${path}`, { method, headers, body: body ? JSON.stringify(body) : undefined })
+  } catch (networkError) {
+    console.error(`[api] ${method} ${path} failed without a response, is the server running at ${API_URL}? (${networkError.message})`)
+    throw new Error('network_error', { cause: networkError })
   }
 
-  return response.json()
+  const payload = await response.json().catch(() => ({}))
+
+  if (response.status === 401) {
+    window.dispatchEvent(new Event('trivia-auth-expired'))
+  }
+
+  if (!response.ok) {
+    const code = payload.code ?? `http_${response.status}`
+    console.error(`[api] ${method} ${path} -> ${response.status} ${code}: ${payload.error ?? 'no error message'}`)
+    throw new Error(code)
+  }
+
+  return payload
 }
 
-export async function fetchUnitLessons(unitId, language) {
-  const response = await fetch(`${API_URL}/api/units/${unitId}/lessons?lang=${language}`)
-
-  if (!response.ok) {
-    throw new Error('Failed to load unit lessons')
-  }
-
-  return response.json()
+export function fetchUnits(language) {
+  return request(`/api/units?lang=${language}`)
 }
 
-export async function fetchLesson(lessonId, language) {
-  const response = await fetch(`${API_URL}/api/lessons/${lessonId}?lang=${language}`)
-
-  if (!response.ok) {
-    throw new Error('Failed to load lesson')
-  }
-
-  return response.json()
+export function fetchUnitLessons(unitId, language) {
+  return request(`/api/units/${unitId}/lessons?lang=${language}`)
 }
 
-export async function fetchFlashcardDecks(language) {
-  const response = await fetch(`${API_URL}/api/flashcard-decks?lang=${language}`)
+export function fetchLesson(lessonId, language) {
+  return request(`/api/lessons/${lessonId}?lang=${language}`)
+}
 
-  if (!response.ok) {
-    throw new Error('Failed to load flashcard decks')
-  }
+export function fetchFlashcardDecks(language) {
+  return request(`/api/flashcard-decks?lang=${language}`)
+}
 
-  return response.json()
+export function completeLesson(lessonId, lessonResult) {
+  return request(`/api/progress/lessons/${lessonId}/complete`, { method: 'POST', body: lessonResult })
+}
+
+export function fetchProgressSummary() {
+  return request('/api/progress/summary')
+}
+
+export function fetchProgressHistory() {
+  return request('/api/progress/history')
+}
+
+export function fetchReviewExercises(language) {
+  return request(`/api/progress/review?lang=${language}`)
+}
+
+export function saveReviewAttempt(reviewAttempt) {
+  return request('/api/progress/review/attempt', { method: 'POST', body: reviewAttempt })
 }

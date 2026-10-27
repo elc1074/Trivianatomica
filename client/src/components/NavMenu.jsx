@@ -1,17 +1,29 @@
 import { useEffect, useId, useRef, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { useAuth } from '../auth/useAuth.js'
 import { useLanguage } from '../i18n/useLanguage.js'
 import Icon from './Icon.jsx'
 import styles from './NavMenu.module.css'
 
-const NAV_ITEMS = [
-  { to: '/', labelKey: 'home', icon: 'home', end: true },
+const STUDY_ITEMS = [
   { to: '/trilha', labelKey: 'lessons', icon: 'school' },
   { to: '/flashcards', labelKey: 'flashcards', icon: 'style' },
+]
+const GUEST_ITEMS = [
+  { to: '/', labelKey: 'home', icon: 'home', end: true },
+  ...STUDY_ITEMS,
+  { to: '/entrar', labelKey: 'signIn', icon: 'login' },
+]
+const STUDENT_ITEMS = [
+  { to: '/painel', labelKey: 'dashboard', icon: 'dashboard' },
+  ...STUDY_ITEMS,
 ]
 
 function NavMenu({ onNavigate }) {
   const { t } = useLanguage()
+  const { isAuthenticated, signOut } = useAuth()
+  const navigate = useNavigate()
+  const navItems = isAuthenticated ? STUDENT_ITEMS : GUEST_ITEMS
   const [open, setOpen] = useState(false)
   const rootRef = useRef(null)
   const triggerRef = useRef(null)
@@ -46,6 +58,15 @@ function NavMenu({ onNavigate }) {
     if (!event.defaultPrevented) setOpen(false)
   }
 
+  function handleSignOut(event) {
+    onNavigate?.(event)
+    if (event.defaultPrevented) return
+
+    setOpen(false)
+    signOut()
+    navigate('/')
+  }
+
   return (
     <div className={styles.root} ref={rootRef}>
       <button
@@ -63,7 +84,7 @@ function NavMenu({ onNavigate }) {
       {open && (
         <nav id={panelId} className={styles.panel} aria-label={t.chrome.nav.label}>
           <ul className={styles.list}>
-            {NAV_ITEMS.map((item) => (
+            {navItems.map((item) => (
               <li key={item.to}>
                 <NavLink
                   to={item.to}
@@ -76,6 +97,14 @@ function NavMenu({ onNavigate }) {
                 </NavLink>
               </li>
             ))}
+            {isAuthenticated && (
+              <li>
+                <button type="button" className={`${styles.link} ${styles.signOut}`} onClick={handleSignOut}>
+                  <Icon name="logout" size={22} color="currentColor" />
+                  {t.chrome.nav.signOut}
+                </button>
+              </li>
+            )}
           </ul>
         </nav>
       )}
