@@ -1,7 +1,9 @@
 import { Router } from 'express'
 import { supabase } from '../lib/supabase.js'
+import { requireAuth } from '../middleware/auth.js'
 
 const router = Router()
+router.use(requireAuth)
 
 function assembleExercise(row, language) {
   const data = language === 'pt' ? row.data_pt : row.data_es
