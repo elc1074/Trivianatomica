@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import Breadcrumb from '../../../components/Breadcrumb.jsx';
 import PageLayout from '../../../components/PageLayout.jsx';
 import { useLanguage } from '../../../i18n/useLanguage.js';
 import FlashcardsContentSelector, { FlashcardsSelectorSkeleton } from './FlashcardsContentSelector.jsx';
@@ -59,10 +60,30 @@ function FlashcardsScreen() {
         setStarted(false)
     }
 
+    function handleBreadcrumbNavigate(event) {
+        if (started && event.currentTarget.getAttribute('href') === '/flashcards') {
+            event.preventDefault()
+            handleBackToSelection()
+        }
+    }
+
+    const breadcrumbItems = started
+        ? [
+            { label: t.chrome.nav.dashboard, to: '/painel' },
+            { label: t.chrome.nav.flashcards, to: '/flashcards' },
+            { label: t.chrome.nav.studying },
+        ]
+        : [
+            { label: t.chrome.nav.dashboard, to: '/painel' },
+            { label: t.chrome.nav.flashcards },
+        ]
+
     return (
         <PageLayout>
             <section className={styles.flashcardsScreen}>
                 <div className={`container ${styles.flashcardsContent}`}>
+                    <Breadcrumb items={breadcrumbItems} onNavigate={handleBreadcrumbNavigate} />
+
                     {!started && (
                         <div className={styles.selectorHeader}>
                             <img

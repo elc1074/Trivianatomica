@@ -1,5 +1,41 @@
 .breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 16px;
   margin: 0 0 24px;
+}
+
+.backButton {
+  display: inline-flex;
+  min-height: 40px;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 6px;
+  border: 2px solid var(--color-border);
+  border-radius: 12px;
+  padding: 0 14px 0 10px;
+  background: var(--color-surface);
+  box-shadow: 0 3px 0 var(--color-border);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.backButton:hover {
+  background: var(--color-background);
+}
+
+.backButton:active {
+  box-shadow: 0 1px 0 var(--color-border);
+  transform: translateY(2px);
+}
+
+.backButton:focus-visible {
+  outline: 3px solid rgba(28, 146, 199, 0.45);
+  outline-offset: 2px;
 }
 
 .list {
