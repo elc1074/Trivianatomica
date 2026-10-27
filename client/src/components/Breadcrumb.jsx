@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { useLanguage } from '../i18n/useLanguage.js'
 import Icon from './Icon.jsx'
+import SkeletonBlock from './SkeletonBlock.jsx'
 import styles from './Breadcrumb.module.css'
 
 // items: [{ label, to }]; o último item é a página atual e não vira link.
@@ -36,7 +37,7 @@ function Breadcrumb({ items, onNavigate }) {
               <li className={styles.item}>
                 {isCurrent ? (
                   <span className={styles.current} aria-current="page">
-                    {item.label}
+                    {item.label ?? <SkeletonBlock width={96} height={14} />}
                   </span>
                 ) : (
                   <Link className={styles.link} to={item.to} onClick={onNavigate}>
