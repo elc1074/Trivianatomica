@@ -1,3 +1,4 @@
+import SkeletonBlock from '../../../components/SkeletonBlock.jsx'
 import styles from './FlashcardsScreen.module.css'
 import { useLanguage } from '../../../i18n/useLanguage.js'
 
@@ -50,6 +51,25 @@ function FlashcardsContentSelector({
             >
                 {copy.selection.start}
             </button>
+        </section>
+    )
+}
+
+export function FlashcardsSelectorSkeleton({ count, label }) {
+    return (
+        <section className={styles.selector} aria-label={label} aria-busy="true">
+            <div className={styles.deckList}>
+                {Array.from({ length: count }, (_, index) => (
+                    <div key={index} className={styles.deckOption}>
+                        <SkeletonBlock width={20} height={20} radius={4} />
+                        <span>
+                            <SkeletonBlock width={220} height={18} />
+                            <SkeletonBlock width={90} height={14} />
+                        </span>
+                    </div>
+                ))}
+            </div>
+            <SkeletonBlock className={styles.startSkeleton} width={200} height={48} radius={999} />
         </section>
     )
 }

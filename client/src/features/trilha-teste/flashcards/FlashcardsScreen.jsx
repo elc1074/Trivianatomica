@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import PageLayout from '../../../components/PageLayout.jsx';
 import { useLanguage } from '../../../i18n/useLanguage.js';
-import FlashcardsContentSelector from './FlashcardsContentSelector.jsx';
+import FlashcardsContentSelector, { FlashcardsSelectorSkeleton } from './FlashcardsContentSelector.jsx';
 import FlashcardsStudy from './FlashcardsStudy.jsx';
 import { getFlashcardDecks } from './deckData.js';
 import flashcardsMascot from '../../../assets/illustrations/mascots-flashcards-header.png'
@@ -83,7 +83,7 @@ function FlashcardsScreen() {
                     )}
 
                     {loading ? (
-                        <p>{t.flashcards.loading}</p>
+                        <FlashcardsSelectorSkeleton count={4} label={t.flashcards.loading} />
                     ) : loadError ? (
                         <div className={styles.flashcardsStatus}>
                             <p>{t.flashcards.loadError}</p>

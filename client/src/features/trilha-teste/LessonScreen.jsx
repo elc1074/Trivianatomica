@@ -4,6 +4,7 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import mascotEncourage from '../../assets/illustrations/mascot-encourage.png'
 import Breadcrumb from '../../components/Breadcrumb.jsx'
 import PageLayout from '../../components/PageLayout.jsx'
+import ExerciseSkeleton from '../../components/ExerciseSkeleton.jsx'
 import { useLanguage } from '../../i18n/useLanguage.js'
 import { fetchLesson } from './api.js'
 import { getMaxPoints } from './data.js'
@@ -105,7 +106,7 @@ function LessonContent({ unitId, lessonId, language }) {
       <PageLayout>
         <section className={styles.lesson}>
           <div className="container">
-            <p>{t.trilha.lesson.loading}</p>
+            <ExerciseSkeleton label={t.trilha.lesson.loading} withBreadcrumb />
           </div>
         </section>
       </PageLayout>

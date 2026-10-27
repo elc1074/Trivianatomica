@@ -1,0 +1,30 @@
+.block {
+  display: block;
+  max-width: 100%;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background-size: 300% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+.default {
+  background-image: linear-gradient(100deg, var(--color-border) 30%, var(--color-background) 50%, var(--color-border) 70%);
+}
+
+.onPrimary {
+  background-image: linear-gradient(
+    100deg,
+    color-mix(in srgb, var(--color-primary-dark) 35%, var(--color-primary)) 30%,
+    color-mix(in srgb, var(--color-surface) 35%, var(--color-primary)) 50%,
+    color-mix(in srgb, var(--color-primary-dark) 35%, var(--color-primary)) 70%
+  );
+}
+
+@keyframes shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .block { animation: none; }
+}
