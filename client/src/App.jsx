@@ -7,6 +7,7 @@ import { AuthProvider } from './auth/AuthContext.jsx'
 import ProtectedRoute from './auth/ProtectedRoute.jsx'
 import AuthPage from './pages/AuthPage.jsx'
 import Dashboard from './pages/Dashboard.jsx'
+import LessonHistory from './pages/LessonHistory.jsx'
 import ReviewScreen from './pages/ReviewScreen.jsx'
 import Home from './pages/Home.jsx'
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/entrar" element={<AuthPage />} />
         <Route path="/cadastro" element={<AuthPage />} />
         <Route path="/painel" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/historico" element={<ProtectedRoute><LessonHistory /></ProtectedRoute>} />
         <Route path="/revisar-erros" element={<ProtectedRoute><ReviewScreen /></ProtectedRoute>} />
         <Route path="/trilha" element={<ProtectedRoute><SystemsPanel /></ProtectedRoute>} />
         <Route path="/trilha/:unitId" element={<ProtectedRoute><UnitPath /></ProtectedRoute>} />

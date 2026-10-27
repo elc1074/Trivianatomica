@@ -17,6 +17,7 @@ const GUEST_ITEMS = [
 const STUDENT_ITEMS = [
   { to: '/painel', labelKey: 'dashboard', icon: 'dashboard' },
   ...STUDY_ITEMS,
+  { to: '/historico', labelKey: 'history', icon: 'history' },
 ]
 
 function NavMenu({ onNavigate }) {

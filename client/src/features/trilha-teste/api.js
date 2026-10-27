@@ -56,6 +56,14 @@ export function fetchProgressHistory() {
   return request('/api/progress/history')
 }
 
+export function fetchLessonHistory(language) {
+  return request(`/api/progress/lessons?lang=${language}`)
+}
+
+export function fetchLessonDetail(lessonId, language) {
+  return request(`/api/progress/lessons/${lessonId}?lang=${language}`)
+}
+
 export function fetchReviewExercises(language) {
   return request(`/api/progress/review?lang=${language}`)
 }

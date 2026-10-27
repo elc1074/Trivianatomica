@@ -61,7 +61,7 @@ function DashboardSkeleton({ label }) {
       </div>
       <div className={styles.sideColumn}>
         <SkeletonBlock width={180} height={26} />
-        {[0, 1].map((index) => (
+        {[0, 1, 2].map((index) => (
           <div key={index} className={styles.toolCard}>
             <SkeletonBlock width={52} height={52} radius="50%" />
             <span className={styles.skeletonRowText}>
@@ -101,6 +101,7 @@ function Dashboard() {
   }, [])
 
   const reviewCount = summary.pendingReviewCount ?? 0
+  const trailComplete = summary.totalLessons > 0 && summary.completedLessons >= summary.totalLessons
   const dateLocale = language === 'pt' ? 'pt-BR' : 'es-CL'
   const firstAccess = !summaryLoading && !summaryError && summary.completedLessons === 0
 
@@ -151,10 +152,10 @@ function Dashboard() {
             <section className={styles.welcome} aria-labelledby="dashboard-welcome">
               <div className={styles.welcomeCopy}>
                 <p className={styles.sectionLabel}>{copy.nextLabel}</p>
-                <h2 id="dashboard-welcome">{copy.nextTitle}</h2>
-                <p>{copy.nextDescription}</p>
-                <Link className="button button-primary" to="/trilha">
-                  {copy.start}
+                <h2 id="dashboard-welcome">{trailComplete ? copy.trailCompleteTitle : copy.nextTitle}</h2>
+                <p>{trailComplete ? copy.trailCompleteDescription : copy.nextDescription}</p>
+                <Link className="button button-primary" to={trailComplete ? '/historico' : '/trilha'}>
+                  {trailComplete ? copy.trailCompleteAction : copy.start}
                   <Icon name="arrow_forward" size={20} color="currentColor" />
                 </Link>
               </div>
@@ -233,6 +234,14 @@ function Dashboard() {
                 <span className={styles.cardBody}>
                   <strong>{copy.pathTitle}</strong>
                   <span>{copy.pathDescription}</span>
+                </span>
+                <Icon name="arrow_forward" size={20} color="currentColor" />
+              </Link>
+              <Link className={styles.toolCard} to="/historico">
+                <span className={styles.icon}><Icon name="history" size={26} color="currentColor" /></span>
+                <span className={styles.cardBody}>
+                  <strong>{copy.lessonHistoryTitle}</strong>
+                  <span>{copy.lessonHistoryDescription}</span>
                 </span>
                 <Icon name="arrow_forward" size={20} color="currentColor" />
               </Link>
