@@ -1,0 +1,238 @@
+.map {
+  position: relative;
+  width: min(100%, 360px);
+  margin: 88px auto 32px;
+}
+
+.stopList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stop {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  width: 140px;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transform: translateX(-50%);
+}
+
+.stopTarget {
+  position: relative;
+  display: grid;
+  width: 120px;
+  height: 112px;
+  place-items: center;
+}
+
+.stopButton {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 74px;
+  height: 66px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 120ms ease;
+}
+
+.stopButton:active {
+  transform: translateY(6px);
+}
+
+.stopButton:focus-visible {
+  outline: 3px solid rgba(28, 146, 199, 0.45);
+  outline-offset: 6px;
+}
+
+.completed,
+.current {
+  background: var(--color-primary);
+  box-shadow: 0 8px 0 var(--color-primary-dark);
+  color: var(--color-surface);
+}
+
+.completed:active,
+.current:active {
+  box-shadow: 0 2px 0 var(--color-primary-dark);
+}
+
+.upcoming {
+  background: var(--color-border);
+  box-shadow: 0 8px 0 color-mix(in srgb, var(--color-border) 70%, var(--color-ink));
+  color: var(--color-text-muted);
+}
+
+.upcoming:active {
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--color-border) 70%, var(--color-ink));
+}
+
+.ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 116px;
+  height: 116px;
+  transform: translate(-50%, calc(-50% + 4px)) rotate(-90deg);
+}
+
+.ring circle {
+  fill: none;
+  stroke-width: 9;
+  stroke-linecap: round;
+}
+
+.ringTrack {
+  stroke: var(--color-border);
+}
+
+.ringProgress {
+  stroke: var(--color-primary);
+}
+
+.startBubble {
+  position: absolute;
+  z-index: 2;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  border: 2px solid var(--color-border);
+  border-radius: 14px;
+  padding: 8px 14px;
+  background: var(--color-surface);
+  color: var(--color-primary-dark);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  animation: bubbleBounce 1.4s ease-in-out infinite;
+}
+
+.startBubble::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid var(--color-border);
+  border-bottom: 2px solid var(--color-border);
+  background: var(--color-surface);
+  transform: translate(-50%, -5px) rotate(45deg);
+}
+
+.stopTitle {
+  color: var(--color-text);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.trophy {
+  display: grid;
+  width: 84px;
+  height: 84px;
+  place-items: center;
+  border-radius: 24px;
+  background: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.trophyEarned {
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+}
+
+.mascot {
+  position: absolute;
+  width: 120px;
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+.celebrateMascot {
+  position: absolute;
+  width: 120px;
+  height: auto;
+  opacity: 0.7;
+  filter: grayscale(0.5);
+  pointer-events: none;
+  user-select: none;
+}
+
+.celebrateMascotEarned {
+  opacity: 1;
+  filter: none;
+}
+
+.left {
+  left: 0;
+}
+
+.right {
+  right: 0;
+}
+
+.shimmer {
+  background: linear-gradient(100deg, var(--color-border) 30%, var(--color-background) 50%, var(--color-border) 70%);
+  background-size: 300% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}
+
+.skeletonCoin {
+  display: block;
+  width: 74px;
+  height: 66px;
+  border-radius: 50%;
+}
+
+.skeletonTitle {
+  display: block;
+  width: 96px;
+  height: 12px;
+  border-radius: 6px;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@keyframes bubbleBounce {
+  50% {
+    transform: translate(-50%, -5px);
+  }
+}
+
+@media (max-width: 380px) {
+  .mascot {
+    width: 92px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .startBubble,
+  .shimmer {
+    animation: none;
+  }
+
+  .stopButton {
+    transition: none;
+  }
+}
