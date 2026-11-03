@@ -29,7 +29,7 @@ function Home() {
             <p className={styles.heroDescription}>{t.home.hero.description}</p>
 
             <div className={styles.heroActions}>
-              <Link className="button button-primary" to="/trilha">
+              <Link className="button button-primary" to="/entrar?mode=signup&redirect=%2Fpainel">
                 {t.home.hero.cta}
                 <Icon name="arrow_forward" size={20} color="currentColor" />
               </Link>

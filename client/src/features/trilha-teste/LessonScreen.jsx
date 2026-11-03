@@ -4,8 +4,9 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import mascotEncourage from '../../assets/illustrations/mascot-encourage.png'
 import Breadcrumb from '../../components/Breadcrumb.jsx'
 import PageLayout from '../../components/PageLayout.jsx'
+import ExerciseSkeleton from '../../components/ExerciseSkeleton.jsx'
 import { useLanguage } from '../../i18n/useLanguage.js'
-import { fetchLesson } from './api.js'
+import { completeLesson, fetchLesson } from './api.js'
 import { getMaxPoints } from './data.js'
 import FillBlankExercise from './exercises/FillBlankExercise.jsx'
 import MatchingExercise from './exercises/MatchingExercise.jsx'
@@ -82,8 +83,11 @@ function LessonContent({ unitId, lessonId, language }) {
   const lessonInProgress = results.length > 0 && !lessonFinished
 
   useEffect(() => {
-    if (lessonFinished) markLessonCompleted(lesson.id)
-  }, [lessonFinished, lesson])
+    if (!lessonFinished) return
+
+    markLessonCompleted(lesson.id)
+    completeLesson(lesson.id, { attempts: results }).catch(() => {})
+  }, [lessonFinished, lesson, results])
 
   useEffect(() => {
     if (!lessonInProgress) return
@@ -105,7 +109,7 @@ function LessonContent({ unitId, lessonId, language }) {
       <PageLayout>
         <section className={styles.lesson}>
           <div className="container">
-            <p>{t.trilha.lesson.loading}</p>
+            <ExerciseSkeleton label={t.trilha.lesson.loading} withBreadcrumb />
           </div>
         </section>
       </PageLayout>

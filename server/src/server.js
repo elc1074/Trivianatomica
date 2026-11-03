@@ -1,19 +1,26 @@
 import cors from 'cors'
 import 'dotenv/config'
 import express from 'express'
+import { handleUnexpectedError, logFailedResponses } from './middleware/errorLogging.js'
 import unitsRouter from './routes/units.js'
+import authRouter from './routes/auth.js'
+import progressRouter from './routes/progress.js'
 
 const app = express()
 const port = process.env.PORT ?? 3001
 
 app.use(cors())
+app.use(logFailedResponses)
 app.use(express.json())
 
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok' })
 })
 
+app.use('/api/auth', authRouter)
+app.use('/api/progress', progressRouter)
 app.use('/api', unitsRouter)
+app.use(handleUnexpectedError)
 
 app.listen(port, () => {
   console.log(`trivia anatômica server listening on port ${port}`)

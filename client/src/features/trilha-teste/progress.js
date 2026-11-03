@@ -13,8 +13,8 @@ export function getCompletedLessonIds() {
   return readCompletedLessonIds()
 }
 
-export function isLessonCompleted(lessonId) {
-  return readCompletedLessonIds().includes(lessonId)
+export function isLessonCompleted(lessonId, completedLessonIds = readCompletedLessonIds()) {
+  return completedLessonIds.includes(lessonId)
 }
 
 export function markLessonCompleted(lessonId) {
@@ -41,32 +41,30 @@ export function isLessonUnlocked(lesson, lessonsInUnit) {
   return readCompletedLessonIds().includes(previousLesson.id)
 }
 
-export function isUnitCompleted(unit) {
+export function isUnitCompleted(unit, completedLessonIds = readCompletedLessonIds()) {
   if (unit.lessons.length === 0) return false
 
-  const completed = readCompletedLessonIds()
-  return unit.lessons.every((lesson) => completed.includes(lesson.id))
+  return unit.lessons.every((lesson) => completedLessonIds.includes(lesson.id))
 }
 
-export function getRecommendedLessonId(lessons) {
-  const completed = readCompletedLessonIds()
-  const recommendedLesson = lessons.find((lesson) => !completed.includes(lesson.id))
+export function getRecommendedLessonId(lessons, completedLessonIds = readCompletedLessonIds()) {
+  const recommendedLesson = lessons.find((lesson) => !completedLessonIds.includes(lesson.id))
 
   return recommendedLesson?.id ?? lessons[0]?.id ?? null
 }
 
-export function getRecommendedUnitId(units) {
-  const recommendedUnit = units.find((unit) => !isUnitCompleted(unit))
+export function getRecommendedUnitId(units, completedLessonIds = readCompletedLessonIds()) {
+  const recommendedUnit = units.find((unit) => !isUnitCompleted(unit, completedLessonIds))
 
   return recommendedUnit?.id ?? units[0]?.id ?? null
 }
 
-export function isUnitUnlocked(unit, units) {
+export function isUnitUnlocked(unit, units, completedLessonIds = readCompletedLessonIds()) {
   if (unit.orderIndex === 0) return true
 
   const previousUnit = units.find((candidate) => candidate.orderIndex === unit.orderIndex - 1)
 
   if (!previousUnit) return true
 
-  return isUnitCompleted(previousUnit)
+  return isUnitCompleted(previousUnit, completedLessonIds)
 }

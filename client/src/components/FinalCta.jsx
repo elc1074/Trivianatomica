@@ -25,7 +25,7 @@ function FinalCta() {
 
           <p className={styles.description}>{t.home.finalCta.description}</p>
 
-          <Link className="button button-primary" to="/trilha">
+          <Link className="button button-primary" to="/entrar?mode=signup&redirect=%2Fpainel">
             {t.home.finalCta.cta}
             <Icon name="arrow_forward" size={20} color="currentColor" />
           </Link>

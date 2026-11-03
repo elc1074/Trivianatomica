@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import logo from '../assets/illustrations/logo.png'
+import { useAuth } from '../auth/useAuth.js'
 import { useLanguage } from '../i18n/useLanguage.js'
 import styles from './Header.module.css'
 import LanguageSwitcher from './LanguageSwitcher.jsx'
@@ -11,6 +12,7 @@ const SCROLL_THRESHOLD = 120
 // confirmLeave: mensagem pedindo confirmação antes de sair da página atual (ex.: lição em andamento).
 function Header({ confirmLeave }) {
   const { t } = useLanguage()
+  const { session } = useAuth()
   const { pathname } = useLocation()
   const isHome = pathname === '/'
   const [scrolled, setScrolled] = useState(false)
@@ -38,7 +40,7 @@ function Header({ confirmLeave }) {
       <div className={`container ${styles.headerContent}`}>
         <Link
           className={styles.brand}
-          to="/"
+          to={session ? '/painel' : '/'}
           aria-label={t.chrome.brand}
           onClick={guardNavigation}
         >
@@ -48,7 +50,7 @@ function Header({ confirmLeave }) {
 
         <div className={styles.headerActions}>
           {showCta ? (
-            <Link className="button button-primary" to="/trilha">
+            <Link className="button button-primary" to="/cadastro?redirect=%2Fpainel">
               {t.home.hero.cta}
             </Link>
           ) : (

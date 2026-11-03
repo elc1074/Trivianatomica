@@ -74,6 +74,14 @@
   text-decoration: none;
 }
 
+.signOut {
+  width: 100%;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+  text-align: left;
+}
+
 .link:hover {
   background: var(--color-background);
 }

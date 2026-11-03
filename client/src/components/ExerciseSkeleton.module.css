@@ -1,0 +1,58 @@
+.exercise {
+  display: flex;
+  flex-direction: column;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.heading {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.statusBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.formatLabel {
+  margin: 24px 0;
+}
+
+.card {
+  display: grid;
+  gap: 14px;
+  border-radius: var(--radius-card);
+  padding: 28px;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.figure {
+  margin: 8px 0;
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 20px;
+  }
+
+  .options {
+    grid-template-columns: 1fr;
+  }
+}
