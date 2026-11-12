@@ -5,6 +5,7 @@ import UnitPath from './features/trilha-teste/UnitPath.jsx'
 import FlashcardsScreen from './features/trilha-teste/flashcards/FlashcardsScreen.jsx'
 import { AuthProvider } from './auth/AuthContext.jsx'
 import ProtectedRoute from './auth/ProtectedRoute.jsx'
+import AuthCallback from './pages/AuthCallback.jsx'
 import AuthPage from './pages/AuthPage.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import LessonHistory from './pages/LessonHistory.jsx'
@@ -18,13 +19,14 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/entrar" element={<AuthPage />} />
         <Route path="/cadastro" element={<AuthPage />} />
+        <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/painel" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/historico" element={<ProtectedRoute><LessonHistory /></ProtectedRoute>} />
         <Route path="/revisar-erros" element={<ProtectedRoute><ReviewScreen /></ProtectedRoute>} />
-        <Route path="/trilha" element={<ProtectedRoute><SystemsPanel /></ProtectedRoute>} />
-        <Route path="/trilha/:unitId" element={<ProtectedRoute><UnitPath /></ProtectedRoute>} />
-        <Route path="/trilha/:unitId/:lessonId" element={<ProtectedRoute><LessonScreen /></ProtectedRoute>} />
-        <Route path="/flashcards" element={<ProtectedRoute><FlashcardsScreen /></ProtectedRoute>} />
+        <Route path="/trilha" element={<SystemsPanel />} />
+        <Route path="/trilha/:unitId" element={<UnitPath />} />
+        <Route path="/trilha/:unitId/:lessonId" element={<LessonScreen />} />
+        <Route path="/flashcards" element={<FlashcardsScreen />} />
       </Routes>
     </AuthProvider>
   )

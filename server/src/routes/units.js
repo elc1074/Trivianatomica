@@ -1,9 +1,9 @@
 import { Router } from 'express'
 import { supabase } from '../lib/supabase.js'
-import { requireAuth } from '../middleware/auth.js'
+import { optionalAuth } from '../middleware/auth.js'
 
 const router = Router()
-router.use(requireAuth)
+router.use(optionalAuth)
 
 function assembleExercise(row, language) {
   const data = language === 'pt' ? row.data_pt : row.data_es
@@ -89,11 +89,12 @@ router.get('/units/:unitId/lessons', async (req, res) => {
     id: unit.id,
     orderIndex: unit.order_index,
     title: unit[titleColumn],
-    lessons: lessons.map((lesson) => ({
+    lessons: lessons.map((lesson, lessonPosition) => ({
       id: lesson.id,
       orderIndex: lesson.order_index,
       title: lesson[titleColumn],
       exerciseCount: lesson.exercises.length,
+      locked: !req.user && lessonPosition > 0,
     })),
   })
 })
@@ -178,6 +179,24 @@ router.get('/lessons/:lessonId', async (req, res) => {
 
   if (!lesson) {
     return res.status(404).json({ error: 'lesson not found' })
+  }
+
+  if (!req.user) {
+    const { data: firstLesson, error: firstLessonError } = await supabase
+      .from('lessons')
+      .select('id')
+      .eq('unit_id', lesson.unit_id)
+      .order('order_index', { ascending: true })
+      .limit(1)
+      .single()
+
+    if (firstLessonError) {
+      return res.status(500).json({ error: firstLessonError.message })
+    }
+
+    if (firstLesson.id !== lesson.id) {
+      return res.status(403).json({ error: 'sign in to access this lesson', code: 'login_required' })
+    }
   }
 
   const { data: exercises, error: exercisesError } = await supabase

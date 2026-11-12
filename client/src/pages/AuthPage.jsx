@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
+import googleLogo from '../assets/brands/google.svg'
 import logo from '../assets/illustrations/logo.png'
 import mascot from '../assets/illustrations/mascot-welcome.png'
 import Icon from '../components/Icon.jsx'
@@ -11,7 +12,7 @@ import styles from './AuthPage.module.css'
 function AuthPage() {
   const location = useLocation()
   const navigate = useNavigate()
-  const { isAuthenticated, signIn, signUp } = useAuth()
+  const { isAuthenticated, signIn, signUp, getOAuthUrl } = useAuth()
   const { t } = useLanguage()
   const copy = t.auth
   const params = new URLSearchParams(location.search)
@@ -20,7 +21,7 @@ function AuthPage() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [error, setError] = useState('')
+  const [error, setError] = useState(() => (params.get('oauth_error') ? copy.errors.oauth_failed : ''))
   const [submitting, setSubmitting] = useState(false)
 
   useEffect(() => {
@@ -77,6 +78,15 @@ function AuthPage() {
             <p>{isSignUp ? copy.signUpDescription : copy.signInDescription}</p>
           </div>
 
+          <div className={styles.providers}>
+            <a className={`button button-light ${styles.providerButton}`} href={getOAuthUrl('google', redirect)}>
+              <img src={googleLogo} alt="" />
+              {copy.continueWithGoogle}
+            </a>
+          </div>
+          <p className={styles.providersHint}>{copy.providersHint}</p>
+          <p className={styles.divider}><span>{copy.orWithEmail}</span></p>
+
           <form className={styles.form} onSubmit={handleSubmit} noValidate>
             {isSignUp && (
               <label>
@@ -104,6 +114,9 @@ function AuthPage() {
           <p className={styles.switchPrompt}>
             <>{isSignUp ? copy.alreadyHaveAccount : copy.noAccount}{' '}<button type="button" onClick={switchMode}>{isSignUp ? copy.enter : copy.create}</button></>
           </p>
+          <Link className={styles.guestLink} to="/trilha">
+            {t.chrome.continueWithoutAccount}
+          </Link>
           <p className={styles.legal}>{copy.legal}</p>
         </div>
       </section>

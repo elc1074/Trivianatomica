@@ -4,28 +4,34 @@ import Breadcrumb from '../../components/Breadcrumb.jsx'
 import Icon from '../../components/Icon.jsx'
 import PageLayout from '../../components/PageLayout.jsx'
 import SkeletonList from '../../components/SkeletonList.jsx'
+import { useAuth } from '../../auth/useAuth.js'
 import { useLanguage } from '../../i18n/useLanguage.js'
 import { fetchProgressSummary, fetchUnits } from './api.js'
 import styles from './PathList.module.css'
 import TrailBanner from './TrailBanner.jsx'
 import TrailMap, { TrailMapSkeleton } from './TrailMap.jsx'
 import TrailViewToggle from './TrailViewToggle.jsx'
-import { getRecommendedUnitId, isUnitCompleted } from './progress.js'
+import { getCompletedLessonIds, getRecommendedUnitId, isUnitCompleted } from './progress.js'
 
 const EMPTY_RESULT = { language: null, units: null, completedLessonIds: [], error: false }
 
 function SystemsPanel() {
   const navigate = useNavigate()
   const { language, t } = useLanguage()
+  const { isAuthenticated } = useAuth()
   const [result, setResult] = useState(EMPTY_RESULT)
   const [reloadIndex, setReloadIndex] = useState(0)
 
   useEffect(() => {
     let cancelled = false
 
-    Promise.all([fetchUnits(language), fetchProgressSummary()])
-      .then(([units, summary]) => {
-        if (!cancelled) setResult({ language, units, completedLessonIds: summary.completedLessonIds ?? [], error: false })
+    const completedLessonIdsRequest = isAuthenticated
+      ? fetchProgressSummary().then((summary) => summary.completedLessonIds ?? [])
+      : Promise.resolve(getCompletedLessonIds())
+
+    Promise.all([fetchUnits(language), completedLessonIdsRequest])
+      .then(([units, completedLessonIds]) => {
+        if (!cancelled) setResult({ language, units, completedLessonIds, error: false })
       })
       .catch(() => {
         if (!cancelled) setResult({ language, units: null, completedLessonIds: [], error: true })
@@ -34,7 +40,7 @@ function SystemsPanel() {
     return () => {
       cancelled = true
     }
-  }, [language, reloadIndex])
+  }, [language, reloadIndex, isAuthenticated])
 
   function handleRetry() {
     setResult(EMPTY_RESULT)
@@ -53,7 +59,7 @@ function SystemsPanel() {
         <div className="container">
           <Breadcrumb
             items={[
-              { label: t.chrome.nav.dashboard, to: '/painel' },
+              isAuthenticated ? { label: t.chrome.nav.dashboard, to: '/painel' } : { label: t.chrome.nav.home, to: '/' },
               { label: t.chrome.nav.lessons },
             ]}
           />

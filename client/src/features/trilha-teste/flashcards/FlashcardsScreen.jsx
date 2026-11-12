@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import Breadcrumb from '../../../components/Breadcrumb.jsx';
 import PageLayout from '../../../components/PageLayout.jsx';
+import { useAuth } from '../../../auth/useAuth.js';
 import { useLanguage } from '../../../i18n/useLanguage.js';
 import FlashcardsContentSelector, { FlashcardsSelectorSkeleton } from './FlashcardsContentSelector.jsx';
 import FlashcardsStudy from './FlashcardsStudy.jsx';
@@ -11,6 +12,10 @@ import styles from './FlashcardsScreen.module.css'
 
 function FlashcardsScreen() {
     const { language, t } = useLanguage()
+    const { isAuthenticated } = useAuth()
+    const rootCrumb = isAuthenticated
+        ? { label: t.chrome.nav.dashboard, to: '/painel' }
+        : { label: t.chrome.nav.home, to: '/' }
 
     const [deckRequest, setDeckRequest] = useState({ language: null, decks: [], error: false })
     const [reloadIndex, setReloadIndex] = useState(0)
@@ -69,12 +74,12 @@ function FlashcardsScreen() {
 
     const breadcrumbItems = started
         ? [
-            { label: t.chrome.nav.dashboard, to: '/painel' },
+            rootCrumb,
             { label: t.chrome.nav.flashcards, to: '/flashcards' },
             { label: t.chrome.nav.studying },
         ]
         : [
-            { label: t.chrome.nav.dashboard, to: '/painel' },
+            rootCrumb,
             { label: t.chrome.nav.flashcards },
         ]
 

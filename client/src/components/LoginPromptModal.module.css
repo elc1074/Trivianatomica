@@ -1,0 +1,72 @@
+.dialog {
+  width: min(calc(100% - 32px), 420px);
+  border: 0;
+  border-radius: 28px;
+  padding: 0;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-card);
+}
+
+.dialog::backdrop {
+  background: rgba(23, 40, 37, 0.45);
+}
+
+.content {
+  display: grid;
+  justify-items: center;
+  padding: 28px clamp(20px, 6vw, 40px) 22px;
+  text-align: center;
+}
+
+.mascot {
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+  margin-bottom: 12px;
+}
+
+.title {
+  margin: 0 0 8px;
+  color: var(--color-ink);
+  font-size: 1.6rem;
+  line-height: 1.15;
+}
+
+.message {
+  margin: 0 0 22px;
+  color: var(--color-text);
+  line-height: 1.55;
+}
+
+.actions {
+  display: grid;
+  width: 100%;
+  gap: 10px;
+}
+
+.actions :global(.button) {
+  width: 100%;
+}
+
+.googleButton {
+  gap: 10px;
+}
+
+.googleButton img {
+  width: 20px;
+  height: 20px;
+}
+
+.dismiss {
+  margin-top: 16px;
+  border: 0;
+  padding: 6px 10px;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  background: transparent;
+  font-weight: 800;
+}
+
+.dismiss:hover {
+  color: var(--color-ink);
+}

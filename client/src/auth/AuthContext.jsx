@@ -17,6 +17,16 @@ function readSession() {
   }
 }
 
+function buildSession(accessToken, expiresAt, user) {
+  const metadata = user.user_metadata ?? {}
+  return {
+    accessToken,
+    expiresAt,
+    email: user.email,
+    name: metadata.display_name || metadata.full_name || metadata.name || user.email.split('@')[0],
+  }
+}
+
 export function AuthProvider({ children }) {
   const [session, setSession] = useState(readSession)
 
@@ -28,6 +38,11 @@ export function AuthProvider({ children }) {
 
     window.addEventListener('trivia-auth-expired', handleAuthExpired)
     return () => window.removeEventListener('trivia-auth-expired', handleAuthExpired)
+  }, [])
+
+  const storeSession = useCallback((nextSession) => {
+    window.localStorage.setItem(SESSION_KEY, JSON.stringify(nextSession))
+    setSession(nextSession)
   }, [])
 
   const authenticate = useCallback(async (path, credentials) => {
@@ -52,14 +67,33 @@ export function AuthProvider({ children }) {
       throw new Error(code)
     }
 
-    const nextSession = {
-      accessToken: data.session.access_token,
-      expiresAt: data.session.expires_at,
-      email: data.user.email,
-      name: data.user.user_metadata?.display_name || data.user.email.split('@')[0],
+    storeSession(buildSession(data.session.access_token, data.session.expires_at, data.user))
+  }, [storeSession])
+
+  const completeOAuthSignIn = useCallback(async ({ accessToken, expiresAt }) => {
+    let response
+
+    try {
+      response = await fetch(`${API_URL}/api/auth/me`, { headers: { Authorization: `Bearer ${accessToken}` } })
+    } catch (networkError) {
+      console.error(`[auth] GET /api/auth/me failed without a response, is the server running at ${API_URL}? (${networkError.message})`)
+      throw new Error('network_error', { cause: networkError })
     }
-    window.localStorage.setItem(SESSION_KEY, JSON.stringify(nextSession))
-    setSession(nextSession)
+
+    const data = await response.json().catch(() => ({}))
+
+    if (!response.ok || !data.user) {
+      const code = data.code ?? `http_${response.status}`
+      console.error(`[auth] GET /api/auth/me -> ${response.status} ${code}: ${data.error ?? 'no user returned'}`)
+      throw new Error(code)
+    }
+
+    storeSession(buildSession(accessToken, expiresAt, data.user))
+  }, [storeSession])
+
+  const getOAuthUrl = useCallback((providerName, redirect) => {
+    const callbackUrl = `${window.location.origin}/auth/callback?redirect=${encodeURIComponent(redirect)}`
+    return `${API_URL}/api/auth/oauth/${providerName}?redirect_to=${encodeURIComponent(callbackUrl)}`
   }, [])
 
   const signIn = useCallback(({ email, password }) => authenticate('signin', { email, password }), [authenticate])
@@ -70,8 +104,8 @@ export function AuthProvider({ children }) {
   }, [])
 
   const value = useMemo(
-    () => ({ session, isAuthenticated: Boolean(session), signIn, signUp, signOut }),
-    [session, signIn, signUp, signOut],
+    () => ({ session, isAuthenticated: Boolean(session), signIn, signUp, signOut, getOAuthUrl, completeOAuthSignIn }),
+    [session, signIn, signUp, signOut, getOAuthUrl, completeOAuthSignIn],
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

@@ -72,7 +72,15 @@ security definer set search_path = public
 as $$
 begin
   insert into public.profiles (user_id, display_name)
-  values (new.id, coalesce(new.raw_user_meta_data ->> 'display_name', ''))
+  values (
+    new.id,
+    coalesce(
+      new.raw_user_meta_data ->> 'display_name',
+      new.raw_user_meta_data ->> 'full_name',
+      new.raw_user_meta_data ->> 'name',
+      ''
+    )
+  )
   on conflict (user_id) do nothing;
   insert into public.user_streaks (user_id)
   values (new.id)

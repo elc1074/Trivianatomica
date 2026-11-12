@@ -1,6 +1,7 @@
 import LessonProgress from './LessonProgress.jsx'
 import { useEffect, useState } from 'react'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useAuth } from '../../auth/useAuth.js'
 import mascotEncourage from '../../assets/illustrations/mascot-encourage.png'
 import Breadcrumb from '../../components/Breadcrumb.jsx'
 import PageLayout from '../../components/PageLayout.jsx'
@@ -40,6 +41,7 @@ function LessonScreen() {
 function LessonContent({ unitId, lessonId, language }) {
   const navigate = useNavigate()
   const { t } = useLanguage()
+  const { isAuthenticated } = useAuth()
 
   const [lessonRequest, setLessonRequest] = useState({
     lesson: null,
@@ -67,10 +69,13 @@ function LessonContent({ unitId, lessonId, language }) {
           setLessonRequest({ lesson, error: false, redirectPath: null })
         }
       })
-      .catch(() => {
-        if (!cancelled) {
-          setLessonRequest({ lesson: null, error: true, redirectPath: `/trilha/${unitId}` })
-        }
+      .catch((requestError) => {
+        if (cancelled) return
+
+        const redirectPath = requestError.message === 'login_required'
+          ? `/cadastro?redirect=${encodeURIComponent(`/trilha/${unitId}/${lessonId}`)}`
+          : `/trilha/${unitId}`
+        setLessonRequest({ lesson: null, error: true, redirectPath })
       })
 
     return () => {
@@ -86,8 +91,8 @@ function LessonContent({ unitId, lessonId, language }) {
     if (!lessonFinished) return
 
     markLessonCompleted(lesson.id)
-    completeLesson(lesson.id, { attempts: results }).catch(() => {})
-  }, [lessonFinished, lesson, results])
+    if (isAuthenticated) completeLesson(lesson.id, { attempts: results }).catch(() => {})
+  }, [lessonFinished, lesson, results, isAuthenticated])
 
   useEffect(() => {
     if (!lessonInProgress) return

@@ -55,4 +55,19 @@ O front-end usa a API do servidor para criar contas, entrar e salvar o progresso
 
 O seed atualiza unidades, lições e exercícios existentes, e remove registros antigos que não estão mais nos arquivos de conteúdo.
 
+## Login com Google
+
+O botão do Google aceita conta pessoal e também o e-mail da UFSM, porque o `@acad.ufsm.br` roda no Google Workspace. A UFSM não oferece login institucional próprio para sistemas externos, por isso o acesso passa pelo Google.
+
+O client manda o usuário para `GET /api/auth/oauth/google`. O server redireciona para o Supabase Auth, e o Supabase devolve o token em `/auth/callback`. Nenhuma variável de ambiente nova é necessária. A configuração fica toda no painel do Supabase:
+
+1. Em Authentication, URL Configuration, adicione `http://localhost:5173/**` e a URL de produção do client, também com `/**`, em Redirect URLs.
+2. Google: no Google Cloud Console, crie um OAuth Client do tipo Web application, com `https://<projeto>.supabase.co/auth/v1/callback` em Authorized redirect URIs. Cole o Client ID e o Client Secret em Authentication, Providers, Google.
+
+Se a pessoa já tinha conta com o mesmo e-mail, o Supabase vincula as duas automaticamente. O trigger do `schema.sql` usa o nome que vem do Google, então rode o SQL de novo depois de atualizar o projeto.
+
+## Modo visitante
+
+Sem login dá para ver a trilha, fazer a primeira lição de cada unidade e estudar os flashcards. As rotas de conteúdo usam `optionalAuth`. Sem token, `GET /api/lessons/:lessonId` responde 403 com `login_required` para qualquer lição que não seja a primeira da unidade. Quando o visitante clica numa lição bloqueada ou termina uma lição, o `LoginPromptModal` pede login. O progresso do visitante fica só no localStorage e não vai para o banco. Painel, histórico e revisão de erros continuam exigindo conta.
+
 Ver [IA.md](IA.md) para as regras de código e commit do projeto, e a estrutura do backend.

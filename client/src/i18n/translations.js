@@ -18,6 +18,7 @@ export const translations = {
       tagline: 'Proyecto académico COIL',
       languageLabel: 'Idioma del sitio',
       backToDashboard: 'Volver al panel',
+      continueWithoutAccount: 'Continuar sin cuenta',
       footerLine1: 'Proyecto COIL UFSM – UST • 2026',
       footerLine2: 'Anatomía Veterinaria',
       nav: {
@@ -38,12 +39,18 @@ export const translations = {
         unit: 'Unidad',
       },
     },
+    loginPrompt: {
+      title: 'Inicia sesión para seguir',
+      lockedLesson: 'Esta lección es para estudiantes con cuenta. Entra para desbloquear toda la ruta y guardar tu avance.',
+      lessonFinished: 'Sin cuenta, este resultado no queda guardado. Entra para guardar tu avance y desbloquear las demás lecciones.',
+      signInWithEmail: 'Entrar con correo',
+      dismiss: 'Ahora no',
+    },
     home: {
       hero: {
         title: 'Estudia Anatomía Veterinaria de forma interactiva',
         description: 'Practica la identificación de estructuras anatómicas y repasa para tu prueba práctica.',
         cta: 'Empezar a estudiar',
-      flashcardsCta: 'Flashcards',
       },
       valuePropsLabel: 'Por qué estudiar con Trivia Anatómica',
       valueProps: [
@@ -199,6 +206,9 @@ export const translations = {
       validationName: 'Escribe tu nombre para crear el perfil.',
       validationEmail: 'Escribe tu correo electrónico para continuar.',
       validationFields: 'Completa el correo y la contraseña para continuar.',
+      continueWithGoogle: 'Continuar con Google',
+      providersHint: 'Puedes usar tu cuenta personal de Google o tu correo de la UFSM (@acad.ufsm.br).',
+      orWithEmail: 'o con tu correo',
       errors: {
         invalid_credentials: 'Correo o contraseña incorrectos.',
         email_exists: 'Ya existe una cuenta con este correo.',
@@ -208,6 +218,7 @@ export const translations = {
         over_request_rate_limit: 'Demasiados intentos. Espera unos minutos e inténtalo de nuevo.',
         network_error: 'No se pudo conectar con el servidor. Inténtalo de nuevo en unos momentos.',
         generic: 'No se pudo completar la solicitud. Inténtalo de nuevo.',
+        oauth_failed: 'No se pudo iniciar sesión con esa cuenta. Inténtalo de nuevo o usa tu correo.',
       },
       recoverySent: 'Si existe una cuenta con este correo, recibirás las instrucciones para restablecer la contraseña.',
     },
@@ -340,6 +351,9 @@ export const translations = {
         backToPanel: 'Volver al panel',
         reviewFlashcards: 'Repasar con flashcards',
       },
+      guest: {
+        locked: 'Requiere cuenta',
+      },
     },
   },
   pt: {
@@ -354,6 +368,7 @@ export const translations = {
       tagline: 'Projeto acadêmico COIL',
       languageLabel: 'Idioma do site',
       backToDashboard: 'Voltar ao painel',
+      continueWithoutAccount: 'Continuar sem conta',
       footerLine1: 'Projeto COIL UFSM – UST • 2026',
       footerLine2: 'Anatomia Veterinária',
       nav: {
@@ -374,12 +389,18 @@ export const translations = {
         unit: 'Unidade',
       },
     },
+    loginPrompt: {
+      title: 'Entre para continuar',
+      lockedLesson: 'Esta lição é para estudantes com conta. Entre para desbloquear toda a trilha e salvar seu avanço.',
+      lessonFinished: 'Sem conta, este resultado não fica salvo. Entre para salvar seu avanço e desbloquear as outras lições.',
+      signInWithEmail: 'Entrar com e-mail',
+      dismiss: 'Agora não',
+    },
     home: {
       hero: {
         title: 'Pratique anatomia veterinária',
         description: 'Treine o reconhecimento das estruturas anatômicas para a prova prática.',
         cta: 'Começar a estudar',
-        flashcardsCta: 'Flashcards',
       },
       valuePropsLabel: 'Por que estudar com o Trivia Anatômica',
       valueProps: [
@@ -535,6 +556,9 @@ export const translations = {
       validationName: 'Digite seu nome para criar o perfil.',
       validationEmail: 'Digite seu e-mail para continuar.',
       validationFields: 'Preencha e-mail e senha para continuar.',
+      continueWithGoogle: 'Continuar com Google',
+      providersHint: 'Você pode usar sua conta pessoal do Google ou seu e-mail da UFSM (@acad.ufsm.br).',
+      orWithEmail: 'ou com seu e-mail',
       errors: {
         invalid_credentials: 'E-mail ou senha incorretos.',
         email_exists: 'Já existe uma conta com este e-mail.',
@@ -544,6 +568,7 @@ export const translations = {
         over_request_rate_limit: 'Muitas tentativas. Espere alguns minutos e tente de novo.',
         network_error: 'Não foi possível conectar ao servidor. Tente de novo em instantes.',
         generic: 'Não foi possível concluir. Tente de novo.',
+        oauth_failed: 'Não foi possível entrar com essa conta. Tente de novo ou use seu e-mail.',
       },
       recoverySent: 'Se existir uma conta com este e-mail, você receberá as instruções para redefinir a senha.',
     },
@@ -676,6 +701,9 @@ export const translations = {
         retry: 'Refazer a unidade',
         backToPanel: 'Voltar às unidades',
         reviewFlashcards: 'Revisar com flashcards',
+      },
+      guest: {
+        locked: 'Precisa de conta',
       },
     },
   },

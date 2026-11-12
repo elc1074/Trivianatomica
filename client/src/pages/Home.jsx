@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useAuth } from '../auth/useAuth.js'
 import heroIllustration from '../assets/illustrations/mascot-welcome.png'
 import FinalCta from '../components/FinalCta.jsx'
 import HowItWorks from '../components/HowItWorks.jsx'
@@ -11,6 +12,7 @@ import styles from './Home.module.css'
 
 function Home() {
   const { t } = useLanguage()
+  const { isAuthenticated } = useAuth()
 
   return (
     <PageLayout>
@@ -34,10 +36,11 @@ function Home() {
                 <Icon name="arrow_forward" size={20} color="currentColor" />
               </Link>
 
-              <Link className="button button-dark" to="/flashcards">
-                {t.home.hero.flashcardsCta}
-                <Icon name="style" size={20} color="currentColor" />
-              </Link>
+              {!isAuthenticated && (
+                <Link className="button button-light" to="/trilha">
+                  {t.chrome.continueWithoutAccount}
+                </Link>
+              )}
             </div>
           </div>
         </div>

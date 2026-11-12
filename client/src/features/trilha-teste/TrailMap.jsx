@@ -12,6 +12,7 @@ const PATH_X_PERCENTS = [50, 66, 76, 66, 50, 34, 24, 34]
 const RING_RADIUS = 50
 const CELEBRATE_GAP = 48
 const RING_LENGTH = 2 * Math.PI * RING_RADIUS
+const STOP_ICONS = { completed: 'check', locked: 'lock', current: 'star', upcoming: 'star' }
 const MASCOT_IMAGES = [mascotEncourage, kiba, castiel]
 const MASCOT_SLOTS = [
   { stopOffset: 2, side: 'left' },
@@ -40,6 +41,7 @@ function getMascotPlacements(stopCount) {
 function TrailMap({
   stops,
   isStopCompleted,
+  isStopLocked,
   currentStopId,
   getStopProgress,
   statusLabels,
@@ -78,7 +80,13 @@ function TrailMap({
 
       <ol className={styles.stopList}>
         {stops.map((stop, index) => {
-          const stopState = isStopCompleted(stop) ? 'completed' : stop.id === currentStopId ? 'current' : 'upcoming'
+          const stopState = isStopCompleted(stop)
+            ? 'completed'
+            : isStopLocked?.(stop)
+              ? 'locked'
+              : stop.id === currentStopId
+                ? 'current'
+                : 'upcoming'
           const stopProgress = stopState === 'current' ? getStopProgress?.(stop) : null
 
           return (
@@ -114,7 +122,7 @@ function TrailMap({
                   onClick={() => onStopSelect(stop.id)}
                   aria-label={getStopLabel(stop.title, statusLabels[stopState])}
                 >
-                  <Icon name={stopState === 'completed' ? 'check' : 'star'} size={36} color="currentColor" />
+                  <Icon name={STOP_ICONS[stopState]} size={36} color="currentColor" />
                 </button>
               </div>
 

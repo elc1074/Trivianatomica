@@ -1,21 +1,24 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import Breadcrumb from '../../components/Breadcrumb.jsx'
+import LoginPromptModal from '../../components/LoginPromptModal.jsx'
 import Icon from '../../components/Icon.jsx'
 import PageLayout from '../../components/PageLayout.jsx'
 import SkeletonList from '../../components/SkeletonList.jsx'
+import { useAuth } from '../../auth/useAuth.js'
 import { useLanguage } from '../../i18n/useLanguage.js'
 import { fetchProgressSummary, fetchUnitLessons } from './api.js'
 import TrailBanner from './TrailBanner.jsx'
 import TrailMap, { TrailMapSkeleton } from './TrailMap.jsx'
 import TrailViewToggle from './TrailViewToggle.jsx'
 import styles from './PathList.module.css'
-import { getRecommendedLessonId, isLessonCompleted } from './progress.js'
+import { getCompletedLessonIds, getRecommendedLessonId, isLessonCompleted } from './progress.js'
 
 function UnitPath() {
   const { unitId } = useParams()
   const navigate = useNavigate()
   const { language, t } = useLanguage()
+  const { isAuthenticated } = useAuth()
   const [unitRequest, setUnitRequest] = useState({
     requestKey: null,
     unit: null,
@@ -23,14 +26,19 @@ function UnitPath() {
     error: false,
   })
   const [reloadIndex, setReloadIndex] = useState(0)
+  const [lockedLessonPath, setLockedLessonPath] = useState(null)
 
   useEffect(() => {
     let cancelled = false
     const key = `${unitId}:${language}`
 
-    Promise.all([fetchUnitLessons(unitId, language), fetchProgressSummary()])
-      .then(([unit, summary]) => {
-        if (!cancelled) setUnitRequest({ requestKey: key, unit, completedLessonIds: summary.completedLessonIds ?? [], error: false })
+    const completedLessonIdsRequest = isAuthenticated
+      ? fetchProgressSummary().then((summary) => summary.completedLessonIds ?? [])
+      : Promise.resolve(getCompletedLessonIds())
+
+    Promise.all([fetchUnitLessons(unitId, language), completedLessonIdsRequest])
+      .then(([unit, completedLessonIds]) => {
+        if (!cancelled) setUnitRequest({ requestKey: key, unit, completedLessonIds, error: false })
       })
       .catch(() => {
         if (!cancelled) setUnitRequest({ requestKey: key, unit: null, completedLessonIds: [], error: true })
@@ -39,7 +47,7 @@ function UnitPath() {
     return () => {
       cancelled = true
     }
-  }, [unitId, language, reloadIndex])
+  }, [unitId, language, reloadIndex, isAuthenticated])
 
   function handleRetry() {
     setUnitRequest({ requestKey: null, unit: null, completedLessonIds: [], error: false })
@@ -49,7 +57,15 @@ function UnitPath() {
   const loading = unitRequest.requestKey !== `${unitId}:${language}`
   const unit = loading ? null : unitRequest.unit
   const loadError = !loading && unitRequest.error
-  const recommendedLessonId = unit ? getRecommendedLessonId(unit.lessons, unitRequest.completedLessonIds) : null
+  const recommendedLessonId = unit
+    ? getRecommendedLessonId(unit.lessons.filter((lesson) => !lesson.locked), unitRequest.completedLessonIds)
+    : null
+
+  function openLesson(lesson) {
+    const lessonPath = `/trilha/${unitId}/${lesson.id}`
+    if (lesson.locked) setLockedLessonPath(lessonPath)
+    else navigate(lessonPath)
+  }
 
   return (
     <PageLayout>
@@ -92,15 +108,17 @@ function UnitPath() {
                   <TrailMap
                     stops={unit.lessons}
                     isStopCompleted={(lesson) => isLessonCompleted(lesson.id, unitRequest.completedLessonIds)}
+                    isStopLocked={(lesson) => lesson.locked}
                     currentStopId={recommendedLessonId}
                     statusLabels={{
                       completed: t.trilha.unitPath.completed,
+                      locked: t.trilha.guest.locked,
                       current: t.trilha.unitPath.suggested,
                       upcoming: t.trilha.unitPath.upcoming,
                     }}
                     getStopLabel={t.trilha.unitPath.lessonNode}
                     startLabel={t.trilha.unitPath.startBubble}
-                    onStopSelect={(lessonId) => navigate(`/trilha/${unitId}/${lessonId}`)}
+                    onStopSelect={(lessonId) => openLesson(unit.lessons.find((lesson) => lesson.id === lessonId))}
                   />
                 ) : (
                   <ul className={styles.unitList}>
@@ -109,7 +127,9 @@ function UnitPath() {
                       const recommended = lesson.id === recommendedLessonId && !completed
                       const lessonStatus = completed
                         ? t.trilha.unitPath.completed
-                        : recommended
+                        : lesson.locked
+                          ? t.trilha.guest.locked
+                          : recommended
                           ? t.trilha.unitPath.suggested
                           : t.trilha.panel.questionsCount(lesson.exerciseCount)
 
@@ -118,10 +138,10 @@ function UnitPath() {
                           <button
                             type="button"
                             className={styles.unitCard}
-                            onClick={() => navigate(`/trilha/${unitId}/${lesson.id}`)}
+                            onClick={() => openLesson(lesson)}
                           >
                             <span className={styles.unitIcon}>
-                              <Icon name={completed ? 'task_alt' : 'category'} size={28} color="currentColor" />
+                              <Icon name={completed ? 'task_alt' : lesson.locked ? 'lock' : 'category'} size={28} color="currentColor" />
                             </span>
                             <span className={styles.unitText}>
                               <span className={styles.unitName}>{lesson.title}</span>
@@ -139,6 +159,13 @@ function UnitPath() {
           )}
         </div>
       </section>
+
+      <LoginPromptModal
+        open={Boolean(lockedLessonPath)}
+        message={t.loginPrompt.lockedLesson}
+        redirect={lockedLessonPath ?? `/trilha/${unitId}`}
+        onClose={() => setLockedLessonPath(null)}
+      />
     </PageLayout>
   )
 }

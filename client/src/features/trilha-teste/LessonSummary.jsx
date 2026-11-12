@@ -1,13 +1,18 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import LessonProgress from './LessonProgress.jsx'
 import mascotCelebrate from '../../assets/illustrations/mascot-celebrate.png'
+import { useAuth } from '../../auth/useAuth.js'
 import Icon from '../../components/Icon.jsx'
+import LoginPromptModal from '../../components/LoginPromptModal.jsx'
 import { useLanguage } from '../../i18n/useLanguage.js'
 import { getMaxPoints } from './data.js'
 import styles from './LessonSummary.module.css'
 
 function LessonSummary({ lesson, results, onRetry, onBackToPanel }) {
   const { t } = useLanguage()
+  const { isAuthenticated } = useAuth()
+  const [loginPromptOpen, setLoginPromptOpen] = useState(!isAuthenticated)
   const formatLabels = t.trilha.lesson.formats
 
   const totalScore = results.reduce((sum, result) => sum + result.points, 0)
@@ -100,6 +105,13 @@ function LessonSummary({ lesson, results, onRetry, onBackToPanel }) {
           )}
         </div>
       </div>
+
+      <LoginPromptModal
+        open={loginPromptOpen}
+        message={t.loginPrompt.lessonFinished}
+        redirect={`/trilha/${lesson.unitId}`}
+        onClose={() => setLoginPromptOpen(false)}
+      />
     </section>
   )
 }

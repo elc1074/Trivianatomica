@@ -63,13 +63,15 @@
   box-shadow: 0 2px 0 var(--color-primary-dark);
 }
 
-.upcoming {
+.upcoming,
+.locked {
   background: var(--color-border);
   box-shadow: 0 8px 0 color-mix(in srgb, var(--color-border) 70%, var(--color-ink));
   color: var(--color-text-muted);
 }
 
-.upcoming:active {
+.upcoming:active,
+.locked:active {
   box-shadow: 0 2px 0 color-mix(in srgb, var(--color-border) 70%, var(--color-ink));
 }
 
