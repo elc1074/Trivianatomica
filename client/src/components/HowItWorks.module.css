@@ -95,6 +95,65 @@
   line-height: 1.65;
 }
 
+.videoCtaWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
+}
+
+.videoCta {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  padding: 0 18px;
+  cursor: pointer;
+  background: var(--color-primary);
+  box-shadow: 0 3px 0 var(--color-primary-press);
+  color: var(--color-ink);
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-weight: 700;
+  transition: transform 140ms ease, background-color 140ms ease;
+}
+
+.videoCta:hover {
+  background: var(--color-primary-light);
+  transform: translateY(-1px);
+}
+
+.videoCta:active {
+  box-shadow: 0 1px 0 var(--color-primary-press);
+  transform: translateY(2px);
+}
+
+.videoCta:focus-visible {
+  outline: 3px solid rgba(28, 146, 199, 0.45);
+  outline-offset: 3px;
+}
+
+.videoWrapper {
+  width: min(100%, 820px);
+  margin: 24px auto 0;
+  overflow: hidden;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: var(--color-ink);
+  box-shadow: var(--shadow-card);
+}
+
+.video {
+  display: block;
+  width: 100%;
+  max-height: 620px;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: var(--color-ink);
+}
+
 @media (max-width: 900px) {
   .howItWorks {
     padding: 76px 0 80px;

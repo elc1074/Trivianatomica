@@ -9,13 +9,16 @@ const STUDY_ITEMS = [
   { to: '/trilha', labelKey: 'lessons', icon: 'school' },
   { to: '/flashcards', labelKey: 'flashcards', icon: 'style' },
 ]
+const ABOUT_ITEM = { to: '/#sobre', labelKey: 'about', icon: 'info' }
 const GUEST_ITEMS = [
   { to: '/', labelKey: 'home', icon: 'home', end: true },
+  ABOUT_ITEM,
   ...STUDY_ITEMS,
   { to: '/entrar', labelKey: 'signIn', icon: 'login' },
 ]
 const STUDENT_ITEMS = [
   { to: '/painel', labelKey: 'dashboard', icon: 'dashboard' },
+  ABOUT_ITEM,
   ...STUDY_ITEMS,
   { to: '/historico', labelKey: 'history', icon: 'history' },
 ]

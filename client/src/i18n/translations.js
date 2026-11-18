@@ -26,6 +26,7 @@ export const translations = {
         open: 'Abrir menú',
         close: 'Cerrar menú',
         home: 'Inicio',
+        about: 'Sobre el proyecto',
         dashboard: 'Panel',
         lessons: 'Lecciones',
         flashcards: 'Flashcards',
@@ -69,6 +70,8 @@ export const translations = {
       ],
       howItWorks: {
         heading: 'Cómo funciona',
+        videoCta: 'Ver cómo funciona',
+        videoLabel: 'Vídeo de presentación de Trivia Anatómica',
         steps: [
           {
             icon: 'menu_book',
@@ -86,6 +89,15 @@ export const translations = {
             description: 'Recibe la respuesta después de cada pregunta y consulta tu puntuación al terminar.'
           }
         ]
+      },
+      about: {
+        eyebrow: 'Una alianza que conecta',
+        title: 'Sobre el proyecto COIL',
+        description: 'La alianza COIL (Collaborative Online International Learning) es una metodología educativa que promueve el aprendizaje colaborativo internacional mediante actividades virtuales, conectando a estudiantes y profesores de la Universidad Federal de Santa Maria (UFSM) y la Universidad Santo Tomás de Chile (UST) en proyectos conjuntos.',
+        partnersLabel: 'Instituciones asociadas',
+        videoLabel: 'Vídeo explicativo del proyecto COIL',
+        ufsm: 'UFSM',
+        ust: 'UST Chile',
       },
       finalCta: {
         headline: '¿Listo para practicar?',
@@ -376,6 +388,7 @@ export const translations = {
         open: 'Abrir menu',
         close: 'Fechar menu',
         home: 'Início',
+        about: 'Sobre o projeto',
         dashboard: 'Painel',
         lessons: 'Lições',
         flashcards: 'Flashcards',
@@ -419,6 +432,8 @@ export const translations = {
       ],
       howItWorks: {
         heading: 'Como funciona',
+        videoCta: 'Ver como funciona',
+        videoLabel: 'Vídeo de apresentação do Trivia Anatômica',
         steps: [
           {
             icon: 'menu_book',
@@ -436,6 +451,15 @@ export const translations = {
             description: 'Confira a resposta de cada questão e veja sua pontuação no fim da unidade.'
           }
         ]
+      },
+      about: {
+        eyebrow: 'Uma parceria que conecta',
+        title: 'Sobre o projeto COIL',
+        description: 'A parceria COIL (Collaborative Online International Learning) é uma metodologia educacional que promove a aprendizagem colaborativa internacional por meio de atividades virtuais, conectando estudantes e professores da Universidade Federal de Santa Maria (UFSM) e da Universidad Santo Tomás del Chile (UST) em projetos conjuntos.',
+        partnersLabel: 'Instituições parceiras',
+        videoLabel: 'Vídeo explicativo do projeto COIL',
+        ufsm: 'UFSM',
+        ust: 'UST Chile',
       },
       finalCta: {
         headline: 'Vamos praticar?',

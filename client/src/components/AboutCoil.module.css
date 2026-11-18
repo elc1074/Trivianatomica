@@ -1,0 +1,123 @@
+.about {
+  position: relative;
+  overflow: hidden;
+  padding: 104px 0 112px;
+  background: var(--color-surface);
+}
+
+.content {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: clamp(24px, 5vw, 64px);
+  padding: clamp(28px, 5vw, 52px);
+  border-radius: var(--radius-card);
+  background: rgba(255, 255, 255, 0.88);
+}
+
+.badge {
+  display: grid;
+  width: 76px;
+  height: 76px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: var(--color-ink);
+}
+
+.copy {
+  min-width: 0;
+}
+
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--color-secondary-dark);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.copy h2 {
+  margin: 0 0 14px;
+  color: var(--color-primary-dark);
+  font-size: clamp(1.9rem, 3vw, 2.45rem);
+  line-height: 1.15;
+}
+
+.description {
+  max-width: 680px;
+  margin: 0;
+  color: var(--color-text);
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.partners {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-secondary-dark);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.partners span {
+  max-width: 110px;
+}
+
+.videoWrapper {
+  grid-column: 1 / -1;
+  width: min(100%, 820px);
+  margin-inline: auto;
+  overflow: hidden;
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-control);
+  background: var(--color-ink);
+  box-shadow: 0 8px 20px rgba(23, 40, 37, 0.12);
+}
+
+.video {
+  display: block;
+  width: 100%;
+  max-height: 620px;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: var(--color-ink);
+}
+
+@media (max-width: 900px) {
+  .about {
+    padding: 76px 0 80px;
+  }
+
+  .content {
+    grid-template-columns: auto 1fr;
+  }
+
+  .partners {
+    grid-column: 1 / -1;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 560px) {
+  .content {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    padding: 28px 22px;
+    text-align: center;
+  }
+
+  .copy h2 {
+    font-size: 1.9rem;
+  }
+
+  .partners {
+    grid-column: auto;
+  }
+}
