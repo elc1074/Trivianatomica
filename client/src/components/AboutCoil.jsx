@@ -17,7 +17,6 @@ function AboutCoil() {
         </div>
 
         <div className={styles.copy}>
-          <p className={styles.eyebrow}>{t.home.about.eyebrow}</p>
           <h2 id="about-title">{t.home.about.title}</h2>
           <p className={styles.description}>{t.home.about.description}</p>
         </div>

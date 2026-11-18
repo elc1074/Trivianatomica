@@ -30,16 +30,6 @@
   min-width: 0;
 }
 
-.eyebrow {
-  margin: 0 0 8px;
-  color: var(--color-secondary-dark);
-  font-family: var(--font-display);
-  font-size: 0.9rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
 .copy h2 {
   margin: 0 0 14px;
   color: var(--color-primary-dark);
