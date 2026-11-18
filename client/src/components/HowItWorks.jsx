@@ -52,8 +52,9 @@ function HowItWorks() {
             ref={videoRef}
             className={styles.video}
             controls
-            preload="metadata"
+            preload="none"
             playsInline
+            poster="/triviavideo-poster.jpg"
             aria-label={t.home.howItWorks.videoLabel}
           >
             <source src="/triviavideo.mp4" type="video/mp4" />

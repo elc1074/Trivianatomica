@@ -31,8 +31,9 @@ function AboutCoil() {
           <video
             className={styles.video}
             controls
-            preload="metadata"
+            preload="none"
             playsInline
+            poster="/video2-poster.jpg"
             aria-label={t.home.about.videoLabel}
           >
             <source src="/video2.mp4" type="video/mp4" />
