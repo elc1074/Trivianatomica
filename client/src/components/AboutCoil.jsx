@@ -3,7 +3,7 @@ import Icon from './Icon.jsx'
 import styles from './AboutCoil.module.css'
 
 function AboutCoil() {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
 
   return (
     <section
@@ -30,14 +30,14 @@ function AboutCoil() {
         <div className={styles.videoWrapper}>
           <video
             className={styles.video}
+            src={language === 'es' ? '/trivia-anatomica-making-of-es-cl.mp4' : '/video2.mp4'}
             controls
-            preload="none"
+            preload="metadata"
             playsInline
+            key={language}
             poster="/video2-poster.jpg"
             aria-label={t.home.about.videoLabel}
-          >
-            <source src="/video2.mp4" type="video/mp4" />
-          </video>
+          />
         </div>
       </div>
     </section>

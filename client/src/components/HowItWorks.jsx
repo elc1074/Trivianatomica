@@ -4,7 +4,7 @@ import Icon from './Icon.jsx'
 import styles from './HowItWorks.module.css'
 
 function HowItWorks() {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
   const videoRef = useRef(null)
   const steps = t.home.howItWorks.steps
 
@@ -51,14 +51,14 @@ function HowItWorks() {
           <video
             ref={videoRef}
             className={styles.video}
+            src={language === 'es' ? '/trivia-anatomica-demonstracao-es-cl.mp4' : '/triviavideo.mp4'}
             controls
-            preload="none"
+            preload="metadata"
             playsInline
+            key={language}
             poster="/triviavideo-poster.jpg"
             aria-label={t.home.howItWorks.videoLabel}
-          >
-            <source src="/triviavideo.mp4" type="video/mp4" />
-          </video>
+          />
         </div>
       </div>
     </section>
