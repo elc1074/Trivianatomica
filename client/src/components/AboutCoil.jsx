@@ -35,7 +35,7 @@ function AboutCoil() {
             preload="metadata"
             playsInline
             key={language}
-            poster="/video2-poster.jpg"
+            poster={language === 'es' ? '/trivia-anatomica-making-of-es-cl-poster.jpg' : '/video2-poster.jpg'}
             aria-label={t.home.about.videoLabel}
           />
         </div>

@@ -56,7 +56,7 @@ function HowItWorks() {
             preload="metadata"
             playsInline
             key={language}
-            poster="/triviavideo-poster.jpg"
+            poster={language === 'es' ? '/trivia-anatomica-demonstracao-es-cl-poster.jpg' : '/triviavideo-poster.jpg'}
             aria-label={t.home.howItWorks.videoLabel}
           />
         </div>
